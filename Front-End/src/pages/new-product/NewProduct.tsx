@@ -1,6 +1,5 @@
 import { Container, Subtitle, TextContainer, Title } from "./styles";
 
-
 const NewProduct = () => {
 	return (
 		<Container>
