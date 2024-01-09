@@ -12,8 +12,6 @@ const Container = styled.section`
 
 	gap: 1.25rem; /* 20px */
 
-	border: 1px solid red;
-
 	h1 {
 		font-size: 24px;
 	}
