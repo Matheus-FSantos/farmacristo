@@ -7,10 +7,16 @@ import PersonalHygienePNG from "./landing-page/personal-hygiene.png";
 import BackgroundImageSVG from "./landing-page/background image.svg";
 import SOBackgroundImageSVG from "./landing-page/section-one-background.jpg";
 
+import PumpersPNG from "./landing-page/product images/pumpers.jpg";
+import CreatinaPNG from "./landing-page/product images/creatina.jpg";
+import AcevitonPNG from "./landing-page/product images/aceviton.jpg";
 
 
 export {
 	HerbalPNG,
+	PumpersPNG,
+	CreatinaPNG,
+	AcevitonPNG,
 	PediatricsPNG,
 	WomanImageSVG,
 	FirstAidKitPNG,
