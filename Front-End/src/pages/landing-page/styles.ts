@@ -63,6 +63,8 @@ const WomanImage = styled.img`
 const SectionTwoContainer = styled.section`
 	padding: 5rem 0; /* 80px and 0 */
 
+	opacity: 0;
+
 	display: flex;
 	flex-direction: column;
 
@@ -175,6 +177,8 @@ const Card = styled.section`
 
 const SectionThreeContainer = styled.section`
 	padding: 5rem 0; /* 80px and 0 */
+
+	opacity: 0;
 `;
 
 const ProductContainer = styled.section`
