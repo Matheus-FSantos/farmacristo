@@ -40,13 +40,15 @@ const SubtitleContainer = styled.section`
 `;
 
 const Error = (): React.ReactElement => {
-    return(
+    return (
         <Container>
 					<h1>404 - Não encontrado!</h1>
 					
 					<SubtitleContainer>
 						<p>A página que você tentou acessar não foi encontrada.</p>
-						<a href="/">Ir para o inicio</a>
+						<a href="/">
+							Ir para o inicio
+						</a>
 					</SubtitleContainer>
 				</Container>					
     );
