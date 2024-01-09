@@ -5,6 +5,7 @@ import TwitterSVG from "./twitter.svg";
 import WhatsappSVG from "./whatsapp.svg";
 import FacebookSVG from "./facebook.svg";
 import InstagramSVG from "./instagram.svg";
+import ArrowRightSVG from "./arrow-right.svg";
 import ShoppingCart from "./shopping-cart.svg";
 import WhatsappWidgetSVG from "./whatsapp-widget.svg";
 
@@ -17,5 +18,6 @@ export {
 	FacebookSVG,
 	ShoppingCart,
 	InstagramSVG,
+	ArrowRightSVG,
 	WhatsappWidgetSVG,
 }
