@@ -1,8 +1,14 @@
+import { Container, Subtitle, TextContainer, Title } from "./styles";
+
+
 const NewProduct = () => {
 	return (
-		<div>
-			New product page
-		</div>
+		<Container>
+			<TextContainer>
+				<Title>Criar um produto</Title>
+				<Subtitle>Crie um novo produto abaixo, campos obrigatórios são marcados com <span>*</span></Subtitle>
+			</TextContainer>
+		</Container>
 	);
 }
 
