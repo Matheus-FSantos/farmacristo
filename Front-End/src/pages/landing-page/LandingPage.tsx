@@ -51,7 +51,7 @@ const LandingPage = (): React.ReactElement => {
 			opacity: 1,
 			scrollTrigger: {
 				trigger: "#two",
-				start: "top 800px"
+				start: "top 700px"
 			}
 		});
 
@@ -85,7 +85,7 @@ const LandingPage = (): React.ReactElement => {
 					<Subtitle>Oferecemos uma seleção excepcional de <span>produtos dedicados ao seu bem-estar.</span></Subtitle>
 				</TextsContainer>
 
-				<WomanImage src={WomanImageSVG} alt="Brown Medical Woman" />
+				<WomanImage src={WomanImageSVG} alt="Uma médica, mulher, morena com cabelos cacheados de braço cruzado" />
 			</SectionOneContainer>
 
 			<SectionTwoContainer id="two">
@@ -96,23 +96,23 @@ const LandingPage = (): React.ReactElement => {
 
 				<CardContainer>
 					<Card className="red">
-						<img src={FirstAidKitPNG} alt="First Aid Kit" loading="lazy"/>
+						<img src={FirstAidKitPNG} alt="Imagem que representa um kit de primeiros socorros, em vermelho" loading="lazy"/>
 						<span>Primeiros socorros</span>
 					</Card>
 					<Card className="blue">
-						<img src={HerbalPNG} alt="First Aid Kit" loading="lazy"/>
+						<img src={HerbalPNG} alt="Imagem que representa uma caixa de vitaminas e suplementos, em azul" loading="lazy"/>
 						<span>Vitaminas e Suplementos</span>
 					</Card>
 					<Card className="orange">
-						<img src={PrescriptionPNG} alt="First Aid Kit" loading="lazy"/>
+						<img src={PrescriptionPNG} alt="Imagem que representa uma prescrição médica, em laranja" loading="lazy"/>
 						<span>Prescrições médicas</span>
 					</Card>
 					<Card className="green">
-						<img src={PersonalHygienePNG} alt="First Aid Kit" loading="lazy"/>
+						<img src={PersonalHygienePNG} alt="Imagem que representa cuidados pessoas, em verde" loading="lazy"/>
 						<span>Cuidados pessoais</span>
 					</Card>
 					<Card className="pink">
-						<img src={PediatricsPNG} alt="First Aid Kit" loading="lazy"/>
+						<img src={PediatricsPNG} alt="Imagem que representa cuidados com bebê (uma mão com um bebê em cima), em rosa" loading="lazy"/>
 						<span>Cuidados com bebês</span>
 					</Card>
 				</CardContainer>
@@ -126,7 +126,7 @@ const LandingPage = (): React.ReactElement => {
 
 				<ProductContainer>
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy"/>
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy"/>
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -138,7 +138,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -152,7 +152,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image"  loading="lazy" />
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto"  loading="lazy" />
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -164,7 +164,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -178,7 +178,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image"  loading="lazy" />
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto"  loading="lazy" />
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -190,7 +190,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -204,7 +204,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy"/>
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy"/>
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -216,7 +216,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -232,7 +232,7 @@ const LandingPage = (): React.ReactElement => {
 
 				<ProductContainer>
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy" />
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy" />
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -244,7 +244,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -258,7 +258,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy"/>
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy"/>
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -270,7 +270,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -284,7 +284,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy"/>
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy"/>
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -296,7 +296,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
@@ -310,7 +310,7 @@ const LandingPage = (): React.ReactElement => {
 					</Product>
 
 					<Product>
-						<ProductImage src={CreatinaPNG} alt="Product image" loading="lazy"/>
+						<ProductImage src={CreatinaPNG} alt="Imagem de um medicamento e/ou produto" loading="lazy"/>
 
 						<ProductTitle className="title">Creatina 100% creapure (150G) - Nutrata</ProductTitle>
 
@@ -322,7 +322,7 @@ const LandingPage = (): React.ReactElement => {
 
 							<ButtonsContainer>
 								<ProductButton className="shopping-cart">
-									<ProductIcon src={ShoppingCart} />
+									<ProductIcon alt="Um carrinho de compras, em azul" src={ShoppingCart} />
 									<span>Adicionar ao carrinho</span>
 								</ProductButton>
 								<ProductButton className="whatsapp">
