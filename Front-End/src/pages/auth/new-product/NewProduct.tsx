@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { useLayoutEffect, useState } from "react";
-import { PrivateRoute } from "../privete-route";
+import { PrivateRoute } from "../private-route";
 
 import {
 	Label,
