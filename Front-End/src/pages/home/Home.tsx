@@ -1,16 +1,14 @@
-import { HeaderAlternative } from "../../components/header/HeaderAlternative";
 import { useDinamicTitle } from "../../hooks/useDinamicTitle";
-import { GlobalContainer } from "../styles/global";
+import { GlobalLayout } from "../../layout/global/GlobalLayout";
 
 const Home = (): React.ReactElement => {
 
 	useDinamicTitle("Inicio");
 
 	return (
-		<GlobalContainer>
-			<HeaderAlternative />
-			home works!!!
-		</GlobalContainer>
+		<GlobalLayout>
+			Home Works!!!!
+		</GlobalLayout>
 	);
 };
 
