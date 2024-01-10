@@ -42,8 +42,11 @@ import {
 	SectionThreeContainer,
 	PriceAndButtonsContainer,
 } from "./styles";
+import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 
 const LandingPage = (): React.ReactElement => {
+
+	useDinamicTitle("Explore");
 
 	useLayoutEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);

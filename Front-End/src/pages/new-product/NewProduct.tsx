@@ -18,8 +18,11 @@ import {
 	CheckBoxContainer,
 	PharmaciesContainer,
 } from "./styles";
+import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 
 const NewProduct = (): React.ReactElement => {
+	
+	useDinamicTitle("Novo produto");
 	
 	const [name, setName] = useState<string>("");
 	const [brand, setBrand] = useState<string>("");
@@ -28,7 +31,6 @@ const NewProduct = (): React.ReactElement => {
 	const [promotionalPrice, setPromotionalPrice] = useState<number>(0);
 	const [prescriptionIsRequired, setPrescriptionIsRequired] = useState<number>(0);
 	const [image, setImage] = useState<string | ArrayBuffer | null>(null);
-
 
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault();
