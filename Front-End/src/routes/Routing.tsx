@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "../pages/home";
 import { Error } from "../pages/error";
 import { LandingPage } from "../pages/landing-page";
-import { NewProduct } from "../pages/new-product/NewProduct";
+import { NewProduct } from "../pages/auth/new-product/NewProduct";
 
 const Routing = (): React.ReactElement => {
 	return (
