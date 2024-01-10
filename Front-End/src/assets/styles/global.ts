@@ -105,6 +105,27 @@ const GlobalStyles = createGlobalStyle`
         opacity: 0.6;
         cursor: not-allowed;
     }
+
+		input[type="checkbox"], input[type="radio"] {
+			-webkit-appearance: none;
+
+			width: 14px;
+			height: 14px;
+			border: 2px solid var(--gray-800);
+			
+			background-color: transparent;
+			border-radius: 2px;
+
+			cursor: pointer;
+			
+			&:checked {
+				border-color: var(--blue-300);
+				background-color: var(--blue-300);
+			}
+		}
+
+		input[type="file"] {
+		}
 `
 
 export { GlobalStyles };
