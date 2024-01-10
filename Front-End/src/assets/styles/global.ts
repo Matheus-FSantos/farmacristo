@@ -85,6 +85,14 @@ const GlobalStyles = createGlobalStyle`
 
     li {
         list-style: none;
+
+				&.brightness {
+					cursor: pointer;
+
+					&:hover {
+						filter: brightness(1.5);
+					}
+				}
     }
 
     a {
@@ -93,8 +101,14 @@ const GlobalStyles = createGlobalStyle`
 
         &:hover {
             filter: brightness(0.7);
-            text-decoration: underline;
+            text-decoration: none;
         }
+
+				&.disableBrightness {
+					&:hover {
+						filter: none;
+					}
+				}
     }
 
     button {
