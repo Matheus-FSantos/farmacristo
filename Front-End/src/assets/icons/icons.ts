@@ -9,6 +9,7 @@ import InstagramSVG from "./instagram.svg";
 import ArrowRightSVG from "./arrow-right.svg";
 import ShoppingCart from "./shopping-cart.svg";
 import WhatsappWidgetSVG from "./whatsapp-widget.svg";
+import ArrowResourcesSVG from "./arrow-resources.svg";
 
 export {
 	LogoPNG,
@@ -21,5 +22,6 @@ export {
 	ShoppingCart,
 	InstagramSVG,
 	ArrowRightSVG,
+	ArrowResourcesSVG,
 	WhatsappWidgetSVG,
 }
