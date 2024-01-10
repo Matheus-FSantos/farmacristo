@@ -23,7 +23,7 @@ const HeaderAlternative = () => {
 			<Hr />
 			
 			<Main>				
-				<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
+				<Logo src={ LogoPNG } className="logo-alternative-header" alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
 			
 				<OptionsContainer>
 					<Option onClick={ () => navigate("/search") }>

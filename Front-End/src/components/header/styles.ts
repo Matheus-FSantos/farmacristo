@@ -16,11 +16,11 @@ const SocialMediaFlex = styled.section`
 `;
 
 const Icon = styled.img`
-	width: 25px;
+	width: 1.563rem; /* 25px */
 	height: auto;
 
 	&.twitter {
-		width: 22.5px;
+		width: 1.406rem; /* 22.5px */
 		height: auto;
 	}
 
@@ -57,6 +57,11 @@ const Logo = styled.img`
 
 	&:hover {
 		cursor: pointer;
+	}
+
+	&.logo-alternative-header {
+		position: relative;
+		left: 0.625rem; /* 10px */
 	}
 `;
 
@@ -95,7 +100,7 @@ const Option = styled.section`
 	border-radius: 0.313rem; /* 5px */
 
 	span {
-		font-size: 14px;
+		font-size: 0.875rem; /* 14px */
 		font-weight: 600;
 
 		color: var(--blue-1000);
@@ -103,7 +108,7 @@ const Option = styled.section`
 
 	img {
 		&.xl {
-			width: 30px;
+			width: 1.875rem; /* 30px */
 			height: auto;
 		}
 	}
