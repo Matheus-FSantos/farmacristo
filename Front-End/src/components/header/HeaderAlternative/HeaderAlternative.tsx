@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
 import { Container, Hr, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex } from "../styles";
 
 import styled from "styled-components";
+
 import { useState } from "react";
+import { AuthService } from "../../../services/Auth";
+import { WhatsappWidget } from "../../whatsapp-widget";
 
 const NavContainer = styled.nav`
 	position: relative;
@@ -20,6 +24,21 @@ const NavContainer = styled.nav`
 			font-size: 1rem;
 			font-weight: 700;
 			color: var(--blue-1000);
+
+			span {
+				display: flex;
+				align-items: center;
+				
+				gap: 10px;
+
+				img {
+					width: 10px;
+
+					&.actived {
+						rotate: calc(180deg);
+					}
+				}
+			}
 
 			section.actived {
 				display: block;
@@ -56,7 +75,15 @@ const ResourcesDropDown = styled.section`
 const HeaderAlternative = () => {
 
 	const navigate = useNavigate();
+	const authService = new AuthService();
 	const [dropdownIsActive, setDropdownIsActive] = useState<boolean>(false);
+
+	const handlePrivateRoutesOnHeader = (route: string) => {
+		if(authService.isLogged())
+			navigate(route);
+		else
+			navigate("/sign-in");
+	}
 
 	return (
 		<Container>
@@ -82,10 +109,14 @@ const HeaderAlternative = () => {
 						<li className="brightness"><a className="disableBrightness" href="/">Inicio</a></li>
 						<li className="brightness"><a className="disableBrightness" href="/search">Pesquisa</a></li>
 						<li className="brightness" id="resources" onClick={() => setDropdownIsActive(!dropdownIsActive) }>
-							Recursos
+							<span>
+								Recursos
+								<img src={ ArrowResourcesSVG } alt="Seta azul apontando para baixo, que quando clicada aponta para cima" className={ dropdownIsActive ? "actived" : ""} />
+							</span>
 							<ResourcesDropDown className={ dropdownIsActive ? "actived" : ""}>
-								<p>Trabalhe conosco</p>
-								<p>Painel Administrativo</p>
+								<p onClick={() => navigate("/careers")}>Trabalhe conosco</p>
+								<p onClick={() => navigate("/explore")}>Explore sobre nós</p>
+								<p onClick={() => navigate("/admin-painel")}>Painel Administrativo</p>
 							</ResourcesDropDown>
 						</li>
 					</ul>
@@ -103,11 +134,13 @@ const HeaderAlternative = () => {
 						</ShoppingCartIconContainer>
 					</Option>
 
-					<Option onClick={ () => navigate("/profile") }>
+					<Option onClick={ () => handlePrivateRoutesOnHeader("/profile") }>
 						<img src={ PersonSVG } alt="Uma carrinho de supermercado em azul" />
 					</Option>
 				</OptionsContainer>
 			</Main>
+
+			<WhatsappWidget />
 		</Container>
 	);
 }
