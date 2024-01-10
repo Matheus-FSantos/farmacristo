@@ -2,19 +2,24 @@ import { ArrowRightSVG } from "../../assets/icons/icons";
 import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 import { Container, SubtitleContainer, Link } from "./styles";
 
-const Error = (): React.ReactElement => {
+interface IErrorProps {
+	title: string,
+	subtitle: string
+}
+
+const Error = ({ title, subtitle }: IErrorProps): React.ReactElement => {
 
 	useDinamicTitle("Erro");
 
 	return (
 		<Container>
-			<h1>404 - Não encontrada!</h1>
+			<h1>{ title }</h1>
 
 			<SubtitleContainer>
-				<p>A página que você tentou acessar não foi encontrada.</p>
+				<p>{ subtitle }</p>
 				<Link href="/">
 					Ir para o inicio{" "}
-					<img src={ArrowRightSVG} alt="Flecha apontando para a esquerda" />
+					<img src={ ArrowRightSVG } alt="Flecha apontando para a esquerda" />
 				</Link>
 			</SubtitleContainer>
 		</Container>

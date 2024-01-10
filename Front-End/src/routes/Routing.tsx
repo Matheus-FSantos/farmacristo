@@ -11,7 +11,7 @@ const Routing = (): React.ReactElement => {
 				<Route path="/" element={<Home />} />
 				<Route path="/explore" element={<LandingPage />} />
 				<Route path="/new-product" element={<NewProduct />} />
-				<Route path="*" element={<Error />} />
+				<Route path="*" element={<Error title="404 - Não encontrada!" subtitle="A página que você tentou acessar não foi encontrada." />} />
 			</Routes>
 		</BrowserRouter>
 	);
