@@ -1,5 +1,6 @@
 import LogoPNG from "./logo.png";
 import EmailSVG from "./email.svg";
+import PersonSVG from "./person.svg";
 import SearchSVG from "./search.svg";
 import TwitterSVG from "./twitter.svg";
 import WhatsappSVG from "./whatsapp.svg";
@@ -12,6 +13,7 @@ import WhatsappWidgetSVG from "./whatsapp-widget.svg";
 export {
 	LogoPNG,
 	EmailSVG,
+	PersonSVG,
 	SearchSVG,
 	TwitterSVG,
 	WhatsappSVG,

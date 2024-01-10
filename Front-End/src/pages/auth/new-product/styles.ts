@@ -1,15 +1,12 @@
 import styled from "styled-components";
 
-const Container = styled.section`
-	padding: 2rem 6.25rem;
-	opacity: 0;
-`
-
 const TextContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 
 	gap: 0.125rem; /* 2px */
+
+	margin-top: 40px;
 `;
 
 const Title = styled.h1`
@@ -245,7 +242,6 @@ export {
 	Button,
 	Subtitle,
 	TextArea,
-	Container,
 	InputsFlex,
 	InputFilled,
 	TextContainer,

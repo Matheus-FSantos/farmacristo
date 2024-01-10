@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { SOBackgroundImageSVG } from "../../assets/images/images";
 
-const Container = styled.section`
-	padding: 0 6.25rem;
-`;
-
 const SectionOneContainer = styled.section`
 	background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url(${SOBackgroundImageSVG}) no-repeat center center;
 	background-size: cover;
@@ -320,7 +316,6 @@ export {
 	Product,
 	Subtitle,
 	OldPrice,
-	Container,
 	WomanImage,
 	TitleGreen,
 	ProductIcon,

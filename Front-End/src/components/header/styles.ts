@@ -101,6 +101,13 @@ const Option = styled.section`
 		color: var(--blue-1000);
 	}
 
+	img {
+		&.xl {
+			width: 30px;
+			height: auto;
+		}
+	}
+
 	&:hover {
 		background-color: var(--blue-100);
 	}

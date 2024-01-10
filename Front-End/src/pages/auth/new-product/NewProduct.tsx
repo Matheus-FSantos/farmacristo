@@ -8,7 +8,6 @@ import {
 	Button,
 	Subtitle,
 	TextArea,
-	Container,
 	InputsFlex,
 	InputFilled,
 	TextContainer,
@@ -20,6 +19,8 @@ import {
 	PharmaciesContainer,
 } from "./styles";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
+import { GlobalContainer } from "../../styles/global";
+import { HeaderAlternative } from "../../../components/header/HeaderAlternative";
 
 const NewProduct = (): React.ReactElement => {
 	
@@ -79,7 +80,9 @@ const NewProduct = (): React.ReactElement => {
 	
 	return (
 		<PrivateRoute>
-			<Container id="container">
+			<GlobalContainer id="container">
+				<HeaderAlternative />
+				
 				<TextContainer>
 					<Title>Criar um produto</Title>
 					<Subtitle>
@@ -192,7 +195,7 @@ const NewProduct = (): React.ReactElement => {
 						<Button className="cancel">Cancelar</Button>
 					</ButtonsContainer>
 				</form>
-			</Container>
+			</GlobalContainer>
 		</PrivateRoute>
 	);
 };

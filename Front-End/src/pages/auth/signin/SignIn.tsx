@@ -1,17 +1,16 @@
-import styled from "styled-components";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
-
-const Container = styled.section`
-	padding: 0 6.25rem;
-`;
+import { HeaderAlternative } from "../../../components/header/HeaderAlternative";
+import { GlobalContainer } from "../../styles/global";
 
 const SignIn = (): React.ReactElement => {
+	
 	useDinamicTitle("Realizar sign-in");
 	
 	return (
-		<Container>
+		<GlobalContainer>
+			<HeaderAlternative />
 			Realize seu login abaixo
-		</Container>
+		</GlobalContainer>
 	);
 }
 

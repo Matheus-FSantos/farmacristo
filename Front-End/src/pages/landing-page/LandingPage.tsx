@@ -6,6 +6,8 @@ import { ShoppingCart } from "../../assets/icons/icons";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 import { CreatinaPNG } from "../../assets/images/images";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDinamicTitle } from "../../hooks/useDinamicTitle";
+import { GlobalContainer } from "../styles/global";
 
 import {
 	HerbalPNG,
@@ -23,7 +25,6 @@ import {
 	Product,
 	Subtitle,
 	OldPrice,
-	Container,
 	WomanImage,
 	TitleGreen,
 	ProductIcon,
@@ -42,7 +43,7 @@ import {
 	SectionThreeContainer,
 	PriceAndButtonsContainer,
 } from "./styles";
-import { useDinamicTitle } from "../../hooks/useDinamicTitle";
+
 
 const LandingPage = (): React.ReactElement => {
 
@@ -79,7 +80,7 @@ const LandingPage = (): React.ReactElement => {
 	}, []);
 
 	return (
-		<Container>
+		<GlobalContainer>
 			<Header />
 
 			<SectionOneContainer id="one">
@@ -340,7 +341,7 @@ const LandingPage = (): React.ReactElement => {
 				</ProductContainer>
 			</SectionThreeContainer>
 			<WhatsappWidget />
-		</Container>
+		</GlobalContainer>
 	);
 }
 
