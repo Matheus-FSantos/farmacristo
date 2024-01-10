@@ -32,8 +32,10 @@ const InputContainer = styled.section`
 	flex-direction: column;
 	
 	gap: 5px;
-	
-	margin: 30px 0;
+
+	&.file {
+		gap: 10px
+	}
 `;
 
 const PriceContainer = styled.section`
@@ -123,14 +125,134 @@ const Label = styled.label`
 	}
 `;
 
+const InputsFlex = styled.section`
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+
+	margin: 30px 0;
+`;
+
+const CheckBoxContainer = styled.section`
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+
+	max-width: 200px;
+	width: 100%;
+
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		label {
+			cursor: pointer;
+			font-weight: 600;
+
+			&:hover {
+				filter: brightness(0.8);
+			}
+		}
+
+		&:hover {
+			label {
+				filter: brightness(1.8);
+			}
+
+			input[type="checkbox"] {
+				filter: brightness(1.8);
+			}
+		}
+	}
+`;
+
+const PharmaciesContainer = styled.section`
+	display: flex;
+	flex-direction: column;
+
+	gap: 20px;
+`;
+
+const RadioContainer = styled.section`
+	display: flex;
+	align-items: center;
+	justify-content: start;
+
+	gap: 10px;
+
+	label:hover {
+		cursor: pointer;
+	}
+
+	input[type="checkbox"]:checked {
+		border-color: var(--red-500);
+		background-color: var(--red-500);
+	}
+
+	&:hover {
+		label {
+			filter: brightness(1.8);
+		}
+		
+		input[type="checkbox"] {
+			filter: brightness(1.8);
+		}
+	}
+`;
+
+const ButtonsContainer = styled.section`
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+`;
+
+const Button = styled.button`
+	width: 100%;
+	height: 40px;
+
+	background-color: transparent;
+	border-radius: 5px;
+	border: 2px solid;
+
+	font-size: 16px;
+	font-weight: 600;
+	
+	&.save {
+		border-color: var(--blue-900);
+		color: var(--blue-900);
+		
+		&:hover {
+			color: var(--white-1000);
+			background-color: var(--blue-900);
+		}
+	}
+
+	&.cancel {
+		border-color: var(--red-500);
+		background-color: var(--red-500);
+		color: var(--white-1000);
+		
+		&:hover {
+			filter: brightness(1.8)
+		}
+	}
+`;
+
 export {
 	Title,
 	Label,
+	Button,
 	Subtitle,
 	TextArea,
 	Container,
+	InputsFlex,
 	InputFilled,
 	TextContainer,
+	RadioContainer,
 	PriceContainer,
 	InputContainer,
+	ButtonsContainer,
+	CheckBoxContainer,
+	PharmaciesContainer,
 }
