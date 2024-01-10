@@ -18,7 +18,7 @@ import {
 	CheckBoxContainer,
 	PharmaciesContainer,
 } from "./styles";
-import { useDinamicTitle } from "../../hooks/useDinamicTitle";
+import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 
 const NewProduct = (): React.ReactElement => {
 	
