@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { AuthService } from "../../../services/Auth";
 
 interface IPrivateRouteProps {
@@ -6,14 +7,14 @@ interface IPrivateRouteProps {
 
 const PrivateRoute = ({ children }: IPrivateRouteProps): React.ReactElement => {
 	const authService = new AuthService();
-	
+
 	return(
 		<div>
 			{
 				authService.isLogged() ?
 					children
 				:
-					<h1>Não está logado!</h1>
+					<Navigate to="/sign-in" replace />
 			}
 		</div>
 	);
