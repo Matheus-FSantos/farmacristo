@@ -1,16 +1,14 @@
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
-import { HeaderAlternative } from "../../../components/header/HeaderAlternative";
-import { GlobalContainer } from "../../styles/global";
+import { GlobalLayout } from "../../../layout/global/GlobalLayout";
 
 const SignIn = (): React.ReactElement => {
 	
-	useDinamicTitle("Realizar sign-in");
+	useDinamicTitle("Entre em sua conta");
 	
 	return (
-		<GlobalContainer>
-			<HeaderAlternative />
+		<GlobalLayout>
 			Realize seu login abaixo
-		</GlobalContainer>
+		</GlobalLayout>
 	);
 }
 
