@@ -1,13 +1,14 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { GlobalStyles } from "./assets/styles/global";
 import { Routing } from "./routes/Routing";
 
 const App = (): React.ReactElement => {
   return (
     <>
-      <Routing /> 
+			<Routing />
 			<GlobalStyles />
-    </>
-  )
+		</>
+	)
 }
 
 export { App };
