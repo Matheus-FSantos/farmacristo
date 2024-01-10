@@ -9,18 +9,18 @@ const TextContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 
-	gap: 2px;
+	gap: 0.125rem; /* 2px */
 `;
 
 const Title = styled.h1`
-	font-size: 46px;
+	font-size: 2.875rem; /* 46px */
 	font-weight: 700;
 `;
 
 const Subtitle = styled.h2`
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	position: relative;
-	left: 4px;
+	left: 0.25rem; /* 4px */
 
 	span {
 		color: red;
@@ -31,10 +31,10 @@ const InputContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 	
-	gap: 5px;
+	gap: 0.313rem; /* 5px */
 
 	&.file {
-		gap: 10px
+		gap: 0.625rem; /* 10px */
 	}
 `;
 
@@ -43,19 +43,19 @@ const PriceContainer = styled.section`
 	align-items: center;
 	justify-content: start;
 
-	gap: 10px;
+	gap: 0.625rem; /* 10px */
 `; 
 
 const InputFilled = styled.input`
 	width: 100%;
-	height: 40px;
+	height: 2.5rem; /* 40px */
 	
-	font-size: 16px;
+	font-size: 1rem;
 
-	padding: 4px 8px;
+	padding: 0.25rem 0.5rem; /* 4px and 8px*/
 
-	border-radius: 5px;
-	border: 1px solid var(--gray-100);
+	border-radius: 0.313rem; /* 5px */
+	border: 0.063rem solid var(--gray-100); /* 1px */
 
 	background-color: var(--gray-80);
 	color: var(--gray-800);
@@ -74,23 +74,23 @@ const InputFilled = styled.input`
 	}
 
 	&.sm {
-		max-width: 500px;
+		max-width: 31.25rem; /* 500px */
 		width: 100%;
 	}
 `;
 
 const TextArea = styled.textarea`
 	width: 100%;
-	height: 150px;
+	height: 9.375rem; /* 150px */
 
 	resize: none;
 	
-	font-size: 16px;
+	font-size: 1rem;
 
-	padding: 4px 8px;
+	padding: 0.25rem 0.5rem;
 
-	border-radius: 5px;
-	border: 1px solid var(--gray-100);
+	border-radius: 0.313rem;
+	border: 0.063rem solid var(--gray-100); /* 1px */
 
 	background-color: var(--gray-80);
 	color: var(--gray-800);
@@ -111,7 +111,7 @@ const TextArea = styled.textarea`
 
 const Label = styled.label`
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 1rem;
 
 	color: var(--black-900);
 
@@ -119,7 +119,7 @@ const Label = styled.label`
 		color: red;
 
 		&.text-muted {
-			font-size: 10px;
+			font-size: 0.625rem; /* 10px */
 			color: var(--gray-800);
 		}
 	}
@@ -128,17 +128,17 @@ const Label = styled.label`
 const InputsFlex = styled.section`
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 1.875rem; /* 30px */
 
-	margin: 30px 0;
+	margin: 1.875rem 0;
 `;
 
 const CheckBoxContainer = styled.section`
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 0.375rem; /* 6px */
 
-	max-width: 200px;
+	max-width: 12.5rem; /* 200px */
 	width: 100%;
 
 	div {
@@ -171,7 +171,7 @@ const PharmaciesContainer = styled.section`
 	display: flex;
 	flex-direction: column;
 
-	gap: 20px;
+	gap: 1.25rem; /* 20px */
 `;
 
 const RadioContainer = styled.section`
@@ -179,7 +179,7 @@ const RadioContainer = styled.section`
 	align-items: center;
 	justify-content: start;
 
-	gap: 10px;
+	gap: 0.625rem; /* 10px */
 
 	label:hover {
 		cursor: pointer;
@@ -204,18 +204,18 @@ const RadioContainer = styled.section`
 const ButtonsContainer = styled.section`
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 0.313rem; /* 5px */
 `;
 
 const Button = styled.button`
 	width: 100%;
-	height: 40px;
+	height: 2.5rem; /* 40px */
 
 	background-color: transparent;
-	border-radius: 5px;
-	border: 2px solid;
+	border-radius: 0.313rem; /* 5px */
+	border: 0.125rem solid; /* 2px */
 
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 600;
 	
 	&.save {
