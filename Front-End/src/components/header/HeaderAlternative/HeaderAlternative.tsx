@@ -36,14 +36,14 @@ const ResourcesDropDown = styled.section`
   position: absolute;
 	top: 120%;
   z-index: 99;
-	
+
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 10px;
 
 	overflow: hidden;
 
 	p {
-		padding: 10px;
+		padding: 0.625rem; /* 10px */
 		color: var(--black-900);
 
 		&:hover {
