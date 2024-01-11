@@ -1,5 +1,6 @@
 package br.com.farmacristo.model.DTO.pharmacy;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import br.com.farmacristo.model.DTO.viacep.AddressDTO;
@@ -13,6 +14,7 @@ public class PharmacyDTO {
 	private String number;
 	private String postalCode;
 	private AddressDTO address;
+	private LocalDateTime createdAt;
 	
 	public PharmacyDTO(Pharmacy pharmacy, AddressDTO address) {
 		this.id = pharmacy.getId().toString();
@@ -21,13 +23,14 @@ public class PharmacyDTO {
 		this.setNumber(pharmacy.getNumber());
 		this.postalCode = pharmacy.getPostalCode();
 		this.address = address;
+		this.createdAt = pharmacy.getCreatedAt();
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, email, id, name, number, postalCode);
+		return Objects.hash(address, createdAt, email, id, name, number, postalCode);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -37,15 +40,16 @@ public class PharmacyDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		PharmacyDTO other = (PharmacyDTO) obj;
-		return Objects.equals(address, other.address) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(number, other.number) && Objects.equals(postalCode, other.postalCode);
+		return Objects.equals(address, other.address) && Objects.equals(createdAt, other.createdAt)
+				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(number, other.number)
+				&& Objects.equals(postalCode, other.postalCode);
 	}
 
 	@Override
 	public String toString() {
-		return "PharmacyDTO [id=" + id + "name=" + name + ", email=" + email + ", number=" + number + ", postalCode=" + postalCode
-				+ ", address=" + address + "]";
+		return "PharmacyDTO [id=" + id + ", name=" + name + ", email=" + email + ", number=" + number + ", postalCode="
+				+ postalCode + ", address=" + address + ", createdAt=" + createdAt + "]";
 	}
 
 	public String getId() {
@@ -98,6 +102,13 @@ public class PharmacyDTO {
 	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
-	
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 	
 }
