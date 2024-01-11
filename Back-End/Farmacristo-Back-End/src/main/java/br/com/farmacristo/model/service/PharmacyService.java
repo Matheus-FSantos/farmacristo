@@ -66,10 +66,23 @@ public class PharmacyService {
 	}
 	
 	@Auth(required=false)
-	public List<Pharmacy> findByNameLike(String name) {
-		return this.pharmacyRepository.findByNameLike(name);
+	public List<PharmacyDTO> findByNameLike(String name) throws CEPNotFound {
+		List<Pharmacy> pharmacies = this.pharmacyRepository.findByNameLike(name);
+		List<PharmacyDTO> pharmaciesDTO = new ArrayList<PharmacyDTO>();
+		
+		for(Pharmacy pharmacy : pharmacies) {
+			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.getPostalCode());
+			AddressDTO address = new AddressDTO(viaCepDTO);
+			pharmacy.updatePostalCode(viaCepDTO.getCep());
+			
+			pharmaciesDTO.add(new PharmacyDTO(pharmacy, address));
+		}
+		
+		return pharmaciesDTO;
 	}
-	
+
+	@OnlyAdmin
+	@Transactional
 	@FieldsValidation
 	@Auth(required=true)
 	public void save(NewPharmacyDTO newPharmacyDTO) throws CEPNotFound, InvalidFields, PharmacyAlreadyExist {
@@ -79,6 +92,24 @@ public class PharmacyService {
 		if(this.pharmacyRepository.findByEmail(newPharmacyDTO.email()).isEmpty()) {
 			Pharmacy newPharmacy = new Pharmacy(newPharmacyDTO.name(), newPharmacyDTO.number(), newPharmacyDTO.email(), newPharmacyDTO.postalCode(), LocalDateTime.now(), LocalDateTime.now());
 			this.pharmacyRepository.save(newPharmacy);
+		} else
+			throw new PharmacyAlreadyExist("Campos inválidos.", "Esta farmácia já existe em nosso sistema. Por favor, altere as informações e tente novamente.");
+	}
+	
+	@OnlyAdmin
+	@Transactional
+	@FieldsValidation
+	@Auth(required=true)
+	public void updatePharmacy(UUID id, NewPharmacyDTO updatedPharmacy) throws InvalidFields, CEPNotFound, PharmacyNotFound, PharmacyAlreadyExist {
+		PharmacyValidation.validation(updatedPharmacy);
+		this.viaCEPRepository.CEPValidation(updatedPharmacy.postalCode());
+		
+		PharmacyDTO oldPharmacy = this.findById(id);
+		Optional<Pharmacy> findByEmail = this.pharmacyRepository.findByEmail(updatedPharmacy.email());
+		
+		if(findByEmail.isEmpty() || (findByEmail.isPresent() && findByEmail.get().getId().equals(id))) {
+			Pharmacy newUpdatedPharmacy = new Pharmacy(id, updatedPharmacy.name(), updatedPharmacy.number(), updatedPharmacy.email(), updatedPharmacy.postalCode(), oldPharmacy.getCreatedAt(), LocalDateTime.now());
+			this.pharmacyRepository.save(newUpdatedPharmacy);
 		} else
 			throw new PharmacyAlreadyExist("Campos inválidos.", "Esta farmácia já existe em nosso sistema. Por favor, altere as informações e tente novamente.");
 	}
