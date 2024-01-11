@@ -50,6 +50,8 @@ public class PharmacyController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	
+	
 	@DeleteMapping("/{pharmacyId}")
 	public ResponseEntity<List<Pharmacy>> delete(@PathVariable(name="pharmacyId") UUID id) throws FarmaCristoException {
 		this.pharmacyService.delete(id);

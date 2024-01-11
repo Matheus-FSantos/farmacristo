@@ -1,7 +1,6 @@
 package br.com.farmacristo.model.service.restTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -24,8 +23,12 @@ public class ViaCEPService {
 	@ExternalRequest
 	public ViaCEPDTO getAddressByCEP(String CEP) throws CEPNotFound {
 		try {
-            ResponseEntity<ViaCEPDTO> response = this.restTemplate.getForEntity(String.format("https://viacep.com.br/ws/%s/json", CEP), ViaCEPDTO.class);
-            return response.getBody();
+			ViaCEPDTO response = this.restTemplate.getForObject(String.format("https://viacep.com.br/ws/%s/json", CEP), ViaCEPDTO.class);
+            
+			if(response.getBairro() == null)
+			    throw new CEPNotFound("Endereço não encontrado.", "Você tentou buscar por um endereço inexistente. Por favor, altere as informações de CEP e tente novamente.");
+			else
+				return response;
         } catch (HttpClientErrorException exception){
             throw new CEPNotFound("Endereço não encontrado.", "Você tentou buscar por um endereço inexistente. Por favor, altere as informações de CEP e tente novamente.");
         }
