@@ -1,0 +1,11 @@
+server:
+  port: 8008
+  
+spring:
+  datasource:
+    url: jdbc:h2:mem:farmacristo
+    driverClassName: org.h2.Driver
+    username: SUDO
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
