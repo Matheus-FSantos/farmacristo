@@ -18,6 +18,35 @@ const Container = styled.section`
 	padding: 2.5rem 0; /* 40px and 0 */
 `;
 
+const OrContainer = styled.section`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 0.313rem; /* 5px */
+
+	margin-top: 1.875rem; /* 30px */
+
+	span {
+		font-size: 0.75rem;   /* 12px */
+		font-weight: 700;
+
+		color: var(--gray-120);
+
+		position: relative;
+		bottom: 0.094rem; /* 1.5px */
+	}
+`;
+
+const OrHr = styled.section`
+	width: 100%;
+	height: 0.125rem; /* 2px */
+
+	background-color: var(--gray-120);
+
+	border-radius: 0.125rem; /* 2px */
+`;
+
 const SignIn = (): React.ReactElement => {
 	useDinamicTitle("Entre em sua conta");
 
@@ -35,6 +64,12 @@ const SignIn = (): React.ReactElement => {
 					<Title>Entrar</Title>
 					<Subtitle>Realize sign-in com sua conta.</Subtitle>
 				</TitleContainer>
+
+				<OrContainer>
+					<OrHr />
+					<span>ou</span>
+					<OrHr />
+				</OrContainer>
 
 				<form onSubmit={handleSubmit}>
 					<InputsFlex>
