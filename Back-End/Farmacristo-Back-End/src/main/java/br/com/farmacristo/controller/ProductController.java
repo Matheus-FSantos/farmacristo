@@ -25,30 +25,40 @@ import br.com.farmacristo.model.DTO.product.NewProductDTO;
 import br.com.farmacristo.model.entity.Product;
 import br.com.farmacristo.model.exception.FarmaCristoException;
 import br.com.farmacristo.model.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping(path="/api/products")
+@Tag(name="Product", description="Controller class that will handle all requests coming to the URL: \"/api/products\" - that is, it controls everything related to the product.")
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
 	
+	@Operation (
+		summary="Find all products",
+		description="With this method you will be able to search for all existing products in our system. In return for the request, all formatted information will come from the respective products, if it exists." 
+	)
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll() {
 		return ResponseEntity.ok().body(this.productService.findAll());
 	}
 	
+	@Operation (
+		summary="Find product by id",
+		description="With this method you can search for a specific product in our system. In return, all formatted information will come from the respective product, if it exists." 
+	)
 	@GetMapping("/{productId}")
 	public ResponseEntity<Product> findById(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.productService.findById(id));
 	}
 	
-	@GetMapping("/name-like/{name}")
-	public ResponseEntity<List<Product>> findByNameLike(@PathVariable(name="name") String name) {
-		return ResponseEntity.ok().body(this.productService.findByNameLike(name));
-	}
-	
+	@Operation (
+		summary="Find product image by id",
+		description="With this method you can search for a specific image of a product in our system. In return for this request, the image of the product will come, if it exists in our system." 
+	)
 	@GetMapping("/image/{productId}")
 	public ResponseEntity<ByteArrayResource> findProductImageById(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
 		Product product = this.productService.findById(id);
@@ -65,24 +75,40 @@ public class ProductController {
 					.body(image);
 	}
 	
+	@Operation (
+		summary="Save a new product",
+		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+	)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody NewProductDTO newProductDTO) throws FarmaCristoException {
 		this.productService.save(newProductDTO);
 		return ResponseEntity.status(201).build();
 	}
 	
+	@Operation (
+		summary="Update an existent product",
+		description="With this method you update an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+	)
 	@PutMapping("/{productId}")
 	public ResponseEntity<Void> update(@PathVariable(name="productId") UUID id, @RequestBody NewProductDTO updatedProduct) throws FarmaCristoException {
 		this.productService.update(id, updatedProduct);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Operation (
+		summary="Update the image of an existing product",
+		description="With this method you update the image of an existing product in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
+	)
 	@PutMapping("/image/{productId}")
 	public ResponseEntity<Void> updateProductImageById(@PathVariable(name="productId") UUID id, @RequestPart(name="image") MultipartFile file) throws IOException, FarmaCristoException {
 		this.productService.updateImage(id, file.getBytes());
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Operation (
+		summary="Delete an existent product",
+		description="With this method you delete an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 
+	)
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<Void> delete(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
 		this.productService.delete(id);
