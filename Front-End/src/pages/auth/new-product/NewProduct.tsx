@@ -7,23 +7,24 @@ import { GlobalLayout } from "../../../layout/global/GlobalLayout";
 
 /* UI */
 import { Label } from "../../../components/ui/label/Label";
+import { Title } from "../../../components/ui/title/Title";
 import { Input } from "../../../components/ui/input/Input";
 import { Button } from "../../../components/ui/button/Button";
 import { TextArea } from "../../../components/ui/text-area/TextArea";
+import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 
 import {
-	Title,
-	Subtitle,
 	Container,
 	InputsFlex,
 	TextContainer,
-	InputContainer,
 	PriceContainer,
 	RadioContainer,
 	ButtonsContainer,
 	CheckBoxContainer,
 	PharmaciesContainer,
 } from "./styles";
+
+import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 
 const NewProduct = (): React.ReactElement => {
 	useDinamicTitle("Novo produto");
@@ -70,7 +71,7 @@ const NewProduct = (): React.ReactElement => {
 	useLayoutEffect(() => {
 		gsap.to("#container", {
 			opacity: 1,
-			duration: 0.2,
+			duration: 1,
 		});
 
 		return () => {
@@ -81,13 +82,10 @@ const NewProduct = (): React.ReactElement => {
 	return (
 		<PrivateRoute>
 			<GlobalLayout>
-				<Container className="container">
+				<Container id="container">
 					<TextContainer>
 						<Title>Criar um produto</Title>
-						<Subtitle>
-							Crie um novo produto abaixo, campos obrigatórios são marcados com{" "}
-							<span>*</span>
-						</Subtitle>
+						<Subtitle>Crie um novo produto abaixo, campos obrigatórios são marcados com <span>*</span></Subtitle>
 					</TextContainer>
 
 					<form onSubmit={handleSubmit}>
@@ -185,7 +183,7 @@ const NewProduct = (): React.ReactElement => {
 								/>
 							</RadioContainer>
 
-							<InputContainer className="file">
+							<InputContainer InputContainerType="file">
 								<Label Required={ true }>Selecine a imagem do produto:</Label>
 								<input
 									type="file"

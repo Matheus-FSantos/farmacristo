@@ -1,16 +1,19 @@
-import styled from "styled-components";
+import { useState } from "react";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 import { GlobalLayout } from "../../../layout/global/GlobalLayout";
 
-const Container = styled.section`
-	width: 500px;
-	height: 600px;
-	margin: 0 auto;
+/* UI */
+import { Title } from "../../../components/ui/title/Title";
+import { Input } from "../../../components/ui/input/Input";
+import { Label } from "../../../components/ui/label/Label";
+import { Button } from "../../../components/ui/button/Button";
+import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
+import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 
-	padding: 30px;
-	
-	border: 1px solid var(--gray-800);
-	border-radius: 10px;
+import styled from "styled-components";
+
+const Container = styled.section`
+	padding: 2.5rem 0; /* 40px and 0 */
 `;
 
 const TitleContainer = styled.section`
@@ -19,23 +22,13 @@ const TitleContainer = styled.section`
 	gap: 5px;
 `;
 
-const Title = styled.h1`
-	font-size: 36px;
-	font-weight: 700;
-
-	color: var(--black-900);
-`;
-
-const Subtitle = styled.h2`
-	font-size: 16px;
-
-	color: var(--black-900);
-`
-
 const SignIn = (): React.ReactElement => {
 	
 	useDinamicTitle("Entre em sua conta");
 	
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+
 	return (
 		<GlobalLayout>
 			<Container>
@@ -43,6 +36,32 @@ const SignIn = (): React.ReactElement => {
 					<Title>Entrar</Title>
 					<Subtitle>Realize sign-in com sua conta.</Subtitle>
 				</TitleContainer>
+
+				<InputContainer>
+					<Label For="email" Required={ true }>E-Mail:</Label>
+					<Input
+						Id="email"
+						Type="email"
+						Value={ email }
+						Required={ true }
+						SetValue={ (e) => setEmail(e.target.value) }
+						Placeholder="Ex.: exemplo@exemplo.com"
+					/>
+				</InputContainer>
+
+				<InputContainer>
+					<Label For="password" Required={ true }>Senha:</Label>
+					<Input
+						Id="password"
+						Type="password"
+						Value={ password }
+						Required={ true }
+						SetValue={ (e) => setPassword(e.target.value) }
+						Placeholder="Ex.: YourPassword1234#"
+					/>
+				</InputContainer>
+
+				<Button Type="submit" ButtonType="save">Entrar</Button>				
 			</Container>
 		</GlobalLayout>
 	);
