@@ -1,7 +1,10 @@
 package br.com.farmacristo.model.DTO.pharmacy;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.farmacristo.model.DTO.viacep.AddressDTO;
 import br.com.farmacristo.model.entity.Pharmacy;
@@ -13,6 +16,7 @@ public class PharmacyDTO {
 	private String email;
 	private String number;
 	private String postalCode;
+	private String image;
 	private AddressDTO address;
 	private LocalDateTime createdAt;
 	
@@ -20,15 +24,16 @@ public class PharmacyDTO {
 		this.id = pharmacy.getId().toString();
 		this.name = pharmacy.getName();
 		this.email = pharmacy.getEmail();
-		this.setNumber(pharmacy.getNumber());
+		this.number = pharmacy.getNumber();
 		this.postalCode = pharmacy.getPostalCode();
+		this.image = pharmacy.getImage();
 		this.address = address;
 		this.createdAt = pharmacy.getCreatedAt();
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, createdAt, email, id, name, number, postalCode);
+		return Objects.hash(address, createdAt, email, id, image, name, number, postalCode);
 	}
 
 	@Override
@@ -42,14 +47,14 @@ public class PharmacyDTO {
 		PharmacyDTO other = (PharmacyDTO) obj;
 		return Objects.equals(address, other.address) && Objects.equals(createdAt, other.createdAt)
 				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(number, other.number)
-				&& Objects.equals(postalCode, other.postalCode);
+				&& Objects.equals(image, other.image) && Objects.equals(name, other.name)
+				&& Objects.equals(number, other.number) && Objects.equals(postalCode, other.postalCode);
 	}
 
 	@Override
 	public String toString() {
 		return "PharmacyDTO [id=" + id + ", name=" + name + ", email=" + email + ", number=" + number + ", postalCode="
-				+ postalCode + ", address=" + address + ", createdAt=" + createdAt + "]";
+				+ postalCode + ", image=" + image + ", address=" + address + ", createdAt=" + createdAt + "]";
 	}
 
 	public String getId() {
@@ -77,17 +82,30 @@ public class PharmacyDTO {
 	}
 	
 	public String getNumber() {
+		StringBuilder finalNumber = new StringBuilder();
+		finalNumber.append(number.substring(0, 2)).append(" ").append(number.substring(2, 3)).append(" ").append(number.substring(3, 7)).append("-").append(number.substring(7, number.length()));
+		
+		return finalNumber.toString();
+	}
+	
+	@JsonIgnore
+	public String getUnformattedNumber() {
 		return number;
 	}
 	
 	public void setNumber(String number) {
-		StringBuilder finalNumber = new StringBuilder();
-		finalNumber.append(number.substring(0, 2)).append(" ").append(number.substring(2, 3)).append(" ").append(number.substring(3, 7)).append("-").append(number.substring(7, number.length()));
-		
-		this.number = finalNumber.toString();
+		this.number = number;
 	}
 	
 	public String getPostalCode() {
+		StringBuilder finalPostalCode = new StringBuilder();
+		finalPostalCode.append(postalCode.substring(0, 5)).append("-").append(postalCode.substring(5, postalCode.length()));
+		
+		return finalPostalCode.toString();
+	}
+	
+	@JsonIgnore
+	public String getUnformattedPostalCode() {
 		return postalCode;
 	}
 	
@@ -95,10 +113,23 @@ public class PharmacyDTO {
 		this.postalCode = postalCode;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+	
+	@JsonIgnore
+	public byte[] getImageBytes() {
+		return Base64.getDecoder().decode(this.image);
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	public AddressDTO getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
