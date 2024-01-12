@@ -78,7 +78,7 @@ public class UserController {
 	
 	@Operation (
 		summary="Save a new user",
-		description="With this method you can add a new user to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you can add a new user to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody NewUserDTO newUserDTO) throws FarmaCristoException {
@@ -88,7 +88,7 @@ public class UserController {
 	
 	@Operation (
 		summary="Update an existent user",
-		description="With this method you update an existing user in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you update an existing user in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PutMapping("/{userId}")
 	public ResponseEntity<Void> update(@RequestBody NewUserDTO newUsersDTO, @PathVariable(name="userId") UUID id) throws FarmaCristoException {

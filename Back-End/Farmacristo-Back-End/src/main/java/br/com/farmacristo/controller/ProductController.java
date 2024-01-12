@@ -77,7 +77,7 @@ public class ProductController {
 	
 	@Operation (
 		summary="Save a new product",
-		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody NewProductDTO newProductDTO) throws FarmaCristoException {
@@ -87,7 +87,7 @@ public class ProductController {
 	
 	@Operation (
 		summary="Update an existent product",
-		description="With this method you update an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you update an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PutMapping("/{productId}")
 	public ResponseEntity<Void> update(@PathVariable(name="productId") UUID id, @RequestBody NewProductDTO updatedProduct) throws FarmaCristoException {

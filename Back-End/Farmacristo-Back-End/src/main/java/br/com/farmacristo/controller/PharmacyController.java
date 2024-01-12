@@ -79,7 +79,7 @@ public class PharmacyController {
 	
 	@Operation (
 		summary="Save a new pharmacy",
-		description="With this method you can add a new pharmacy to our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you can add a new pharmacy to our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody NewPharmacyDTO newPharmacyDTO) throws FarmaCristoException {
@@ -89,7 +89,7 @@ public class PharmacyController {
 	
 	@Operation (
 		summary="Update an existent pharmacy",
-		description="With this method you update an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 409 will be returned and between others." 
+		description="With this method you update an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PutMapping("/{pharmacyId}")
 	public ResponseEntity<Void> update(@PathVariable(name="pharmacyId") UUID id, @RequestBody NewPharmacyDTO updatedPharmacy) throws FarmaCristoException {
