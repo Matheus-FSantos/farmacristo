@@ -102,7 +102,7 @@ public class UserController {
 	)
 	@PutMapping("/image/{userId}")
 	public ResponseEntity<Void> updateUserImageById(@PathVariable(name="userId") UUID id, @RequestParam(name="image") MultipartFile file) throws IOException, FarmaCristoException {
-		this.userService.updateUserImage(id, file.getBytes());
+		this.userService.updateUserImage(id, file);
 		return ResponseEntity.noContent().build();
 	}
 	
