@@ -3,14 +3,18 @@ package br.com.farmacristo.model.entity;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +40,9 @@ public class Pharmacy implements Serializable {
 	@Column(nullable=false, length=8)
 	private String postalCode;
 	
+	@Lob
+	private String image;
+	
 	@Column(nullable=false)
 	private LocalDateTime createdAt;
 	
@@ -52,7 +59,7 @@ public class Pharmacy implements Serializable {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
+	
 	public Pharmacy(UUID id, String name, String number, String email, String postalCode, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.name = name;
@@ -63,9 +70,38 @@ public class Pharmacy implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
+	public Pharmacy(UUID id, String name, String number, String email, String postalCode, byte[] image, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.id = id;
+		this.name = name;
+		this.number = number;
+		this.email = email;
+		this.postalCode = postalCode;
+		this.updateImage(image);
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+	
+	public Pharmacy(UUID id, String name, String number, String email, String postalCode, String image, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.id = id;
+		this.name = name;
+		this.number = number;
+		this.email = email;
+		this.postalCode = postalCode;
+		this.image = image;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+	
+	@Override
+	public String toString() {
+		return "Pharmacy [id=" + id + ", name=" + name + ", number=" + number + ", email=" + email + ", postalCode="
+				+ postalCode + ", image=" + image + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, email, id, name, number, postalCode, updatedAt);
+		return Objects.hash(createdAt, email, id, image, name, number, postalCode, updatedAt);
 	}
 
 	@Override
@@ -78,15 +114,9 @@ public class Pharmacy implements Serializable {
 			return false;
 		Pharmacy other = (Pharmacy) obj;
 		return Objects.equals(createdAt, other.createdAt) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(number, other.number) && Objects.equals(postalCode, other.postalCode)
-				&& Objects.equals(updatedAt, other.updatedAt);
-	}
-
-	@Override
-	public String toString() {
-		return "Pharmacy [id=" + id + ", name=" + name + ", number=" + number + ", email=" + email + ", postalCode="
-				+ postalCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				&& Objects.equals(id, other.id) && Objects.equals(image, other.image)
+				&& Objects.equals(name, other.name) && Objects.equals(number, other.number)
+				&& Objects.equals(postalCode, other.postalCode) && Objects.equals(updatedAt, other.updatedAt);
 	}
 
 	public UUID getId() {
@@ -147,6 +177,31 @@ public class Pharmacy implements Serializable {
 
 	private void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	
+	@JsonIgnore
+	public byte[] getImageBytes() {
+		return Base64.getDecoder().decode(this.image);
+	}
+	
+	public void updateImage(byte[] image) {
+		this.setImage(image);
+	}
+	
+	public void updateImage(String encodedImage) {
+		this.setImage(encodedImage);
+	}
+	
+	private void setImage(byte[] image) {
+		this.image = Base64.getEncoder().encodeToString(image);
+	}
+	
+	private void setImage(String encodedImage) {
+		this.image = encodedImage;
 	}
 
 	public LocalDateTime getCreatedAt() {
