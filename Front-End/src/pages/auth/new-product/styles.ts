@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const TextContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-
-	gap: 0.125rem; /* 2px */
-`;
-
 const Container = styled.section`
 	padding: 2.5rem 0; /* 40px 0 */
 `;
@@ -95,7 +88,6 @@ const ButtonsContainer = styled.section`
 
 export {
 	Container,
-	TextContainer,
 	RadioContainer,
 	PriceContainer,
 	ButtonsContainer,

@@ -12,12 +12,12 @@ import { Input } from "../../../components/ui/input/Input";
 import { Button } from "../../../components/ui/button/Button";
 import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 import { TextArea } from "../../../components/ui/text-area/TextArea";
-import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
+import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
+import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 
 import {
 	Container,
-	TextContainer,
 	PriceContainer,
 	RadioContainer,
 	ButtonsContainer,
@@ -82,10 +82,10 @@ const NewProduct = (): React.ReactElement => {
 		<PrivateRoute>
 			<GlobalLayout>
 				<Container id="container">
-					<TextContainer>
+					<TitleContainer>
 						<Title>Criar um produto</Title>
 						<Subtitle>Crie um novo produto abaixo, campos obrigatórios são marcados com <span>*</span></Subtitle>
-					</TextContainer>
+					</TitleContainer>
 
 					<form onSubmit={handleSubmit}>
 						<InputsFlex>
