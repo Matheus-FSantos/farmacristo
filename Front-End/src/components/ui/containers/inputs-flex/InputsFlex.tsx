@@ -8,4 +8,5 @@ const InputsFlex = ({ children }: IInputsFlexProps): React.ReactElement => {
 	return <InputsFlexComponent>{ children }</InputsFlexComponent>
 }
 
+
 export { InputsFlex };

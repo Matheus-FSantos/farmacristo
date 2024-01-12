@@ -9,3 +9,4 @@ const InputsFlex = styled.section`
 `;
 
 export { InputsFlex };
+
