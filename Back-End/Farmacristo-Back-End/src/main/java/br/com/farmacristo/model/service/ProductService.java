@@ -1,11 +1,13 @@
 package br.com.farmacristo.model.service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.product.NewProductDTO;
 import br.com.farmacristo.model.annotation.Auth;
@@ -64,9 +66,12 @@ public class ProductService {
 	@OnlyAdmin
 	@Transactional
 	@Auth(required=true)
-	public void updateImage(UUID id, byte[] newImageBytes) throws ProductNotFound {
+	public void updateImage(UUID id, MultipartFile newImageBytes) throws ProductNotFound, InvalidFields, IOException {
+		/* Fields Validation */
+		ImageUtils.validation(newImageBytes);
+		
 		Product product = this.findById(id);
-		product.updateImage(newImageBytes);
+		product.updateImage(newImageBytes.getBytes());
 		this.productRepository.save(product);
 	}
 	
