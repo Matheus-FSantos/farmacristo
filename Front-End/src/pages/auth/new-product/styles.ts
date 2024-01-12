@@ -17,14 +17,6 @@ const PriceContainer = styled.section`
 	justify-content: start;
 
 	gap: 0.625rem; /* 10px */
-`; 
-
-const InputsFlex = styled.section`
-	display: flex;
-	flex-direction: column;
-	gap: 1.875rem; /* 30px */
-
-	margin: 1.875rem 0;
 `;
 
 const CheckBoxContainer = styled.section`
@@ -103,7 +95,6 @@ const ButtonsContainer = styled.section`
 
 export {
 	Container,
-	InputsFlex,
 	TextContainer,
 	RadioContainer,
 	PriceContainer,

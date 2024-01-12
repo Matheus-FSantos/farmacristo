@@ -10,12 +10,13 @@ import { Label } from "../../../components/ui/label/Label";
 import { Title } from "../../../components/ui/title/Title";
 import { Input } from "../../../components/ui/input/Input";
 import { Button } from "../../../components/ui/button/Button";
+import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 import { TextArea } from "../../../components/ui/text-area/TextArea";
 import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
+import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
 
 import {
 	Container,
-	InputsFlex,
 	TextContainer,
 	PriceContainer,
 	RadioContainer,
@@ -23,8 +24,6 @@ import {
 	CheckBoxContainer,
 	PharmaciesContainer,
 } from "./styles";
-
-import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 
 const NewProduct = (): React.ReactElement => {
 	useDinamicTitle("Novo produto");
