@@ -1,4 +1,4 @@
-import { HeaderAlternative } from "../../components/header/HeaderAlternative";
+import { HeaderAlternative } from "../../components/header/header-alternative";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 import { GlobalContainer } from "../../pages/styles/global";
 import { AuthService } from "../../services/Auth";
