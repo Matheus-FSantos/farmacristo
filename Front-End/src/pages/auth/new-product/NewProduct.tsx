@@ -1,18 +1,21 @@
-import { gsap } from "gsap";
 import { useLayoutEffect, useState } from "react";
+
+import { gsap } from "gsap";
 import { PrivateRoute } from "../private-route";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 import { GlobalLayout } from "../../../layout/global/GlobalLayout";
 
+/* UI */
+import { Label } from "../../../components/ui/label/Label";
+import { Input } from "../../../components/ui/input/Input";
+import { Button } from "../../../components/ui/button/Button";
+import { TextArea } from "../../../components/ui/text-area/TextArea";
 
 import {
-	Label,
 	Title,
-	Button,
 	Subtitle,
-	TextArea,
+	Container,
 	InputsFlex,
-	InputFilled,
 	TextContainer,
 	InputContainer,
 	PriceContainer,
@@ -21,6 +24,7 @@ import {
 	CheckBoxContainer,
 	PharmaciesContainer,
 } from "./styles";
+
 const NewProduct = (): React.ReactElement => {
 	useDinamicTitle("Novo produto");
 
@@ -29,8 +33,7 @@ const NewProduct = (): React.ReactElement => {
 	const [description, setDescription] = useState<string>("");
 	const [price, setPrice] = useState<number>(0);
 	const [promotionalPrice, setPromotionalPrice] = useState<number>(0);
-	const [prescriptionIsRequired, setPrescriptionIsRequired] =
-		useState<number>(0);
+	const [prescriptionIsRequired, setPrescriptionIsRequired] = useState<number>(0);
 	const [image, setImage] = useState<string | ArrayBuffer | null>(null);
 
 	const handleSubmit = (e: React.FormEvent): void => {
@@ -78,7 +81,7 @@ const NewProduct = (): React.ReactElement => {
 	return (
 		<PrivateRoute>
 			<GlobalLayout>
-				<div className="container">
+				<Container className="container">
 					<TextContainer>
 						<Title>Criar um produto</Title>
 						<Subtitle>
@@ -90,105 +93,86 @@ const NewProduct = (): React.ReactElement => {
 					<form onSubmit={handleSubmit}>
 						<InputsFlex>
 							<InputContainer>
-								<Label htmlFor="name">
-									Nome: <span>*</span>
-								</Label>
-								<InputFilled
-									type="text"
-									id="name"
-									required
-									value={name}
-									onChange={(e) => setName(e.target.value)}
-									placeholder="Ex.: Desodorante Antitranspirante Aerosol Masculino"
+								<Label For="name" Required={ true }>Nome:</Label>
+								<Input
+									Id="name"
+									Value={ name }
+									SetValue={ (e) => setName(e.target.value) }
+									Required={ true }
+									Placeholder="Ex.: Desodorante Antitranspirante Aerosol Masculino"
 								/>
 							</InputContainer>
 
 							<InputContainer>
-								<Label htmlFor="name">
-									Marca: <span>*</span>
-								</Label>
-								<InputFilled
-									type="text"
-									id="name"
-									required
-									value={brand}
-									onChange={(e) => setBrand(e.target.value)}
-									placeholder="Ex.: Rexona"
+								<Label For="name" Required={ true }>Marca:</Label>
+								<Input
+									Id="name"
+									Required={ true }
+									Value={ brand }
+									SetValue={ (e) => setBrand(e.target.value) }
+									Placeholder="Ex.: Rexona"
 								/>
 							</InputContainer>
 
 							<InputContainer>
-								<Label htmlFor="description">
-									Descrição: <span>*</span>
-								</Label>
+								<Label For="description" Required={ true }>Descrição:</Label>
 								<TextArea
-									id="description"
-									required
-									value={description}
-									onChange={(e) => setDescription(e.target.value)}
-									placeholder="Ex.: Desodorante Antitranspirante Aerosol Masculino Rexona Extracool 72 horas 150ml"
+									Id="description"
+									Required={ true }
+									Value={description}
+									SetValue={ (e) => setDescription(e.target.value) }
+									Placeholder="Ex.: Desodorante Antitranspirante Aerosol Masculino Rexona Extracool 72 horas 150ml"
 								/>
 							</InputContainer>
 
 							<PriceContainer>
 								<InputContainer>
-									<Label htmlFor="price">
-										Preço: <span>*</span>
-										<InputFilled
-											className="sm"
-											type="number"
-											id="price"
-											required
-											value={price}
-											onChange={(e) => setPrice(Number(e.target.value))}
-											placeholder="Ex.: 129.99"
-										/>
-									</Label>
+									<Label For="price" Required={true}>Preço:</Label>
+									<Input
+										Id="price"
+										Type="number"
+										InputType="sm"
+										Value={ price }
+										Required = { true }
+										Placeholder="Ex.: 129.99"
+										SetValue={(e) => setPrice(Number(e.target.value))}
+									/>
 								</InputContainer>
 								<InputContainer>
-									<Label htmlFor="promotionalPrice">
-										Preço promocional:{" "}
-										<span className="text-muted">(Em caso de promoção)</span>
-									</Label>
-									<InputFilled
-										className="sm"
-										type="number"
-										id="promotionalPrice"
-										value={promotionalPrice}
-										onChange={(e) =>
-											setPromotionalPrice(Number(e.target.value))
-										}
-										placeholder="Ex.: 129.99"
+									<Label For="promotionalPrice">Preço promocional: <span className="text-muted">(Em caso de promoção)</span></Label>
+									<Input
+										Type="number"
+										InputType="sm"
+										Id="promotionalPrice"
+										Value={ promotionalPrice }
+										Placeholder="Ex.: 129.99"
+										SetValue={ (e) => setPromotionalPrice(Number(e.target.value)) }
 									/>
 								</InputContainer>
 							</PriceContainer>
 
 							<PharmaciesContainer>
-								<Label>
-									Selecione a(s) farmácia(s): <span>*</span>
-								</Label>
+								<Label Required={ true }>Selecione a(s) farmácia(s):</Label>
 								<CheckBoxContainer>
 									<div>
-										<Label htmlFor="farmacia-01">Farmácia 01</Label>
+										<Label For="farmacia-01">Farmácia 01</Label>
 										<input id="farmacia-01" value="1" type="checkbox" />
 									</div>
 
 									<div>
-										<Label htmlFor="farmacia-02">Farmácia 02</Label>
+										<Label For="farmacia-02">Farmácia 02</Label>
 										<input id="farmacia-02" value="2" type="checkbox" />
 									</div>
 
 									<div>
-										<Label htmlFor="farmacia-03">Farmácia 03</Label>
+										<Label For="farmacia-03">Farmácia 03</Label>
 										<input id="farmacia-03" value="3" type="checkbox" />
 									</div>
 								</CheckBoxContainer>
 							</PharmaciesContainer>
 
 							<RadioContainer>
-								<Label htmlFor="prescriptionIsRequired">
-									O produto necessita de receita? Clique aqui caso aplicavel
-								</Label>
+								<Label For="prescriptionIsRequired">O produto necessita de receita? Clique aqui caso aplicavel</Label>
 								<input
 									type="checkbox"
 									id="prescriptionIsRequired"
@@ -202,9 +186,7 @@ const NewProduct = (): React.ReactElement => {
 							</RadioContainer>
 
 							<InputContainer className="file">
-								<Label>
-									Selecine a imagem do produto: <span>*</span>
-								</Label>
+								<Label Required={ true }>Selecine a imagem do produto:</Label>
 								<input
 									type="file"
 									required
@@ -215,13 +197,11 @@ const NewProduct = (): React.ReactElement => {
 						</InputsFlex>
 
 						<ButtonsContainer>
-							<Button className="save" type="submit">
-								Salvar produto
-							</Button>
-							<Button className="cancel">Cancelar</Button>
+							<Button ButtonType="save" Type="submit">Salvar produto</Button>
+							<Button ButtonType="cancel">Cancelar</Button>
 						</ButtonsContainer>
 					</form>
-				</div>
+				</Container>
 			</GlobalLayout>
 		</PrivateRoute>
 	);

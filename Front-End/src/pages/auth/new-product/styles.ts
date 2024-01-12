@@ -5,8 +5,6 @@ const TextContainer = styled.section`
 	flex-direction: column;
 
 	gap: 0.125rem; /* 2px */
-
-	margin-top: 40px;
 `;
 
 const Title = styled.h1`
@@ -22,6 +20,10 @@ const Subtitle = styled.h2`
 	span {
 		color: red;
 	}
+`;
+
+const Container = styled.section`
+	padding: 2.5rem 0; /* 40px 0 */
 `;
 
 const InputContainer = styled.section`
@@ -42,69 +44,6 @@ const PriceContainer = styled.section`
 
 	gap: 0.625rem; /* 10px */
 `; 
-
-const InputFilled = styled.input`
-	width: 100%;
-	height: 2.5rem; /* 40px */
-	
-	font-size: 1rem;
-
-	padding: 0.25rem 0.5rem; /* 4px and 8px*/
-
-	border-radius: 0.313rem; /* 5px */
-	border: 0.063rem solid var(--gray-100); /* 1px */
-
-	background-color: var(--gray-80);
-	color: var(--gray-800);
-
-	&::placeholder {
-		font-weight: 500;
-	}
-
-	&:focus {
-		background-color: var(--white-1000);
-		color: var(--black-900);
-
-		outline-color: var(--blue-900);
-		outline-style: solid;
-		outline-width: thin;
-	}
-
-	&.sm {
-		max-width: 31.25rem; /* 500px */
-		width: 100%;
-	}
-`;
-
-const TextArea = styled.textarea`
-	width: 100%;
-	height: 9.375rem; /* 150px */
-
-	resize: none;
-	
-	font-size: 1rem;
-
-	padding: 0.25rem 0.5rem;
-
-	border-radius: 0.313rem;
-	border: 0.063rem solid var(--gray-100); /* 1px */
-
-	background-color: var(--gray-80);
-	color: var(--gray-800);
-
-	&::placeholder {
-		font-weight: 500;
-	}
-
-	&:focus {
-		background-color: var(--white-1000);
-		color: var(--black-900);
-
-		outline-color: var(--blue-900);
-		outline-style: solid;
-		outline-width: thin;
-	}
-`;
 
 const Label = styled.label`
 	font-weight: 500;
@@ -204,46 +143,12 @@ const ButtonsContainer = styled.section`
 	gap: 0.313rem; /* 5px */
 `;
 
-const Button = styled.button`
-	width: 100%;
-	height: 2.5rem; /* 40px */
-
-	background-color: transparent;
-	border-radius: 0.313rem; /* 5px */
-	border: 0.125rem solid; /* 2px */
-
-	font-size: 1rem;
-	font-weight: 600;
-	
-	&.save {
-		border-color: var(--blue-900);
-		color: var(--blue-900);
-		
-		&:hover {
-			color: var(--white-1000);
-			background-color: var(--blue-900);
-		}
-	}
-
-	&.cancel {
-		border-color: var(--red-500);
-		background-color: var(--red-500);
-		color: var(--white-1000);
-		
-		&:hover {
-			filter: brightness(1.8)
-		}
-	}
-`;
-
 export {
 	Title,
 	Label,
-	Button,
 	Subtitle,
-	TextArea,
+	Container,
 	InputsFlex,
-	InputFilled,
 	TextContainer,
 	RadioContainer,
 	PriceContainer,
