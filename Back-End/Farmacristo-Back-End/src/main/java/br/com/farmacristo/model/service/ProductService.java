@@ -36,11 +36,6 @@ public class ProductService {
 		return this.productRepository.findById(id).orElseThrow(() -> new ProductNotFound("Produto não encontrado.", "Você tentou buscar informações de um produto inexistente. Por favor, altere as informações e realize uma nova busca."));
 	}
 	
-	@Auth(required=false)
-	public List<Product> findByNameLike(String name) {
-		return this.productRepository.findByNameLike(name);
-	}
-	
 	@OnlyAdmin
 	@Transactional
 	@FieldsValidation
