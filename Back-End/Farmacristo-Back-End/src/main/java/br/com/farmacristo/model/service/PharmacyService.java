@@ -23,6 +23,7 @@ import br.com.farmacristo.model.exception.specialization.pharmacy.PharmacyNotFou
 import br.com.farmacristo.model.exception.specialization.viacep.CEPNotFound;
 import br.com.farmacristo.model.repository.PharmacyRepository;
 import br.com.farmacristo.model.service.restTemplate.ViaCEPService;
+import br.com.farmacristo.model.util.images.ImageUtils;
 import br.com.farmacristo.model.util.validation.PharmacyValidation;
 import jakarta.transaction.Transactional;
 
@@ -43,8 +44,6 @@ public class PharmacyService {
 		for(Pharmacy pharmacy : pharmacies) {
 			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.getPostalCode());
 			AddressDTO address = new AddressDTO(viaCepDTO);
-			pharmacy.updatePostalCode(viaCepDTO.getCep());
-			
 			pharmaciesDTO.add(new PharmacyDTO(pharmacy, address));
 		}
 		
@@ -58,27 +57,9 @@ public class PharmacyService {
 		if(pharmacy.isPresent()) {
 			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.get().getPostalCode());
 			AddressDTO address = new AddressDTO(viaCepDTO);
-			
-			pharmacy.get().updatePostalCode(viaCepDTO.getCep());
 			return new PharmacyDTO(pharmacy.get(), address);
 		} else
 			throw new PharmacyNotFound("Farmácia não encontrada.", "Você tentou buscar informações de uma farmácia inexistente. Por favor, altere as informações e realize uma nova busca.");
-	}
-	
-	@Auth(required=false)
-	public List<PharmacyDTO> findByNameLike(String name) throws CEPNotFound {
-		List<Pharmacy> pharmacies = this.pharmacyRepository.findByNameLike(name);
-		List<PharmacyDTO> pharmaciesDTO = new ArrayList<PharmacyDTO>();
-		
-		for(Pharmacy pharmacy : pharmacies) {
-			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.getPostalCode());
-			AddressDTO address = new AddressDTO(viaCepDTO);
-			pharmacy.updatePostalCode(viaCepDTO.getCep());
-			
-			pharmaciesDTO.add(new PharmacyDTO(pharmacy, address));
-		}
-		
-		return pharmaciesDTO;
 	}
 
 	@OnlyAdmin
@@ -91,6 +72,7 @@ public class PharmacyService {
 		
 		if(this.pharmacyRepository.findByEmail(newPharmacyDTO.email()).isEmpty()) {
 			Pharmacy newPharmacy = new Pharmacy(newPharmacyDTO.name(), newPharmacyDTO.number(), newPharmacyDTO.email(), newPharmacyDTO.postalCode(), LocalDateTime.now(), LocalDateTime.now());
+			newPharmacy.updateImage(ImageUtils.encryptedDefaultImage);
 			this.pharmacyRepository.save(newPharmacy);
 		} else
 			throw new PharmacyAlreadyExist("Campos inválidos.", "Esta farmácia já existe em nosso sistema. Por favor, altere as informações e tente novamente.");
@@ -108,10 +90,19 @@ public class PharmacyService {
 		Optional<Pharmacy> findByEmail = this.pharmacyRepository.findByEmail(updatedPharmacy.email());
 		
 		if(findByEmail.isEmpty() || (findByEmail.isPresent() && findByEmail.get().getId().equals(id))) {
-			Pharmacy newUpdatedPharmacy = new Pharmacy(id, updatedPharmacy.name(), updatedPharmacy.number(), updatedPharmacy.email(), updatedPharmacy.postalCode(), oldPharmacy.getCreatedAt(), LocalDateTime.now());
+			Pharmacy newUpdatedPharmacy = new Pharmacy(id, updatedPharmacy.name(), updatedPharmacy.number(), updatedPharmacy.email(), updatedPharmacy.postalCode(), oldPharmacy.getImage(), oldPharmacy.getCreatedAt(), LocalDateTime.now());
 			this.pharmacyRepository.save(newUpdatedPharmacy);
 		} else
 			throw new PharmacyAlreadyExist("Campos inválidos.", "Esta farmácia já existe em nosso sistema. Por favor, altere as informações e tente novamente.");
+	}
+
+	@OnlyAdmin
+	@Transactional
+	@Auth(required=true)
+	public void updatePharmacyImageById(UUID id, byte[] newImageBytes) throws PharmacyNotFound, CEPNotFound {
+		PharmacyDTO pharmacyDTO = this.findById(id);
+		Pharmacy updatedPharmacy = new Pharmacy(id, pharmacyDTO.getName(), pharmacyDTO.getUnformattedNumber(), pharmacyDTO.getEmail(), pharmacyDTO.getUnformattedPostalCode(), newImageBytes, pharmacyDTO.getCreatedAt(), LocalDateTime.now());
+		this.pharmacyRepository.save(updatedPharmacy);
 	}
 	
 	@OnlyAdmin
