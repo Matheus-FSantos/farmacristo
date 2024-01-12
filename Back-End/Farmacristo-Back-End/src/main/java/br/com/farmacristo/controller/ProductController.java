@@ -101,7 +101,7 @@ public class ProductController {
 	)
 	@PutMapping("/image/{productId}")
 	public ResponseEntity<Void> updateProductImageById(@PathVariable(name="productId") UUID id, @RequestPart(name="image") MultipartFile file) throws IOException, FarmaCristoException {
-		this.productService.updateImage(id, file.getBytes());
+		this.productService.updateImage(id, file);
 		return ResponseEntity.noContent().build();
 	}
 	
