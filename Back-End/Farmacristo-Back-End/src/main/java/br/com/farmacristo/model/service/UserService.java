@@ -1,11 +1,13 @@
 package br.com.farmacristo.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
 import br.com.farmacristo.model.annotation.Auth;
@@ -76,9 +78,12 @@ public class UserService {
 	
 	@Transactional
 	@Auth(required=true)
-	public void updateUserImage(UUID id, byte[] newImageBytes) throws UserNotFound {
+	public void updateUserImage(UUID id, MultipartFile newImageBytes) throws UserNotFound, InvalidFields, IOException {
+		/* Fields Validation */
+		ImageUtils.validation(newImageBytes);
+		
 		User user = this.findById(id);
-		user.updateImage(newImageBytes);
+		user.updateImage(newImageBytes.getBytes());
 		this.userRepository.save(user);
 	}
 	
