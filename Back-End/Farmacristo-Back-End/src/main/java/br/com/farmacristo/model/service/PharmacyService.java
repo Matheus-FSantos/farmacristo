@@ -1,5 +1,6 @@
 package br.com.farmacristo.model.service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.pharmacy.NewPharmacyDTO;
 import br.com.farmacristo.model.DTO.pharmacy.PharmacyDTO;
@@ -98,10 +100,14 @@ public class PharmacyService {
 
 	@OnlyAdmin
 	@Transactional
+	@FieldsValidation
 	@Auth(required=true)
-	public void updatePharmacyImageById(UUID id, byte[] newImageBytes) throws PharmacyNotFound, CEPNotFound {
+	public void updatePharmacyImageById(UUID id, MultipartFile newImageBytes) throws PharmacyNotFound, CEPNotFound, InvalidFields, IOException {
+		/* Fields Validation */
+		ImageUtils.validation(newImageBytes);
+		
 		PharmacyDTO pharmacyDTO = this.findById(id);
-		Pharmacy updatedPharmacy = new Pharmacy(id, pharmacyDTO.getName(), pharmacyDTO.getUnformattedNumber(), pharmacyDTO.getEmail(), pharmacyDTO.getUnformattedPostalCode(), newImageBytes, pharmacyDTO.getCreatedAt(), LocalDateTime.now());
+		Pharmacy updatedPharmacy = new Pharmacy(id, pharmacyDTO.getName(), pharmacyDTO.getUnformattedNumber(), pharmacyDTO.getEmail(), pharmacyDTO.getUnformattedPostalCode(), newImageBytes.getBytes(), pharmacyDTO.getCreatedAt(), LocalDateTime.now());
 		this.pharmacyRepository.save(updatedPharmacy);
 	}
 	
