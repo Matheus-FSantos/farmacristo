@@ -103,7 +103,7 @@ public class PharmacyController {
 	)
 	@PutMapping("/image/{pharmacyId}")
 	public ResponseEntity<Void> updatePharmacyImageById(@PathVariable(name="pharmacyId") UUID id, @RequestPart(name="image") MultipartFile file) throws IOException, FarmaCristoException {
-		this.pharmacyService.updatePharmacyImageById(id, file.getBytes());
+		this.pharmacyService.updatePharmacyImageById(id, file);
 		return ResponseEntity.noContent().build();
 	}
 	
