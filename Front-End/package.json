@@ -17,6 +17,7 @@
     "gsap": "^3.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.21.1",
     "styled-components": "^6.1.6"
