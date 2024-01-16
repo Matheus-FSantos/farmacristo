@@ -18,13 +18,6 @@ const SectionOneContainer = styled.section`
 	overflow-y: hidden;
 `;
 
-const TextsContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	
-	gap: 1.25rem;
-`;
-
 const Title = styled.h1`
 	font-size: 3rem; /* 48px */
 	font-weight: 800;
@@ -68,22 +61,6 @@ const SectionTwoContainer = styled.section`
 	align-items: center;
 
 	gap: 3.125rem; /* 50px */
-`;
-
-const TextsGreenContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-
-	justify-content: center;
-	align-items: center;
-
-	gap: 0.625rem; /* 10px */
-`;
-
-const TitleGreen = styled.h1`
-	font-size: 2.25rem; /* 36px */
-	font-weight: 800;
-	color: var(--green-1000);
 `;
 
 const SubtitleGreen = styled.h2`
@@ -187,150 +164,15 @@ const ProductContainer = styled.section`
 	gap: 8%;
 `;
 
-const Product = styled.div`
-	width: 12.5rem; /* 200px */
-	height: 21.875rem; /* 350px */
-
-	display: flex;
-	flex-direction: column;
-
-	gap: 0.938rem; /* 15px */
-
-	cursor: pointer;
-
-	&:hover {
-		transform: scale(1.05);
-	}
-`;
-
-const ProductImage = styled.img`
-	width: 100%;
-	height: 10.938rem; /* 175px */
-`;
-
-const ProductTitle = styled.span`
-	font-size: 1rem; /* 16px */
-	font-weight: 700;
-	
-	overflow: hidden;
-  text-overflow: ellipsis;
-	white-space: nowrap;
-
-	color: var(--green-700);	
-`;
-
-const PriceAndButtonsContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	
-	gap: 1.25rem; /* 20px */
-`;
-
-const PricesContainer = styled.section`
-	display: flex;
-	align-items: start;
-	justify-content: start;
-
-	gap: 0.5rem; /* 8px */
-`;
-
-const Price = styled.span`
-	font-size: 1.5rem; /* 24px */
-	font-weight: 800;
-	color: var(--green-800);
-`;
-
-const OldPrice = styled.span`
-	font-size: 0.625rem; /* 10px */
-	font-weight: 800;
-
-	text-decoration: line-through;
-
-	position: relative;
-	top: 16%;
-
-	color: var(--gray-200);
-`;
-
-const ButtonsContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	gap: 0.313rem; /* 5px */ 
-`;
-
-const ProductButton = styled.button`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	
-	gap: 0.375rem; /* 6px */
-
-	width: 100%;
-	height: 2.188rem; /* 35px */
-
-	border: 0.094rem solid; /* 1.5px */
-	border-radius: 0.313rem; /* 5px */
-
-	svg {
-		&.whatsapp-icon {
-			width: 1.25rem; /* 20px */
-		}
-	}
-	
-	span {
-		font-size: 0.75rem; /* 12px */
-		font-weight: 700;
-	}
-
-	&:hover {
-		filter: brightness(80%)
-	}
-
-	&.whatsapp {
-		border-color: var(--green-800);
-		background-color: var(--green-170);
-		
-		span {
-			color: var(--green-800);
-		}
-	}
-
-	&.shopping-cart {
-		border-color: var(--blue-1000);
-		background-color: var(--blue-170);
-
-		span {
-			color: var(--blue-1000);
-		}
-	}
-`;
-
-const ProductIcon = styled.img`
-	width: 1.25rem; /* 20px */
-`;
-
 export {
 	Card,
-	Price,
 	Title,
-	Product,
 	Subtitle,
-	OldPrice,
 	WomanImage,
-	TitleGreen,
-	ProductIcon,
-	ProductTitle,
-	ProductImage,
-	ProductButton,
 	CardContainer,
 	SubtitleGreen,
-	TextsContainer,
-	PricesContainer,
-	ButtonsContainer,
 	ProductContainer,
 	SectionOneContainer,
 	SectionTwoContainer,
-	TextsGreenContainer,
 	SectionThreeContainer,
-	PriceAndButtonsContainer,
 }
