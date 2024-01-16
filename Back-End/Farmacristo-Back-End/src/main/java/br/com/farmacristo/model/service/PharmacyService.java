@@ -52,6 +52,10 @@ public class PharmacyService {
 		return pharmaciesDTO;
 	}
 	
+	public Pharmacy findByIdDefault(UUID id) throws PharmacyNotFound {
+		return this.pharmacyRepository.findById(id).orElseThrow(() -> new PharmacyNotFound("Farmácia não encontrada.", "Você tentou buscar informações de uma farmácia inexistente. Por favor, altere as informações e realize uma nova busca."));
+	}
+	
 	@Auth(required=false)
 	public PharmacyDTO findById(UUID id) throws PharmacyNotFound, CEPNotFound {
 		Optional<Pharmacy> pharmacy = this.pharmacyRepository.findById(id);

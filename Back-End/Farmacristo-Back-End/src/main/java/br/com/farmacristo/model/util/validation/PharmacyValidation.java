@@ -43,5 +43,5 @@ public class PharmacyValidation {
 			if(number.length() != 11)
 				messages.add("O campo NÚMERO deve conter 11 caracteres, exemplo: 11912344321.");
 	}
-	
+
 }

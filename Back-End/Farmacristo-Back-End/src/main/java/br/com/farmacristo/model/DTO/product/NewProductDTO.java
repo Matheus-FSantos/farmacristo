@@ -2,6 +2,7 @@ package br.com.farmacristo.model.DTO.product;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import br.com.farmacristo.model.annotation.DTO;
 
@@ -16,22 +17,30 @@ public class NewProductDTO implements Serializable {
 	private Double price;
 	private Double promotionalPrice;
 	private Boolean prescriptionIsRequired;
+	private Set<ProductPharmacyDTO> pharmacies; 
 	
-	public NewProductDTO(String name, String description, String brand, Double price, Double promotionalPrice, Boolean prescriptionIsRequired) {
+	public NewProductDTO(String name, String description, String brand, Double price, Double promotionalPrice, Boolean prescriptionIsRequired, Set<ProductPharmacyDTO> pharmacies) {
 		this.name = name;
 		this.description = description;
 		this.brand = brand;
 		this.price = price;
 		this.promotionalPrice = promotionalPrice;
 		this.prescriptionIsRequired = prescriptionIsRequired;
+		
+		this.pharmacies = pharmacies;
+	}
+
+	@Override
+	public String toString() {
+		return "NewProductDTO [name=" + name + ", description=" + description + ", brand=" + brand + ", price=" + price
+				+ ", promotionalPrice=" + promotionalPrice + ", prescriptionIsRequired=" + prescriptionIsRequired
+				+ ", pharmacies=" + pharmacies + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(brand, description, name, prescriptionIsRequired, price, promotionalPrice);
+		return Objects.hash(brand, description, name, pharmacies, prescriptionIsRequired, price, promotionalPrice);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -43,21 +52,10 @@ public class NewProductDTO implements Serializable {
 			return false;
 		NewProductDTO other = (NewProductDTO) obj;
 		return Objects.equals(brand, other.brand) && Objects.equals(description, other.description)
-				&& Objects.equals(name, other.name)
+				&& Objects.equals(name, other.name) && Objects.equals(pharmacies, other.pharmacies)
 				&& Objects.equals(prescriptionIsRequired, other.prescriptionIsRequired)
 				&& Objects.equals(price, other.price) && Objects.equals(promotionalPrice, other.promotionalPrice);
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "NewProductInfosDTO [name=" + name + ", description=" + description + ", brand=" + brand + ", price="
-				+ price + ", promotionalPrice=" + promotionalPrice + ", prescriptionIsRequired="
-				+ prescriptionIsRequired + "]";
-	}
-
-
 
 	public String getName() {
 		return name;
@@ -105,6 +103,10 @@ public class NewProductDTO implements Serializable {
 	
 	public void setPrescriptionIsRequired(Boolean prescriptionIsRequired) {
 		this.prescriptionIsRequired = prescriptionIsRequired;
+	}
+	
+	public Set<ProductPharmacyDTO> getPharmacies() {
+		return pharmacies;
 	}
 	
 }

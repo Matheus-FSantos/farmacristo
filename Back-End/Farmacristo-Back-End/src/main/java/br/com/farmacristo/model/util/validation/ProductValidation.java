@@ -2,8 +2,10 @@ package br.com.farmacristo.model.util.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import br.com.farmacristo.model.DTO.product.NewProductDTO;
+import br.com.farmacristo.model.DTO.product.ProductPharmacyDTO;
 import br.com.farmacristo.model.exception.specialization.InvalidFields;
 
 public class ProductValidation {
@@ -17,6 +19,7 @@ public class ProductValidation {
 		ProductValidation.priceValidation(messages, newProductDTO.getPrice());
 		ProductValidation.promotionalPriceValidation(messages, newProductDTO);
 		ProductValidation.prescriptionIsRequiredValidation(messages, newProductDTO.getPrescriptionIsRequired());
+		ProductValidation.pharmaciesValidation(messages, newProductDTO.getPharmacies());
 		
 		if(!messages.isEmpty())
 			throw new InvalidFields(messages, "Algumas informações foram inseridas de maneira incorreta. Por favor, verifique e corrija os campos necessários.");
@@ -58,6 +61,11 @@ public class ProductValidation {
 	public static void prescriptionIsRequiredValidation(List<String> messages, Boolean prescriptionIsRequired) {
 		if(prescriptionIsRequired == null)
 			messages.add("Informar se é obrigatório o uso de prescrição para a compra desse produto é requerido.");
+	}
+	
+	public static void pharmaciesValidation(List<String> messages, Set<ProductPharmacyDTO> pharmacies) {
+		if(pharmacies.isEmpty())
+			messages.add("O produto não pode ser criado sem estar presente em PELO MENOS UMA FARMÁCIA. Por favor, atualize os campos e tente novamente.");	
 	}
 	
 }
