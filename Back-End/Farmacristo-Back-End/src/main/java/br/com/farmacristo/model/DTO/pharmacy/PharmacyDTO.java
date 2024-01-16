@@ -19,6 +19,7 @@ public class PharmacyDTO {
 	private String image;
 	private AddressDTO address;
 	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 	
 	public PharmacyDTO(Pharmacy pharmacy, AddressDTO address) {
 		this.id = pharmacy.getId().toString();
@@ -29,6 +30,7 @@ public class PharmacyDTO {
 		this.image = pharmacy.getImage();
 		this.address = address;
 		this.createdAt = pharmacy.getCreatedAt();
+		this.updatedAt = pharmacy.getUpdatedAt();
 	}
 
 	@Override
@@ -140,6 +142,14 @@ public class PharmacyDTO {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	
 }
