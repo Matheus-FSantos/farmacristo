@@ -66,29 +66,33 @@ public class DatabaseInitializer {
     }
 
     public void insertProductsData(List<NewProductDTO> array) {
-    	array.addAll(Arrays.asList(
-    		new NewProductDTO(
-    			"Desodorante Antitranspirante Aerossol Rexona Men Active Dry 250ml", 
-    			"Desodorante Antitranspirante Aerossol Rexona Men Active Dry 250ml",
-   				"Rexona",
-   				17.90,
-   				null,
-   				false
-    		),
-    		new NewProductDTO(
-    			"Glifage XR 500mg Merck S/A 30 comprimidos",
-    			"Glifage XR 500mg Merck S/A 30 comprimidos é indicado para tratar diabetes tipo 2, associado a uma dieta alimentar. Pode ser usado junto com a insulinoterapia, na diabetes tipo 1, prevenção da diabetes tipo 2, em pré-diabéticos e síndrome do ovário policístico. Uso adulto, sob orientação médica.",
-    			"Glifage",
-    			6.62,
-    			null,
-   				false
-   			)
-    	));
+    	//array.addAll(Arrays.asList(
+    	//	new NewProductDTO(
+    	//		"Desodorante Antitranspirante Aerossol Rexona Men Active Dry 250ml", 
+    	//		"Desodorante Antitranspirante Aerossol Rexona Men Active Dry 250ml",
+    	//		"Rexona",
+    	//		17.90,
+    	//		null,
+    	//		false,
+    	//	),
+    	//	new NewProductDTO(
+    	//		"Glifage XR 500mg Merck S/A 30 comprimidos",
+    	//		"Glifage XR 500mg Merck S/A 30 comprimidos é indicado para tratar diabetes tipo 2, associado a uma dieta alimentar. Pode ser usado junto com a insulinoterapia, na diabetes tipo 1, prevenção da diabetes tipo 2, em pré-diabéticos e síndrome do ovário policístico. Uso adulto, sob orientação médica.",
+    	//		"Glifage",
+    	//		6.62,
+    	//		null,
+    	//		false
+    	//	)
+    	//));
     }
     
     public void insertPharmaciesData(List<NewPharmacyDTO> array) {
+    	
+    	
     	array.addAll(Arrays.asList(
-    		new NewPharmacyDTO("Farmacristo", "11977789878", "farmacristo@redefarmacristo.com.br", "05875350")
+        		new NewPharmacyDTO("Farmacristo 1", "11977789878", "farmacristo1@redefarmacristo.com.br", "05875350"),
+        		new NewPharmacyDTO("Farmacristo 2", "11977789878", "farmacristo2@redefarmacristo.com.br", "05875350"),
+        		new NewPharmacyDTO("Farmacristo 3", "11977789878", "farmacristo3@redefarmacristo.com.br", "05875350")
     	));
     }
     
