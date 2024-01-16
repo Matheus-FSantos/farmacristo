@@ -5,6 +5,7 @@ import { LandingPage } from "../pages/landing-page";
 import { NewProduct } from "../pages/auth/new-product";
 import { SignIn } from "../pages/auth/signin";
 import { SignUp } from "../pages/auth/signup";
+import { ShoppingCart } from "../pages/auth/shopping-cart";
 
 const Routing = (): React.ReactElement => {
 	return (
@@ -15,6 +16,7 @@ const Routing = (): React.ReactElement => {
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/explore" element={<LandingPage />} />
 				<Route path="/new-product" element={<NewProduct />} />
+				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="*" element={<Error title="404 - Não encontrada!" subtitle="A página que você tentou acessar não foi encontrada." />} />
 			</Routes>
 		</BrowserRouter>
