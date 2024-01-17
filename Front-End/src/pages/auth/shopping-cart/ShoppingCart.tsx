@@ -23,7 +23,7 @@ const ShoppingCart = () => {
 		<GlobalLayout>
 			<ShoppingCartContainer>
 				<TitleContainer>
-					<Title Type="sm">Shopping cart</Title>
+					<Title Type="sm">Carrinho</Title>
 					<Subtitle>Abaixo, todos os itens do seu carrinho!</Subtitle>
 				</TitleContainer>
 

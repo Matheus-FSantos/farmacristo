@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import {
 	LogoPNG,
 	EmailSVG,
@@ -9,8 +10,8 @@ import {
 	SearchSVG,
 	ShoppingCart,
 } from "../../assets/icons/icons";
+
 import {
-	Hr,
 	Icon,
 	Main,
 	Logo,
@@ -22,6 +23,9 @@ import {
 	ContactInformations,
 	ShoppingCartIconContainer,
 } from "./styles";
+
+/* UI */
+import { Hr } from "../ui/hr/Hr";
 
 const Header = (): React.ReactElement => {
 

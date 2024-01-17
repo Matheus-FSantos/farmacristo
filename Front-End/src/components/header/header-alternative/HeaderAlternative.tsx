@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
-import { Container, Hr, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex } from "../styles";
+import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex } from "../styles";
 import { NavContainer, ResourcesDropDown } from "./styles";
+import { Hr } from "../../ui/hr/Hr";
 
 interface IHeaderAlternative {
 	isLogged: boolean

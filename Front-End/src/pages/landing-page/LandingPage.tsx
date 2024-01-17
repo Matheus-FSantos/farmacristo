@@ -9,8 +9,9 @@ import { GlobalContainer } from "../styles/global";
 
 /* UI */
 import { Product } from "../../components/ui/product/Product";
-import { TitleContainer } from "../../components/ui/containers/title-container/TitleContainer";
 import { Title as TitleComponent } from "../../components/ui/title/Title";
+import { TitleContainer } from "../../components/ui/containers/title-container/TitleContainer";
+import { ProductsGridContainer } from "../../components/ui/containers/products-grid-container/ProductsGridContainer";
 
 import {
 	HerbalPNG,
@@ -28,7 +29,6 @@ import {
 	WomanImage,
 	CardContainer,
 	SubtitleGreen,
-	ProductContainer,
 	SectionOneContainer,
 	SectionTwoContainer,
 	SectionThreeContainer,
@@ -117,19 +117,18 @@ const LandingPage = (): React.ReactElement => {
 					<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
 				</TitleContainer>
 
-				<ProductContainer>
-					<Product />
-					<Product />
-					<Product />
-					<Product />
-				</ProductContainer>
-
-				<ProductContainer>
-					<Product />
-					<Product />
-					<Product />
-					<Product />
-				</ProductContainer>
+				<div className="products-grid">
+					<ProductsGridContainer>
+						<Product />
+						<Product />
+						<Product />
+						<Product />
+						<Product />
+						<Product />
+						<Product />
+						<Product />
+					</ProductsGridContainer>
+				</div>
 			</SectionThreeContainer>
 			<WhatsappWidget />
 		</GlobalContainer>

@@ -152,16 +152,18 @@ const SectionThreeContainer = styled.section`
 	padding: 5rem 0; /* 80px and 0 */
 
 	opacity: 0;
-`;
 
-const ProductContainer = styled.section`
-	padding: 1.875rem; /* 30px */
-	
-	display: flex;
-	justify-content: center;
-	
-	//gap: 3.75rem; /* 60px */
-	gap: 8%;
+	div.products-grid {
+		width: 100%;
+
+		display: flex;
+		flex-direction: column;
+		
+		align-items: center;
+		justify-content: center;
+
+		gap: 50px;
+	}
 `;
 
 export {
@@ -171,7 +173,6 @@ export {
 	WomanImage,
 	CardContainer,
 	SubtitleGreen,
-	ProductContainer,
 	SectionOneContainer,
 	SectionTwoContainer,
 	SectionThreeContainer,
