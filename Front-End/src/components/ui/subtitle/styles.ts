@@ -6,6 +6,14 @@ const Subtitle = styled.h2`
 	span {
 		color: red;
 	}
+
+	&.xl {
+		font-size: 0.9rem;
+	}
+
+	&.green {
+		color: var(--green-1000);
+	}
 `;
 
 export { Subtitle };

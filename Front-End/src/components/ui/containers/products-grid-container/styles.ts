@@ -1,0 +1,25 @@
+import styled from "styled-components";
+
+const ProductGridContainer = styled.section`
+	width: 100%;
+
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+
+	place-items: center;
+
+	@media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export { ProductGridContainer };
