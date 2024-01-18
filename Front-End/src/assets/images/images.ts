@@ -11,6 +11,8 @@ import PumpersPNG from "./landing-page/product images/pumpers.jpg";
 import CreatinaPNG from "./landing-page/product images/creatina.jpg";
 import AcevitonPNG from "./landing-page/product images/aceviton.jpg";
 
+import BackgroundTexture from "./landing-page/background-texture.svg";
+
 
 export {
 	HerbalPNG,
@@ -21,6 +23,7 @@ export {
 	WomanImageSVG,
 	FirstAidKitPNG,
 	PrescriptionPNG,
+	BackgroundTexture,
 	BackgroundImageSVG,
 	PersonalHygienePNG,
 	SOBackgroundImageSVG,
