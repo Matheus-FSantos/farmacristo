@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 
 import { Container, ContentContainer, OrContainer, OrHr, RedirectSpan } from "../signin/styles";
@@ -11,7 +12,6 @@ import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
 import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
-import { useState } from "react";
 import { GoogleWidget } from "../../../components/google-widget";
 
 const SignUp = (): React.ReactElement => {
