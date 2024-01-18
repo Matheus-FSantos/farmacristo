@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SOBackgroundImageSVG } from "../../assets/images/images";
+import { BackgroundTexture, SOBackgroundImageSVG } from "../../assets/images/images";
 
 const SectionOneContainer = styled.section`
 	background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url(${SOBackgroundImageSVG}) no-repeat center center;
@@ -166,14 +166,138 @@ const SectionThreeContainer = styled.section`
 	}
 `;
 
+const SectionFourContainer = styled.section`
+	padding: 0;
+	opacity: 0;
+
+	position: relative;
+
+	width: 100vw;
+	height: 645px;
+
+	color: var(--white-1000);
+	background: var(--green-1000) url(${ BackgroundTexture }) center center;
+	background-size: cover;
+
+	overflow: hidden;
+`;
+
+const Elipse = styled.div`
+	border: 0;
+	border-radius: 100%;
+
+	position: absolute;
+
+	&.xl {
+		width: 240px;
+		height: 240px;
+	}
+
+	&.lg {
+		width: 200px;
+		height: 200px;
+	}
+
+	&.sm {
+		width: 100px;
+		height: 100px;
+	}
+
+	&.red {
+		background-color: var(--red-500);
+		top: -60px;
+		right: -60px;
+	}
+
+	&.green-60 {
+		background-color: var(--green-850);
+		
+		opacity: 60%;
+
+		top: -68%;
+		left: -8%;
+	}
+
+	&.green {
+		background-color: var(--green-850);
+
+		top: 15%;
+		right: -15%;
+	}
+
+	&.yellow {
+		background-color: var(--yellow-500);
+		opacity: 40%;
+
+		top: -110px;
+		right: 30px;
+	}
+
+	&.pink {
+		background-color: var(--pink-900);
+		opacity: 50%;
+
+		left: -40px;
+		bottom: -40px;
+	}
+`;
+
+const JoinUsTextsContainer = styled.section`
+	display: flex;
+	flex-direction: column;
+
+	gap: 50px;
+
+	div.title-container {
+		position: relative;
+
+		h1 {
+			position: relative;
+			z-index: 1;
+		}
+	}
+`;
+
+const JoinUsDescription = styled.p`
+	width: 440px;
+	text-align: justify;
+	
+	font-size: 20px;
+
+	span {
+		font-weight: 700;
+		text-decoration: underline;
+	}
+`;
+
+const SectionFourContainerFlex = styled.section`
+	height: 645px;
+
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: center;
+
+	gap: 100px;
+
+	div.sign-up-container {
+		position: relative;
+	}
+`;
+
 export {
 	Card,
 	Title,
+	Elipse,
 	Subtitle,
 	WomanImage,
 	CardContainer,
 	SubtitleGreen,
+	JoinUsDescription,
 	SectionOneContainer,
 	SectionTwoContainer,
+	SectionFourContainer,
+	JoinUsTextsContainer,
 	SectionThreeContainer,
+	SectionFourContainerFlex,
 }
