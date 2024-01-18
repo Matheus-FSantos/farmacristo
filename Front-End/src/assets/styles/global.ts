@@ -4,6 +4,7 @@ const GlobalStyles = createGlobalStyle`
 		:root {
 			--white-1000: #FFFFFF;
 
+			--black-1000: #000000;
 			--black-900: #212121;
 
 			--gray-800: #474747;
@@ -28,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 			
 			--green-1000: #153243;
 			--green-900: #48BE00;
+			--green-850: #225145;
 			--green-800: #3C8067;
 			--green-700: #284B63;
 			--green-500: #25D366;
@@ -39,6 +41,8 @@ const GlobalStyles = createGlobalStyle`
 
 			--orange-900: #FF8500;
 			--orange-150: #FFEDD9;
+
+			--yellow-500: #ED9C00;
 		}
 
 
