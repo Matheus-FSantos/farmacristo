@@ -6,6 +6,10 @@ const InputsFlex = styled.section`
 	gap: 1.875rem; /* 30px */
 
 	margin: 1.875rem 0;
+
+	&.no-margin {
+		margin: 0;
+	}
 `;
 
 export { InputsFlex };

@@ -14,6 +14,18 @@ const Label = styled.label`
 			color: var(--gray-800);
 		}
 	}
+
+	&.green {
+		color: var(--green-1000);
+	}
+
+	&.bold {
+		font-weight: 700;
+	}
+
+	&.sm {
+		font-size: 0.875rem; /* 14px */
+	}
 `;
 
 export { Label };

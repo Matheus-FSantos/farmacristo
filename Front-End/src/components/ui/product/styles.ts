@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 const Product = styled.div`
-	width: 12.5rem; /* 200px */
-	height: 21.875rem; /* 350px */
+	width: 15.625rem; /* 250px */
+	height: 25rem; /* 400px */
 
 	display: flex;
 	flex-direction: column;
 
-	gap: 0.938rem; /* 15px */
+	justify-content: space-between;
 
 	cursor: pointer;
 
@@ -18,7 +18,7 @@ const Product = styled.div`
 
 const ProductImage = styled.img`
 	width: 100%;
-	height: 10.938rem; /* 175px */
+	height: 13.438rem; /* 215px */
 `;
 
 const ProductTitle = styled.span`
