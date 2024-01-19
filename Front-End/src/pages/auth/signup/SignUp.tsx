@@ -37,7 +37,7 @@ const SignUp = (): React.ReactElement => {
 		const alert = toast.loading("Por favor, aguarde...");
 		await useTimeout(1000);
 		toast.update(alert, {
-			render: "Logado! Redirecionando...",
+			render: "Conta criada! Redirecionando...",
 			type: "success",
 			isLoading: false,
 			position: "top-right",
@@ -52,7 +52,7 @@ const SignUp = (): React.ReactElement => {
 		setIsDisabled(false);
 		await useTimeout(1000);
 
-		navigate("/");
+		navigate("/signin");
 	}
 
 	return (
