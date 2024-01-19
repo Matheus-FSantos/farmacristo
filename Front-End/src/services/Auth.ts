@@ -7,6 +7,11 @@ class AuthService {
 			return false;
 	}
 
+	loggin(): void {
+		if(!this.isLogged())
+			sessionStorage.setItem("TOKEN", "TOKEN ALEATORIO");
+	}
+
 }
 
 export { AuthService };
