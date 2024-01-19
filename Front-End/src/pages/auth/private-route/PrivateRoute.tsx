@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }: IPrivateRouteProps): React.ReactElement => {
 				authService.isLogged() ?
 					children
 				:
-					<Navigate to="/sign-in" replace />
+					<Navigate to="/signin" replace />
 			}
 		</div>
 	);
