@@ -37,6 +37,13 @@ const SubtitleContainer = styled.section`
 			text-decoration: none;
 		}
 	}
+
+	@media only screen and (max-width: 422px) {
+		p {
+			font-size: 1rem;
+			text-align: center;
+		}
+	}
 `;
 
 const Link = styled.a`
