@@ -7,6 +7,7 @@ import { TitleContainer } from "../../../components/ui/containers/title-containe
 import { ShoppingCartItemList } from "./shopping-cart-item-list";
 
 import styled from "styled-components";
+import { PrivateRoute } from "../private-route";
 
 const ShoppingCartContainer = styled.section`
 	display: flex;
@@ -19,17 +20,19 @@ const ShoppingCartContainer = styled.section`
 `;
 
 const ShoppingCart = () => {
-	return(
-		<GlobalLayout>
-			<ShoppingCartContainer>
-				<TitleContainer>
-					<Title Type="sm">Carrinho</Title>
-					<Subtitle>Abaixo, todos os itens do seu carrinho!</Subtitle>
-				</TitleContainer>
+	return (
+		<PrivateRoute>
+			<GlobalLayout>
+				<ShoppingCartContainer>
+					<TitleContainer>
+						<Title Type="sm">Carrinho</Title>
+						<Subtitle>Abaixo, todos os itens do seu carrinho!</Subtitle>
+					</TitleContainer>
 
-				<ShoppingCartItemList />
-			</ShoppingCartContainer>
-		</GlobalLayout>
+					<ShoppingCartItemList />
+				</ShoppingCartContainer>
+			</GlobalLayout>
+		</PrivateRoute>
 	);
 }
 
