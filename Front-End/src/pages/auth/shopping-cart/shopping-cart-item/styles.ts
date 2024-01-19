@@ -47,13 +47,14 @@ const InfosContainer = styled.section`
 	div {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 
 		gap: 8px;
 	}
 `;
 
 const ProductDescription = styled.span `
-	width: 100%;
+	width: 500px;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -65,6 +66,14 @@ const ProductDescription = styled.span `
 	font-weight: 600;
 
 	color: var(--gray-700);
+
+	@media only screen and (max-width: 1230px) {
+		width: 350px;
+	}
+
+	@media only screen and (max-width: 1010px) {
+		width: 300px;
+	}
 `;
 
 export {

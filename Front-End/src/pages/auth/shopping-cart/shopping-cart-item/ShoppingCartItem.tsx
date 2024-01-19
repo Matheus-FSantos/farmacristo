@@ -30,7 +30,6 @@ const ShoppingCartItem = () => {
 			
 			<div className="buttons">
 				<ButtonsContainer>
-					<ProductButton Type="shopping-cart" />
 					<ProductButton Type="whatsapp" />
 				</ButtonsContainer>
 			</div>

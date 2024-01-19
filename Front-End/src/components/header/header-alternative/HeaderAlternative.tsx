@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
 import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex } from "../styles";
-import { NavContainer, ResourcesDropDown } from "./styles";
+import { NavContainer, ResponsiveNavContainer, MobileNavBar, ResourcesDropDown } from "./styles";
 import { Hr } from "../../ui/hr/Hr";
 
 interface IHeaderAlternative {
@@ -11,9 +11,22 @@ interface IHeaderAlternative {
 }
 
 const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
-
 	const navigate = useNavigate();
+
 	const [dropdownIsActive, setDropdownIsActive] = useState<boolean>(false);
+	const [mobileNavBarOpen, setMobileNavBarOpen] = useState<boolean>(false); 
+
+	if(mobileNavBarOpen) {
+		var elementoHtml = document.documentElement;
+		elementoHtml.style.position = 'fixed';
+		elementoHtml.style.width = '100%';
+		elementoHtml.style.height = '100%';
+	} else {
+		var elementoHtml = document.documentElement;
+		elementoHtml.style.position = '';
+		elementoHtml.style.width = '';
+		elementoHtml.style.height = '';
+	}
 
 	const handleNavigate = (path: string) => {
 		navigate(path);
@@ -23,11 +36,11 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 		if(isLogged)
 			handleNavigate(path);
 		else
-			handleNavigate("/sign-in");
+			handleNavigate("/signin");
 	}
 
 	return (
-		<Container>
+		<Container className={ mobileNavBarOpen ? "open" : ""}>
 			<SocialMediaFlex>
 				<a href="https://www.facebook.com/" target="_blank">
 					<Icon src={ FacebookSVG } alt="Logo do aplicativo facebook (um F com o fundo em azul)" />
@@ -42,7 +55,31 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 			
 			<Hr />
 			
-			<Main>				
+			<Main>
+				<ResponsiveNavContainer className={ mobileNavBarOpen ? "clicked" : ""} onClick={ () => setMobileNavBarOpen(!mobileNavBarOpen) }>
+					<div id="first"></div>
+					<div id="second"></div>
+					<div id="third"></div>
+				</ResponsiveNavContainer>
+
+				<MobileNavBar className={ mobileNavBarOpen ? "actived" : ""}>
+					<ul className="column">
+						<li className="brightness"><span className="disableBrightness" onClick={() => handleNavigate("/")}>Inicio</span></li>
+						<li className="brightness"><span className="disableBrightness" onClick={() => handleNavigate("/search")}>Pesquisa</span></li>
+						<li className="brightness" id="resources" onClick={() => setDropdownIsActive(!dropdownIsActive) }>
+							<span>
+								Recursos
+								<img src={ ArrowResourcesSVG } alt="Seta azul apontando para baixo, que quando clicada aponta para cima" className={ dropdownIsActive ? "actived" : ""} />
+							</span>
+							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
+								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
+								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
+								<p onClick={() => handleNavigate("/admin-painel")}>Painel Administrativo</p>
+							</ResourcesDropDown>
+						</li>
+					</ul>
+				</MobileNavBar>
+
 				<Logo src={ LogoPNG } className="logo-alternative-header" alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => handleNavigate("/") }/>
 			
 				<NavContainer>
@@ -54,7 +91,7 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 								Recursos
 								<img src={ ArrowResourcesSVG } alt="Seta azul apontando para baixo, que quando clicada aponta para cima" className={ dropdownIsActive ? "actived" : ""} />
 							</span>
-							<ResourcesDropDown className={ dropdownIsActive ? "actived" : ""}>
+							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
 								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
 								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
 								<p onClick={() => handleNavigate("/admin-painel")}>Painel Administrativo</p>

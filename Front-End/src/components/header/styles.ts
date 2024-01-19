@@ -5,6 +5,13 @@ const Container = styled.div`
 	height: auto;
 
 	padding: 0.938rem 0; /* 15px and 0px */
+
+	position: relative;
+
+	&.open {
+		height: 100vh;
+		overflow: hidden;
+	}
 `;
 
 const SocialMediaFlex = styled.div`

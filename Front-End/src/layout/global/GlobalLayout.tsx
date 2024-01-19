@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { HeaderAlternative } from "../../components/header/header-alternative";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 import { GlobalContainer } from "../../pages/styles/global";
