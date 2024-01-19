@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const GlobalContainer = styled.section`
 	padding: 0 6.25rem; /* 0 and 100px */
+	overflow: auto;
 
 	@media only screen and (max-width: 1200px) {
 		&.products-grid {
