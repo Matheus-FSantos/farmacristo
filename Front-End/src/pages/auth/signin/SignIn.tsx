@@ -19,10 +19,12 @@ import { TitleContainer } from "../../../components/ui/containers/title-containe
 import { Logo } from "../../../components/header/styles";
 import { LogoPNG } from "../../../assets/icons/icons";
 import { useTimeout } from "../../../hooks/useTimeout";
+import { AuthService } from "../../../services/Auth";
 
 const SignIn = (): React.ReactElement => {
 	useDinamicTitle("Entre em sua conta");
 
+	const authService = new AuthService();
 	const navigate = useNavigate();
 
 	const [email, setEmail] = useState<string>("");
@@ -32,6 +34,8 @@ const SignIn = (): React.ReactElement => {
 	const handleSubmit = async (e: React.FormEvent): Promise<void>  => {
 		e.preventDefault();
 		setIsDisabled(true);
+
+		authService.loggin();
 		
 		const alert = toast.loading("Por favor, aguarde...");
 		await useTimeout(1000);
