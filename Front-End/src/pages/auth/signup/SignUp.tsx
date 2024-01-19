@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Toast } from "../../../components/toast";
+import { useTimeout } from "../../../hooks/useTimeout";
+
 import { Container, ContentContainer, RedirectSpan } from "../signin/styles";
 
 /* UI */
@@ -14,7 +19,6 @@ import { InputContainer } from "../../../components/ui/containers/input-containe
 import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
 import { Logo } from "../../../components/header/styles";
 import { LogoPNG } from "../../../assets/icons/icons";
-import { useNavigate } from "react-router-dom";
 
 const SignUp = (): React.ReactElement => {
 	useDinamicTitle("Cria uma conta");
@@ -24,75 +28,100 @@ const SignUp = (): React.ReactElement => {
 	const [name, setName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
-	const handleSubmit = (e: React.FormEvent): void => {
+	const handleSubmit = async (e: React.FormEvent): Promise<void> => {
 		e.preventDefault();
+		setIsDisabled(true);
+		
+		const alert = toast.loading("Por favor, aguarde...");
+		await useTimeout(1000);
+		toast.update(alert, {
+			render: "Logado! Redirecionando...",
+			type: "success",
+			isLoading: false,
+			position: "top-right",
+			autoClose: 2000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+			theme: "colored",
+		});
+		setIsDisabled(false);
+		await useTimeout(1000);
+
+		navigate("/");
 	}
 
-	return(
-		<Container>
-			<ContentContainer className="signup">
-				<TitleContainer>
-					<Title>Nova conta</Title>
-					<Subtitle>Campos obrigatórios marcados com <span>*</span></Subtitle>
-				</TitleContainer>
+	return (
+		<>
+			<Container>
+				<ContentContainer className="signup">
+					<TitleContainer>
+						<Title>Nova conta</Title>
+						<Subtitle>Campos obrigatórios marcados com <span>*</span></Subtitle>
+					</TitleContainer>
 
-				<div>
-					<form onSubmit={ handleSubmit }>
-						<InputsFlex>
-							<InputContainer>
-								<Label For="name" Required={true}>
-									Nome:
-								</Label>
-								<Input
-									Id="name"
-									Type="text"
-									Value={ name }
-									Required={ true }
-									SetValue={(e) => setName(e.target.value)}
-									Placeholder="Ex.: Fernando Gabriel"
-								/>
-							</InputContainer>
-							<InputContainer>
-								<Label For="email" Required={true}>
-									E-Mail:
-								</Label>
-								<Input
-									Id="email"
-									Type="email"
-									Value={ email }
-									Required={ true }
-									SetValue={(e) => setEmail(e.target.value)}
-									Placeholder="Ex.: exemplo@exemplo.com"
-								/>
-							</InputContainer>
+					<div>
+						<form onSubmit={ handleSubmit }>
+							<InputsFlex>
+								<InputContainer>
+									<Label For="name" Required={true}>
+										Nome:
+									</Label>
+									<Input
+										Id="name"
+										Type="text"
+										Value={ name }
+										Required={ true }
+										SetValue={(e) => setName(e.target.value)}
+										Placeholder="Ex.: Fernando Gabriel"
+									/>
+								</InputContainer>
+								<InputContainer>
+									<Label For="email" Required={true}>
+										E-Mail:
+									</Label>
+									<Input
+										Id="email"
+										Type="email"
+										Value={ email }
+										Required={ true }
+										SetValue={(e) => setEmail(e.target.value)}
+										Placeholder="Ex.: exemplo@exemplo.com"
+									/>
+								</InputContainer>
 
-							<InputContainer>
-								<Label For="password" Required={true}>
-									Senha:
-								</Label>
-								<Input
-									Id="password"
-									Type="password"
-									Value={ password }
-									Required={ true }
-									SetValue={(e) => setPassword(e.target.value)}
-									Placeholder="Ex.: YourPassword1234#"
-								/>
-							</InputContainer>
-							<RedirectSpan>Já possui uma conta? <a onClick={ () => navigate("/signin") }>Clique aqui</a></RedirectSpan>
-						</InputsFlex>
+								<InputContainer>
+									<Label For="password" Required={true}>
+										Senha:
+									</Label>
+									<Input
+										Id="password"
+										Type="password"
+										Value={ password }
+										Required={ true }
+										SetValue={(e) => setPassword(e.target.value)}
+										Placeholder="Ex.: YourPassword1234#"
+									/>
+								</InputContainer>
+								<RedirectSpan>Já possui uma conta? <a onClick={ () => navigate("/signin") }>Clique aqui</a></RedirectSpan>
+							</InputsFlex>
 
 
-						<Button Type="submit" ButtonType="save">
-							Criar
-						</Button>
-					</form>
-				</div>
-			</ContentContainer>
+							<Button Type="submit" ButtonType="save" isDisabled={ isDisabled }>
+								Criar
+							</Button>
+						</form>
+					</div>
+				</ContentContainer>
 
-			<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
-		</Container>
+				<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
+			</Container>
+			<Toast />
+		</>
 	);
 }
 
