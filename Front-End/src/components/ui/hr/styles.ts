@@ -17,6 +17,12 @@ const Hr = styled.section`
 		width: 0.125rem; /* 2px */
 		height: 28.125rem; /* 450px */
 	}
+
+	@media only screen and (max-width: 832px) {
+		&.vertical {
+			display: none;
+		}
+	}
 `;
 
 export { Hr };

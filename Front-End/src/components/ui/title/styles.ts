@@ -21,6 +21,32 @@ const Title = styled.h1`
 	&.white {
 		color: var(--white-1000);
 	}
+
+	@media only screen and (max-width: 1310px) {
+		font-size: 2.375rem; /* 38px */
+	
+		&.sm {
+			font-size: 1.75rem; /* 28px */
+		}
+	}
+
+	@media only screen and (max-width: 545px) {
+		font-size: 1.75rem; /* 28px */
+		
+		&.sm {
+			font-size: 1.4rem; /* 22.4px */
+		}
+	}
+
+	@media only screen and (max-width: 465px) {
+		font-size: 1.5rem; /* 24px */
+	}
+
+	@media only screen and (max-width: 390px) {
+		&.sm {
+			font-size: 1.25rem; /* 20px */
+		}
+	}
 `;
 
 export { Title };

@@ -14,6 +14,14 @@ const Product = styled.div`
 	&:hover {
 		transform: scale(1.05);
 	}
+
+	@media only screen and (max-width: 1240px) {
+		transform: scale(0.88);
+		
+		&:hover {
+			transform: scale(0.93);
+		}
+	}
 `;
 
 const ProductImage = styled.img`

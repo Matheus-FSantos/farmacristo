@@ -27,54 +27,26 @@ import {
 import {
 	Card,
 	Title,
+	Elipse,
 	Subtitle,
 	WomanImage,
-	CardContainer,
 	SubtitleGreen,
+	CardContainer,
+	SignUpContainer,
+	JoinUsDescription,
 	SectionOneContainer,
 	SectionTwoContainer,
-	SectionThreeContainer,
 	SectionFourContainer,
-	Elipse,
-	SectionFourContainerFlex,
 	JoinUsTextsContainer,
-	JoinUsDescription,
+	SectionThreeContainer,
+	SectionFourContainerFlex,
 } from "./styles";
 
-import styled from "styled-components";
 import { Button } from "../../components/ui/button/Button";
 import { InputContainer } from "../../components/ui/containers/input-container/InputContainer";
 import { Label } from "../../components/ui/label/Label";
 import { Input } from "../../components/ui/input/Input";
 import { InputsFlex } from "../../components/ui/containers/inputs-flex/InputsFlex";
-
-const SignUpContainer = styled.section`
-	width: 400px;
-	height: 514px;
-
-	position: relative;
-	z-index: 1;
-
-	border: 0;
-	border-radius: 20px;
-	background-color: var(--white-1000);
-
-	display: flex;
-	flex-direction: column;
-
-	justify-content: space-evenly;
-
-	padding: 0 40px; /* 10px 40px */
-
-	form {
-		height: 68%;
-
-		display: flex;
-		flex-direction: column;
-
-		gap: 50px;
-	}
-`;
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
@@ -134,10 +106,12 @@ const LandingPage = (): React.ReactElement => {
 				<Header />
 
 				<SectionOneContainer id="one">
-					<TitleContainer Type="xxl">
-						<Title>Descubra o Poder da Saúde<br /><span>com a FarmaCristo.</span></Title>
-						<Subtitle>Oferecemos uma seleção excepcional de <span>produtos dedicados ao seu bem-estar.</span></Subtitle>
-					</TitleContainer>
+					<div className="text-container">
+						<TitleContainer Type="xxl title">
+							<Title>Descubra o Poder da Saúde<br /><span>com a FarmaCristo.</span></Title>
+							<Subtitle>Oferecemos uma seleção excepcional de <span>produtos dedicados ao seu bem-estar.</span></Subtitle>
+						</TitleContainer>
+					</div>
 
 					<WomanImage src={WomanImageSVG} alt="Uma médica, mulher, morena com cabelos cacheados de braço cruzado" />
 				</SectionOneContainer>
@@ -149,49 +123,56 @@ const LandingPage = (): React.ReactElement => {
 					</TitleContainer>
 
 					<CardContainer>
-						<Card className="red">
-							<img src={FirstAidKitPNG} alt="Imagem que representa um kit de primeiros socorros, em vermelho" loading="lazy"/>
-							<span>Primeiros socorros</span>
-						</Card>
-						<Card className="blue">
-							<img src={HerbalPNG} alt="Imagem que representa uma caixa de vitaminas e suplementos, em azul" loading="lazy"/>
-							<span>Vitaminas e Suplementos</span>
-						</Card>
-						<Card className="orange">
-							<img src={PrescriptionPNG} alt="Imagem que representa uma prescrição médica, em laranja" loading="lazy"/>
-							<span>Prescrições médicas</span>
-						</Card>
-						<Card className="green">
-							<img src={PersonalHygienePNG} alt="Imagem que representa cuidados pessoas, em verde" loading="lazy"/>
-							<span>Cuidados pessoais</span>
-						</Card>
-						<Card className="pink">
-							<img src={PediatricsPNG} alt="Imagem que representa cuidados com bebê (uma mão com um bebê em cima), em rosa" loading="lazy"/>
-							<span>Cuidados com bebês</span>
-						</Card>
+						<div className="scrollable">
+							<Card className="red">
+								<img src={FirstAidKitPNG} alt="Imagem que representa um kit de primeiros socorros, em vermelho" loading="lazy"/>
+								<span>Primeiros socorros</span>
+							</Card>
+							<Card className="blue">
+								<img src={HerbalPNG} alt="Imagem que representa uma caixa de vitaminas e suplementos, em azul" loading="lazy"/>
+								<span>Vitaminas e Suplementos</span>
+							</Card>
+							<Card className="orange">
+								<img src={PrescriptionPNG} alt="Imagem que representa uma prescrição médica, em laranja" loading="lazy"/>
+								<span>Prescrições médicas</span>
+							</Card>
+							<Card className="green">
+								<img src={PersonalHygienePNG} alt="Imagem que representa cuidados pessoas, em verde" loading="lazy"/>
+								<span>Cuidados pessoais</span>
+							</Card>
+							<Card className="pink">
+								<img src={PediatricsPNG} alt="Imagem que representa cuidados com bebê (uma mão com um bebê em cima), em rosa" loading="lazy"/>
+								<span>Cuidados com bebês</span>
+							</Card>
+						</div>
+
+						<div className="blur toright"></div>
+						<div className="blur toleft"></div>
 					</CardContainer>
 				</SectionTwoContainer>
-
-				<SectionThreeContainer id="three">
-					<TitleContainer Type="xl center">
-						<TitleComponent Type="sm green extra-bold">Produtos em destaque</TitleComponent>
-						<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
-					</TitleContainer>
-
-					<div className="products-grid">
-						<ProductsGridContainer>
-							<Product />
-							<Product />
-							<Product />
-							<Product />
-							<Product />
-							<Product />
-							<Product />
-							<Product />
-						</ProductsGridContainer>
-					</div>
-				</SectionThreeContainer>
 			</GlobalContainer>
+
+			<SectionThreeContainer id="three">
+				<GlobalContainer className="products-grid">
+						<TitleContainer Type="xl center">
+							<TitleComponent Type="sm green extra-bold">Produtos em destaque</TitleComponent>
+							<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
+						</TitleContainer>
+
+						<div className="products-grid">
+							<ProductsGridContainer>
+								<Product />
+								<Product />
+								<Product />
+								<Product />
+								<Product />
+								<Product />
+								<Product />
+								<Product />
+							</ProductsGridContainer>
+						</div>
+					</GlobalContainer>
+				</SectionThreeContainer>
 
 			<SectionFourContainer id="four">
 				<Elipse className="yellow lg"/>
@@ -272,6 +253,7 @@ const LandingPage = (): React.ReactElement => {
 				</GlobalContainer>
 			</SectionFourContainer>
 
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 			<WhatsappWidget />
 		</>
 	);

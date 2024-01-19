@@ -12,6 +12,8 @@ const Container = styled.a`
 	right: 3.125rem; /* 50px */
 	bottom: 3.125rem;
 
+	z-index: 99;
+
 	cursor: pointer;
 	
 	display: flex;
@@ -27,6 +29,11 @@ const Container = styled.a`
 		bottom: 0.063rem; /* 1px */
 		left: 0.031rem; /* 0.5px */
 		position: relative;	
+	}
+
+	@media only screen and (max-width: 768px) {
+		right: 1rem;
+		bottom: 1rem;
 	}
 `;
 

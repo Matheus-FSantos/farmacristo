@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const Container = styled.section`
+const Container = styled.div`
 	width: 100%;
 	height: auto;
 
 	padding: 0.938rem 0; /* 15px and 0px */
 `;
 
-const SocialMediaFlex = styled.section`
+const SocialMediaFlex = styled.div`
 	display: flex;
 
 	justify-content: start;
@@ -27,16 +27,18 @@ const Icon = styled.img`
 	&:hover {
 		transform: scale(1.2);
 	}
+
+	@media only screen and (max-width: 750px) {
+		width: 20px;
+	}
 `;
 
-const Main = styled.section`
+const Main = styled.div`
 	display: flex;
 	align-items: center;
 
 	justify-content: space-between;
 `;
-
-const ContactInformations = styled.section``;
 
 const Logo = styled.img`
 	width: 5rem; /* 80px */
@@ -53,9 +55,23 @@ const Logo = styled.img`
 		position: relative;
 		left: 0.625rem; /* 10px */
 	}
+
+	@media only screen and (max-width: 1024px) {
+		left: -2.5rem;
+	}
+
+	@media only screen and (max-width: 520px) {
+		left: 0;
+	}
 `;
 
-const Informations = styled.section`
+const ContactInformations = styled.div`
+	@media only screen and (max-width: 520px) {
+		display: none;
+	}
+`;
+
+const Informations = styled.div`
 	display: flex;
 
 	justify-content: start;
@@ -69,14 +85,24 @@ const Informations = styled.section`
 		font-size: 0.875rem; /* 14px */
 		font-weight: 600;
 	}
+
+	@media only screen and (max-width: 750px) {
+		span {
+			font-size: 10px;	
+		}
+	}
 `;
 
-const OptionsContainer = styled.section`
+const OptionsContainer = styled.div`
 	display: flex;
 	gap: 1rem; /* 16px */
+
+	@media only screen and (max-width: 1024px) {
+		transform: scale(0.9);
+	}
 `;
 
-const Option = styled.section`
+const Option = styled.div`
 	display: flex;
 
 	justify-content: start;
@@ -89,7 +115,7 @@ const Option = styled.section`
 	padding: 0.5rem 0.875rem; /* 8px and 14px */
 	border-radius: 0.313rem; /* 5px */
 
-	span {
+	span.description {
 		font-size: 0.875rem; /* 14px */
 		font-weight: 600;
 
@@ -106,9 +132,15 @@ const Option = styled.section`
 	&:hover {
 		background-color: var(--blue-100);
 	}
+
+	@media only screen and (max-width: 1024px) {
+		span.description {
+			display: none;
+		}
+	}
 `;
 
-const ShoppingCartIconContainer = styled.section`
+const ShoppingCartIconContainer = styled.div`
 	position: relative;
 
 	span {
@@ -121,6 +153,9 @@ const ShoppingCartIconContainer = styled.section`
 		right: -0.625rem; /* -10px */
 		bottom: -0.5rem; /* -8px */
 		position: absolute;
+
+		font-size: 0.875rem; /* 14px */
+		font-weight: 600;
 	}
 `;
 

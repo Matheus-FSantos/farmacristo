@@ -1,15 +1,40 @@
 import styled from "styled-components";
 
-const Container = styled.section`
+const Container = styled.div`
 	width: 100vw;
 	height: 100vh;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	position: relative;
+
+	img {
+		position: absolute;
+
+		bottom: 0.625rem; /* 10px */
+		left: 46.5%;
+	}
+
+	@media only screen and (max-width: 1024px) {
+		height: 90vh;
+		
+		img {
+			left: 46%;
+			bottom: 10%;
+		}
+	}
+
+	@media only screen and (max-width: 524px) {
+		img {
+			left: 43%;
+			bottom: 5%;
+		}
+	}
 `;
 
-const ContentContainer = styled.section`
+const ContentContainer = styled.div`
 	padding: 2.5rem; /* 40px */
 
 	max-width: 450px;
@@ -17,7 +42,6 @@ const ContentContainer = styled.section`
 	height: 600px;
 
 	border-radius: 1rem;
-	border: 1px solid var(--gray-120);
 
 	display: flex;
 	flex-direction: column;
@@ -32,11 +56,10 @@ const ContentContainer = styled.section`
 
 	&.signup {
 		max-width: 500px;
-		height: 700px;
 	}
 `;
 
-const OrContainer = styled.section`
+const OrContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -56,7 +79,7 @@ const OrContainer = styled.section`
 	}
 `;
 
-const OrHr = styled.section`
+const OrHr = styled.div`
 	width: 100%;
 	height: 0.125rem; /* 2px */
 

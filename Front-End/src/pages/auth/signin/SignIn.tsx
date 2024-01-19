@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
-import { GoogleWidget } from "../../../components/google-widget";
 
-import { Container, ContentContainer, OrContainer, OrHr, RedirectSpan } from "./styles";
+import { Container, ContentContainer, RedirectSpan } from "./styles";
 
 /* UI */
 import { Title } from "../../../components/ui/title/Title";
@@ -13,9 +12,14 @@ import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
 import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
+import { Logo } from "../../../components/header/styles";
+import { LogoPNG } from "../../../assets/icons/icons";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = (): React.ReactElement => {
 	useDinamicTitle("Entre em sua conta");
+
+	const navigate = useNavigate();
 
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
@@ -33,14 +37,6 @@ const SignIn = (): React.ReactElement => {
 				</TitleContainer>
 
 				<div>
-					<GoogleWidget />
-
-					<OrContainer>
-						<OrHr />
-						<span>ou</span>
-						<OrHr />
-					</OrContainer>
-
 					<form onSubmit={handleSubmit}>
 						<InputsFlex>
 							<InputContainer>
@@ -70,7 +66,7 @@ const SignIn = (): React.ReactElement => {
 									Placeholder="Ex.: YourPassword1234#"
 								/>
 							</InputContainer>
-							<RedirectSpan>Não possui uma conta? <a href="/sign-up">Clique aqui</a></RedirectSpan>
+							<RedirectSpan>Não possui uma conta? <a onClick={ () => navigate("/signup") }>Clique aqui</a></RedirectSpan>
 						</InputsFlex>
 
 
@@ -80,6 +76,8 @@ const SignIn = (): React.ReactElement => {
 					</form>
 				</div>
 			</ContentContainer>
+		
+			<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
 		</Container>
 	);
 };
