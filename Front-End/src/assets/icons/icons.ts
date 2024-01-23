@@ -3,6 +3,7 @@ import EmailSVG from "./email.svg";
 import PersonSVG from "./person.svg";
 import SearchSVG from "./search.svg";
 import GoogleSVG from "./google.svg";
+import RemovePNG from "./remove.png";
 import TwitterSVG from "./twitter.svg";
 import WhatsappSVG from "./whatsapp.svg";
 import FacebookSVG from "./facebook.svg";
@@ -18,6 +19,7 @@ export {
 	PersonSVG,
 	SearchSVG,
 	GoogleSVG,
+	RemovePNG,
 	TwitterSVG,
 	WhatsappSVG,
 	FacebookSVG,
