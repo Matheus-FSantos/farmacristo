@@ -45,6 +45,15 @@ const ProductButton = styled.button`
 			color: var(--blue-1000);
 		}
 	}
+
+	&.remove {
+		border-color: var(--red-500);
+		background-color: var(--red-150);
+
+		span {
+			color: var(--red-500);
+		}
+	}
 `;
 
 const ProductIcon = styled.img`
