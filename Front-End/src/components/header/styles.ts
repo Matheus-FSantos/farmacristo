@@ -63,8 +63,24 @@ const Logo = styled.img`
 		left: 0.625rem; /* 10px */
 	}
 
+	&.logo-alternative-header-hr {
+		display: none;
+	}
+
 	@media only screen and (max-width: 1024px) {
 		left: -2.5rem;
+	}
+
+	@media only screen and (max-width: 612px) {
+		&.logo-alternative-header {
+			display: none;
+		}
+
+		&.logo-alternative-header-hr {
+			display: block;
+			width: 2.5rem; /* 40px */
+			height: auto;
+		}
 	}
 
 	@media only screen and (max-width: 520px) {
@@ -107,6 +123,12 @@ const OptionsContainer = styled.div`
 	@media only screen and (max-width: 1024px) {
 		transform: scale(0.9);
 	}
+
+	@media only screen and (max-width: 612px) {
+		position: relative;
+		left: 2.5%;
+		gap: 0;
+	}
 `;
 
 const Option = styled.div`
@@ -145,6 +167,10 @@ const Option = styled.div`
 			display: none;
 		}
 	}
+
+	@media only screen and (max-width: 612px) {	
+		transform: scale(0.9);
+	}
 `;
 
 const ShoppingCartIconContainer = styled.div`
@@ -166,6 +192,12 @@ const ShoppingCartIconContainer = styled.div`
 	}
 `;
 
+const MobileSocialMediaContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
 export {
 	Icon,
 	Main,
@@ -177,4 +209,5 @@ export {
 	OptionsContainer,
 	ContactInformations,
 	ShoppingCartIconContainer,
+	MobileSocialMediaContainer,
 }

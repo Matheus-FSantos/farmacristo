@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
-import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex } from "../styles";
+import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex, MobileSocialMediaContainer } from "../styles";
 import { NavContainer, ResponsiveNavContainer, MobileNavBar, ResourcesDropDown } from "./styles";
 import { Hr } from "../../ui/hr/Hr";
 
@@ -41,18 +41,22 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 
 	return (
 		<Container className={ mobileNavBarOpen ? "open" : ""}>
-			<SocialMediaFlex>
-				<a href="https://www.facebook.com/" target="_blank">
-					<Icon src={ FacebookSVG } alt="Logo do aplicativo facebook (um F com o fundo em azul)" />
-				</a>
-				<a href="https://www.instagram.com/" target="_blank">
-					<Icon src={ InstagramSVG } alt="Logo do aplicativo instagram (uma camera, arredondada, com o fundo em azul)" />
-				</a>
-				<a href="https://twitter.com/" target="_blank">
-					<Icon src={ TwitterSVG } className="twitter" alt="Logo do aplicativo Twiiter (um passarinho em branco com o fundo em azul escuro)" />
-				</a>
-			</SocialMediaFlex>
-			
+			<MobileSocialMediaContainer>
+				<SocialMediaFlex>
+					<a href="https://www.facebook.com/" target="_blank">
+						<Icon src={ FacebookSVG } alt="Logo do aplicativo facebook (um F com o fundo em azul)" />
+					</a>
+					<a href="https://www.instagram.com/" target="_blank">
+						<Icon src={ InstagramSVG } alt="Logo do aplicativo instagram (uma camera, arredondada, com o fundo em azul)" />
+					</a>
+					<a href="https://twitter.com/" target="_blank">
+						<Icon src={ TwitterSVG } className="twitter" alt="Logo do aplicativo Twiiter (um passarinho em branco com o fundo em azul escuro)" />
+					</a>
+				</SocialMediaFlex>
+				
+				<Logo src={ LogoPNG } className="logo-alternative-header-hr" alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => handleNavigate("/") }/>
+			</MobileSocialMediaContainer>
+
 			<Hr />
 			
 			<Main>
