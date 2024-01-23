@@ -19,12 +19,11 @@ const ItemList = styled.section`
 
 const TotalContainer = styled.section`
 	display: flex;
-	justify-content: end;
 	align-items: end;
 
-	padding-right: 60px;
+	padding-right: 3.75rem; /* 60px */
 
-	gap: 10px;
+	gap: 0.625rem; /* 10px */
 
 	span.price {
 		font-weight: 700;

@@ -11,7 +11,7 @@ import { ButtonsContainer } from "../../../../components/ui/containers/buttons-c
 import { Icon, IconAndInfos, InfosContainer, ProductDescription, ShoppingCartItemContainer } from "./styles";
 
 const ShoppingCartItem = () => {
-	return(
+	return (
 		<ShoppingCartItemContainer>
 			<IconAndInfos>
 				<Icon src={ CreatinaPNG }/>
@@ -31,6 +31,7 @@ const ShoppingCartItem = () => {
 			<div className="buttons">
 				<ButtonsContainer>
 					<ProductButton Type="whatsapp" />
+					<ProductButton Type="remove" />
 				</ButtonsContainer>
 			</div>
 		</ShoppingCartItemContainer>
