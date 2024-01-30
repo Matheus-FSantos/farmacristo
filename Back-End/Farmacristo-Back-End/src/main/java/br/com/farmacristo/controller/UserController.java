@@ -10,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
+import br.com.farmacristo.model.DTO.user.UserDTO;
 import br.com.farmacristo.model.entity.User;
 import br.com.farmacristo.model.exception.FarmaCristoException;
 import br.com.farmacristo.model.service.UserService;
@@ -30,7 +30,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping(path="/api/users")
 @Tag(name="User", description="Controller class that will handle all requests coming to the URL: \"/api/users\" - that is, it controls everything related to the user.")
 public class UserController {
@@ -43,7 +42,7 @@ public class UserController {
 		description="With this method you will be able to search for all existing users in our system. In return for the request, all formatted information will come from the respective user, if it exists." 
 	)
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<UserDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.userService.findAll());
 	}
 	
@@ -52,7 +51,7 @@ public class UserController {
 		description="With this method you can search for a specific user in our system. In return, all formatted information will come from the respective user, if it exists." 
 	)
 	@GetMapping("/{userId}")
-	public ResponseEntity<User> findById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
+	public ResponseEntity<UserDTO> findById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.userService.findById(id));
 	}
 	
@@ -62,7 +61,7 @@ public class UserController {
 	)
 	@GetMapping("/image/{userId}")
 	public ResponseEntity<ByteArrayResource> findUserImageById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
-		User user = this.userService.findById(id);
+		User user = this.userService.findByIdDefault(id);
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

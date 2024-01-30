@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.farmacristo.model.entity.enums.UserTier;
 import br.com.farmacristo.model.exception.FarmaCristoException;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -46,6 +48,10 @@ public class User implements Serializable {
 	@Column(nullable=false, length=120)
 	private String password;
 	
+	@JsonIgnore
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+	private ShoppingCart shoppingCart;
+	
 	@Column(nullable=false)
 	private LocalDateTime createdAt;
 	
@@ -58,31 +64,34 @@ public class User implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.shoppingCart = null;
 		this.createdAt = LocalDateTime.now();
 		this.updatedAt = LocalDateTime.now();
 		
 		this.updateTier(tier);
 	}
 	
-	public User(UUID id, UserTier tier, String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	public User(UUID id, UserTier tier, String name, String email, String password, ShoppingCart shoppingCart, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.shoppingCart = shoppingCart;
 		
 		this.updateTier(tier);
 	}
 	
 
-	public User(UUID id, UserTier tier, String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt, byte[] image) {
+	public User(UUID id, UserTier tier, String name, String email, String password, ShoppingCart shoppingCart, LocalDateTime createdAt, LocalDateTime updatedAt, byte[] image) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.shoppingCart = shoppingCart;
 		
 		this.updateTier(tier);
 	}
@@ -199,7 +208,19 @@ public class User implements Serializable {
 	private void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+	
+	public void updateShoppingCart(ShoppingCart shoppingCart) {
+		this.setShoppingCart(shoppingCart);
+	}
 
+	private void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+	
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}

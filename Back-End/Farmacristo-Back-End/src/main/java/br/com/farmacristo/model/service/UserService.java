@@ -1,6 +1,7 @@
 package br.com.farmacristo.model.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,11 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
+import br.com.farmacristo.model.DTO.user.UserDTO;
 import br.com.farmacristo.model.annotation.Auth;
 import br.com.farmacristo.model.annotation.FieldsValidation;
 import br.com.farmacristo.model.annotation.OnlyAdmin;
+import br.com.farmacristo.model.entity.ShoppingCart;
 import br.com.farmacristo.model.entity.User;
 import br.com.farmacristo.model.entity.enums.UserTier;
+import br.com.farmacristo.model.exception.FarmaCristoException;
 import br.com.farmacristo.model.exception.specialization.InvalidFields;
 import br.com.farmacristo.model.exception.specialization.user.UserAlreadyExist;
 import br.com.farmacristo.model.exception.specialization.user.UserNotFound;
@@ -28,15 +32,30 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private ShoppingCartService shoppingCartService;
 
 	@OnlyAdmin
 	@Auth(required=false)
-	public List<User> findAll() {
-		return this.userRepository.findAll();
+	public List<UserDTO> findAll() throws FarmaCristoException {
+		List<User> users = this.userRepository.findAll();
+		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		
+		for(User user : users)
+			usersDTO.add(new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getTier()));
+		
+		
+		return usersDTO;
 	}
 	
 	@Auth(required=true)
-	public User findById(UUID id) throws UserNotFound {
+	public UserDTO findById(UUID id) throws FarmaCristoException {
+		User user = this.findByIdDefault(id);
+		return new UserDTO(user.getId(), user.getEmail(), user.getEmail(), user.getPassword(), user.getTier());
+	}
+	
+	public User findByIdDefault(UUID id) throws UserNotFound {
 		return this.userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não encontrado.", "Você tentou buscar informações de um usuário inexistente. Por favor, altere as informações e realize uma nova busca."));
 	}
 	
@@ -50,7 +69,9 @@ public class UserService {
 		if(this.userRepository.findByEmail(newUserDTO.email()).isEmpty()) {
 			User newUser = new User(UserTier.Client, newUserDTO.name(), newUserDTO.email(), newUserDTO.password());
 			newUser.updateImage(ImageUtils.encryptedDefaultUserImage);
-			userRepository.save(newUser);
+			newUser = userRepository.save(newUser);
+			ShoppingCart shoppingCart = shoppingCartService.newShoppingCart(newUser);
+			newUser.updateShoppingCart(shoppingCart);
 		} else
 			throw new UserAlreadyExist("Campos inválidos.", "Esta conta já existe em nosso sistema. Se você já é um usuário registrado, por favor, faça login para acessar sua conta.");
 	}
@@ -61,7 +82,7 @@ public class UserService {
 		/* Fields Validation */
 		UserValidation.validation(updatedUser);
 		
-		User oldUser = this.findById(id);
+		User oldUser = this.findByIdDefault(id);
 		Optional<User> user = this.userRepository.findByEmail(updatedUser.email());
 		
 		
@@ -82,7 +103,7 @@ public class UserService {
 		/* Fields Validation */
 		ImageUtils.validation(newImageBytes);
 		
-		User user = this.findById(id);
+		User user = this.findByIdDefault(id);
 		user.updateImage(newImageBytes.getBytes());
 		this.userRepository.save(user);
 	}
@@ -91,7 +112,7 @@ public class UserService {
 	@Transactional
 	@Auth(required=true)
 	public void updateUserTierToAdmin(UUID id) throws UserNotFound {
-		User user = this.findById(id);
+		User user = this.findByIdDefault(id);
 		user.updateTier(UserTier.Administrator);
 		this.userRepository.save(user);
 	}
@@ -100,7 +121,7 @@ public class UserService {
 	@Transactional
 	@Auth(required=true)
 	public void updateUserTierToClient(UUID id) throws UserNotFound {
-		User user = this.findById(id);
+		User user = this.findByIdDefault(id);
 		user.updateTier(UserTier.Client);
 		this.userRepository.save(user);
 	}
