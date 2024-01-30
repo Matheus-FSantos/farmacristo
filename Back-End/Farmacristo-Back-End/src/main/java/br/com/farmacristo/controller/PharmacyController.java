@@ -61,7 +61,7 @@ public class PharmacyController {
 	)
 	@GetMapping("/image/{pharmacyId}")
 	public ResponseEntity<ByteArrayResource> findProductImageById(@PathVariable(name="pharmacyId") UUID id) throws FarmaCristoException {
-		PharmacyDTO pharmacyDTO = this.pharmacyService.findById(id);
+		Pharmacy pharmacyDTO = this.pharmacyService.findByIdDefault(id);
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

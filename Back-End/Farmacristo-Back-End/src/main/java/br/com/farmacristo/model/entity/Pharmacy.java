@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.farmacristo.model.DTO.pharmacy.PharmacyDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -51,18 +50,6 @@ public class Pharmacy implements Serializable {
 	private LocalDateTime updatedAt;
 
 	public Pharmacy() { }
-	
-	public Pharmacy(PharmacyDTO pharmacyDTO) {
-		this.id = UUID.fromString(pharmacyDTO.getId());
-		this.name = pharmacyDTO.getName();
-		this.number = pharmacyDTO.getUnformattedNumber();
-		this.email = pharmacyDTO.getEmail();
-		this.postalCode = pharmacyDTO.getUnformattedPostalCode();
-		this.setImage(pharmacyDTO.getImageBytes());
-		this.setCreatedAt(pharmacyDTO.getCreatedAt());
-		this.setUpdatedAt(pharmacyDTO.getUpdatedAt());
-		
-	}
 	
 	public Pharmacy(String name, String number, String email, String postalCode, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.name = name;

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.product.NewProductDTO;
+import br.com.farmacristo.model.DTO.product.ProductDTO;
 import br.com.farmacristo.model.entity.Product;
 import br.com.farmacristo.model.exception.FarmaCristoException;
 import br.com.farmacristo.model.service.ProductService;
@@ -40,7 +41,7 @@ public class ProductController {
 		description="With this method you will be able to search for all existing products in our system. In return for the request, all formatted information will come from the respective products, if it exists." 
 	)
 	@GetMapping
-	public ResponseEntity<List<Product>> findAll() {
+	public ResponseEntity<List<ProductDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.productService.findAll());
 	}
 	
@@ -49,7 +50,7 @@ public class ProductController {
 		description="With this method you can search for a specific product in our system. In return, all formatted information will come from the respective product, if it exists." 
 	)
 	@GetMapping("/{productId}")
-	public ResponseEntity<Product> findById(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
+	public ResponseEntity<ProductDTO> findById(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.productService.findById(id));
 	}
 	
@@ -59,7 +60,7 @@ public class ProductController {
 	)
 	@GetMapping("/image/{productId}")
 	public ResponseEntity<ByteArrayResource> findProductImageById(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
-		Product product = this.productService.findById(id);
+		Product product = this.productService.findByIdDefault(id);
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

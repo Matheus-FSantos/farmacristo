@@ -46,7 +46,7 @@ public class PharmacyService {
 		for(Pharmacy pharmacy : pharmacies) {
 			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.getPostalCode());
 			AddressDTO address = new AddressDTO(viaCepDTO);
-			pharmaciesDTO.add(new PharmacyDTO(pharmacy, address));
+			pharmaciesDTO.add(new PharmacyDTO(pharmacy.getId(), pharmacy.getName(), pharmacy.getEmail(), pharmacy.getNumber(), pharmacy.getPostalCode(), address));
 		}
 		
 		return pharmaciesDTO;
@@ -63,7 +63,7 @@ public class PharmacyService {
 		if(pharmacy.isPresent()) {
 			ViaCEPDTO viaCepDTO = this.viaCEPRepository.getAddressByCEP(pharmacy.get().getPostalCode());
 			AddressDTO address = new AddressDTO(viaCepDTO);
-			return new PharmacyDTO(pharmacy.get(), address);
+			return new PharmacyDTO(pharmacy.get().getId(), pharmacy.get().getName(), pharmacy.get().getEmail(), pharmacy.get().getNumber(), pharmacy.get().getPostalCode(), address);
 		} else
 			throw new PharmacyNotFound("Farmácia não encontrada.", "Você tentou buscar informações de uma farmácia inexistente. Por favor, altere as informações e realize uma nova busca.");
 	}
@@ -92,7 +92,7 @@ public class PharmacyService {
 		PharmacyValidation.validation(updatedPharmacy);
 		this.viaCEPRepository.CEPValidation(updatedPharmacy.postalCode());
 		
-		PharmacyDTO oldPharmacy = this.findById(id);
+		Pharmacy oldPharmacy = this.findByIdDefault(id);
 		Optional<Pharmacy> findByEmail = this.pharmacyRepository.findByEmail(updatedPharmacy.email());
 		
 		if(findByEmail.isEmpty() || (findByEmail.isPresent() && findByEmail.get().getId().equals(id))) {
@@ -110,8 +110,8 @@ public class PharmacyService {
 		/* Fields Validation */
 		ImageUtils.validation(newImageBytes);
 		
-		PharmacyDTO pharmacyDTO = this.findById(id);
-		Pharmacy updatedPharmacy = new Pharmacy(id, pharmacyDTO.getName(), pharmacyDTO.getUnformattedNumber(), pharmacyDTO.getEmail(), pharmacyDTO.getUnformattedPostalCode(), newImageBytes.getBytes(), pharmacyDTO.getCreatedAt(), LocalDateTime.now());
+		Pharmacy pharmacy = this.findByIdDefault(id);
+		Pharmacy updatedPharmacy = new Pharmacy(id, pharmacy.getName(), pharmacy.getNumber(), pharmacy.getEmail(), pharmacy.getPostalCode(), newImageBytes.getBytes(), pharmacy.getCreatedAt(), LocalDateTime.now());
 		this.pharmacyRepository.save(updatedPharmacy);
 	}
 	

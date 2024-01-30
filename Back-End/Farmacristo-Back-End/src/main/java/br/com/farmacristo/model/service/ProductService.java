@@ -2,6 +2,7 @@ package br.com.farmacristo.model.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.farmacristo.model.DTO.pharmacy.PharmacyDTO;
 import br.com.farmacristo.model.DTO.product.NewProductDTO;
+import br.com.farmacristo.model.DTO.product.ProductDTO;
 import br.com.farmacristo.model.DTO.product.ProductPharmacyDTO;
 import br.com.farmacristo.model.annotation.Auth;
 import br.com.farmacristo.model.annotation.FieldsValidation;
@@ -37,13 +40,36 @@ public class ProductService {
 	private PharmacyService pharmacyService;
 	
 	@Auth(required=false)
-	public List<Product> findAll() {
-		return this.productRepository.findAll();
+	public List<ProductDTO> findAll() throws PharmacyNotFound, CEPNotFound {
+		List<Product> products = this.productRepository.findAll();
+		List<ProductDTO> productsDTO = new ArrayList<ProductDTO>();
+		
+		Set<PharmacyDTO> pharmaciesDTO = new HashSet<PharmacyDTO>();
+		
+		for(Product product : products) {
+			for(Pharmacy pharmacy : product.getPharmacies())
+				pharmaciesDTO.add(this.pharmacyService.findById(pharmacy.getId()));
+			
+			productsDTO.add(new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getBrand(), product.getPrice(), product.getPromotionalPrice(), product.getPrescriptionIsRequired(), pharmaciesDTO));			
+		}
+		
+		return productsDTO;
 	}
 	
 	@OnlyAdmin
 	@Auth(required=true)
-	public Product findById(UUID id) throws ProductNotFound {
+	public ProductDTO findById(UUID id) throws ProductNotFound, PharmacyNotFound, CEPNotFound {
+		Product product = this.findByIdDefault(id);
+		Set<PharmacyDTO> pharmaciesDTO = new HashSet<PharmacyDTO>();
+		
+		
+		for(Pharmacy pharmacy : product.getPharmacies())
+			pharmaciesDTO.add(this.pharmacyService.findById(pharmacy.getId()));
+		
+		return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getBrand(), product.getPrice(), product.getPromotionalPrice(), product.getPrescriptionIsRequired(), pharmaciesDTO);
+	}
+
+	public Product findByIdDefault(UUID id) throws ProductNotFound {
 		return this.productRepository.findById(id).orElseThrow(() -> new ProductNotFound("Produto não encontrado.", "Você tentou buscar informações de um produto inexistente. Por favor, altere as informações e realize uma nova busca."));
 	}
 	
@@ -73,7 +99,7 @@ public class ProductService {
 		/* Fields Validation */
 		ProductValidation.validation(updatedProductDTO);
 		Set<Pharmacy> pharmacies = this.getPharmacies(updatedProductDTO.getPharmacies());
-		Product oldProduct = this.findById(id);
+		Product oldProduct = this.findByIdDefault(id);
 		this.modify(oldProduct, updatedProductDTO);
 		
 		oldProduct.getPharmacies().clear();
@@ -88,7 +114,7 @@ public class ProductService {
 		/* Fields Validation */
 		ImageUtils.validation(newImageBytes);
 		
-		Product product = this.findById(id);
+		Product product = this.findByIdDefault(id);
 		product.updateImage(newImageBytes.getBytes());
 		this.productRepository.save(product);
 	}
