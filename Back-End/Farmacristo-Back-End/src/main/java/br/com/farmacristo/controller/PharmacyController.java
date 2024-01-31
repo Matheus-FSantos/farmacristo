@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,6 +76,7 @@ public class PharmacyController {
 					.body(image);
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Save a new pharmacy",
 		description="With this method you can add a new pharmacy to our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
@@ -85,6 +87,7 @@ public class PharmacyController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Update an existent pharmacy",
 		description="With this method you update an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
@@ -95,6 +98,7 @@ public class PharmacyController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Update the image of an existing pharmacy",
 		description="With this method you update the image of an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
@@ -105,6 +109,7 @@ public class PharmacyController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")	
 	@Operation (
 		summary="Delete an existent pharmacy",
 		description="With this method you delete an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 

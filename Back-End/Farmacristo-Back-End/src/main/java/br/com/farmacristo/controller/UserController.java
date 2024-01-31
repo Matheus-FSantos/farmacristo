@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Find all users",
 		description="With this method you will be able to search for all existing users in our system. In return for the request, all formatted information will come from the respective user, if it exists." 
@@ -45,7 +47,7 @@ public class UserController {
 	public ResponseEntity<List<UserDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.userService.findAll());
 	}
-	
+
 	@Operation (
 		summary="Find user by id",
 		description="With this method you can search for a specific user in our system. In return, all formatted information will come from the respective user, if it exists." 
@@ -105,6 +107,7 @@ public class UserController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Downgrade the tier of an existing user (to client)",
 		description="With this method you lower the level of an existing user in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
@@ -115,6 +118,7 @@ public class UserController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Update the tier of an existing user (to admin)",
 		description="With this method you increase the level of an existing user in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 

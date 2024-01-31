@@ -9,6 +9,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,6 +75,7 @@ public class ProductController {
 					.body(image);
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Save a new product",
 		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
@@ -84,6 +86,7 @@ public class ProductController {
 		return ResponseEntity.status(201).build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Update an existent product",
 		description="With this method you update an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
@@ -94,6 +97,7 @@ public class ProductController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Update the image of an existing product",
 		description="With this method you update the image of an existing product in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
@@ -104,6 +108,7 @@ public class ProductController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasRole('Administrator')")
 	@Operation (
 		summary="Delete an existent product",
 		description="With this method you delete an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 

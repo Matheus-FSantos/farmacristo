@@ -12,7 +12,10 @@ import org.springframework.context.annotation.Configuration;
 import br.com.farmacristo.model.DTO.pharmacy.NewPharmacyDTO;
 import br.com.farmacristo.model.DTO.product.NewProductDTO;
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
+import br.com.farmacristo.model.entity.User;
+import br.com.farmacristo.model.entity.enums.UserTier;
 import br.com.farmacristo.model.exception.FarmaCristoException;
+import br.com.farmacristo.model.repository.UserRepository;
 import br.com.farmacristo.model.service.PharmacyService;
 import br.com.farmacristo.model.service.ProductService;
 import br.com.farmacristo.model.service.UserService;
@@ -21,7 +24,7 @@ import br.com.farmacristo.model.service.UserService;
 public class DatabaseInitializer {
 	
     @Bean
-    CommandLineRunner init(@Autowired UserService userService, @Autowired ProductService productService, @Autowired PharmacyService pharmacyService) {
+    CommandLineRunner init(@Autowired UserService userService, @Autowired ProductService productService, @Autowired PharmacyService pharmacyService, @Autowired UserRepository userRepository) {
 		return args -> {
 			List<NewUserDTO> newUsersList = new ArrayList<NewUserDTO>();
 			List<NewProductDTO> newProductsList = new ArrayList<NewProductDTO>();
@@ -34,6 +37,9 @@ public class DatabaseInitializer {
 			newUsersList.forEach(user -> {
 				try {
 					userService.save(user);
+					User savedUser = userRepository.findByEmail(user.email()).get();
+					savedUser.updateTier(UserTier.Administrator);
+					userRepository.save(savedUser);
 				} catch (FarmaCristoException e) {
 					System.out.println(e.getMessages());
 				}

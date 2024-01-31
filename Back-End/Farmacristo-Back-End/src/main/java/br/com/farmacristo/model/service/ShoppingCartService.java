@@ -1,7 +1,9 @@
 package br.com.farmacristo.model.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -10,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.farmacristo.model.DTO.ShoppingCartDTO;
+import br.com.farmacristo.model.DTO.product.ProductDTO;
+import br.com.farmacristo.model.annotation.Auth;
 import br.com.farmacristo.model.entity.Product;
 import br.com.farmacristo.model.entity.ShoppingCart;
 import br.com.farmacristo.model.entity.User;
+import br.com.farmacristo.model.exception.specialization.pharmacy.PharmacyNotFound;
 import br.com.farmacristo.model.exception.specialization.product.ProductNotFound;
 import br.com.farmacristo.model.exception.specialization.shoppingCart.ShoppingCartNotFound;
+import br.com.farmacristo.model.exception.specialization.viacep.CEPNotFound;
 import br.com.farmacristo.model.repository.ShoppingCartRepository;
 
 @Service
@@ -28,19 +34,42 @@ public class ShoppingCartService {
 	@Autowired
 	private ProductService productService;
 	
-	public List<ShoppingCartDTO> findAll() {
+	public List<ShoppingCartDTO> findAll() throws ProductNotFound, PharmacyNotFound, CEPNotFound {
 		List<ShoppingCart> shoppingCarts = this.repository.findAll();
 		List<ShoppingCartDTO> shoppingCartsDTO = new ArrayList<ShoppingCartDTO>();
 		
-		for(ShoppingCart shoppingCart : shoppingCarts)
-			shoppingCartsDTO.add(new ShoppingCartDTO(shoppingCart.getId(), shoppingCart.getUser().getId(), shoppingCart.getProducts()));
+		Set<ProductDTO> productsDTO = new HashSet<ProductDTO>();
+		
+		for(ShoppingCart shoppingCart : shoppingCarts) {
+			for(Product product : shoppingCart.getProducts())
+				productsDTO.add(this.productService.findById(product.getId()));
+			
+			shoppingCartsDTO.add(new ShoppingCartDTO(shoppingCart.getId(), shoppingCart.getUser().getId(), productsDTO));
+			productsDTO.clear();
+		}
 
 		return shoppingCartsDTO;
 	}
 	
-	public ShoppingCartDTO findById(UUID id) throws ShoppingCartNotFound {
+	public ShoppingCartDTO findById(UUID id) throws ShoppingCartNotFound, ProductNotFound, PharmacyNotFound, CEPNotFound {
 		ShoppingCart shoppingCart = this.findByIdDefault(id);
-		return new ShoppingCartDTO(shoppingCart.getId(), shoppingCart.getUser().getId(), shoppingCart.getProducts());
+		Set<ProductDTO> productsDTO = new HashSet<ProductDTO>();
+		
+		for(Product product : shoppingCart.getProducts())
+			productsDTO.add(this.productService.findById(product.getId()));
+			
+		return new ShoppingCartDTO(shoppingCart.getId(), shoppingCart.getUser().getId(), productsDTO);
+	}
+	
+	@Auth(required=true)
+	public Set<ProductDTO> findShoppingCartProductsByUserId(UUID userId) throws ProductNotFound, PharmacyNotFound, CEPNotFound {
+		List<ShoppingCartDTO> shoppingCarts = this.findAll();
+		
+		for(ShoppingCartDTO shoppingCart : shoppingCarts)
+			if(shoppingCart.userId().equals(userId))
+				return shoppingCart.products();
+		
+		return null;
 	}
 	
 	public ShoppingCart findByIdDefault(UUID id) throws ShoppingCartNotFound {
@@ -52,7 +81,7 @@ public class ShoppingCartService {
 	}
 
 	public void addProductOnShoppingCart(UUID id, UUID productId) throws ProductNotFound, ShoppingCartNotFound {
-		 Product product = this.productService.findById(productId);
+		 Product product = this.productService.findByIdDefault(productId);
 		 ShoppingCart shoppingCart = this.findByIdDefault(id);
 		 
 		 shoppingCart.getProducts().add(product);
@@ -60,10 +89,9 @@ public class ShoppingCartService {
 		 
 		 this.repository.save(shoppingCart);
 	}
-
 	
 	public void removeProductOnShoppingCart(UUID id, UUID productId) throws ProductNotFound, ShoppingCartNotFound {
-		Product product = this.productService.findById(productId);
+		Product product = this.productService.findByIdDefault(productId);
 		ShoppingCart shoppingCart = this.findByIdDefault(id);
 	
 		if(shoppingCart.getProducts().contains(product)) {

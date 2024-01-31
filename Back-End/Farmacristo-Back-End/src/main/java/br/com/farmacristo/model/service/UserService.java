@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,9 @@ public class UserService {
 	
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@OnlyAdmin
 	@Auth(required=false)
@@ -67,7 +71,7 @@ public class UserService {
 		UserValidation.validation(newUserDTO);
 		
 		if(this.userRepository.findByEmail(newUserDTO.email()).isEmpty()) {
-			User newUser = new User(UserTier.Client, newUserDTO.name(), newUserDTO.email(), newUserDTO.password());
+			User newUser = new User(UserTier.Client, newUserDTO.name(), newUserDTO.email(), this.passwordEncoder.encode(newUserDTO.password()));
 			newUser.updateImage(ImageUtils.encryptedDefaultUserImage);
 			newUser = userRepository.save(newUser);
 			ShoppingCart shoppingCart = shoppingCartService.newShoppingCart(newUser);
