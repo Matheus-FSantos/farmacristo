@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 import { GlobalLayout } from "../../layout/global/GlobalLayout";
 import { Title as TitleLandingPage, Subtitle as SubtitleLandingPage } from "../landing-page/styles";
 
-import { BannerContainer, WorkWithUsContainer } from "./styles";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BannerContainer, WorkWithUsContainer, Form } from "./styles";
 
 /* UI */
 import { Title } from "../../components/ui/title/Title";
@@ -52,6 +54,22 @@ const WorkWithUs = (): React.ReactElement => {
 			reader.readAsArrayBuffer(file);
 		}
 	};
+
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to("#one", {
+			opacity: 1,
+			scrollTrigger: {
+				trigger: "#one",
+				start: "top 500px"
+			}
+		});
+
+		return () => {
+			gsap.killTweensOf("#one");
+		}
+	}, []);
+
 	return (
 		<GlobalLayout>
 			<WorkWithUsContainer>
@@ -75,7 +93,7 @@ const WorkWithUs = (): React.ReactElement => {
 					</Subtitle>
 				</TitleContainer>
 
-				<form onSubmit={handleSubmit}>
+				<Form id="one" onSubmit={handleSubmit}>
 					<InputsFlex>
 						<InputContainer>
 							<Label For="name" Required={true}>
@@ -133,7 +151,7 @@ const WorkWithUs = (): React.ReactElement => {
 							Enviar
 						</Button>
 					</ButtonsContainer>
-				</form>
+				</Form>
 			</WorkWithUsContainer>
 		</GlobalLayout>
 	);

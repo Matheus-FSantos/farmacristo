@@ -26,7 +26,12 @@ const WorkWithUsContainer = styled.div`
 	padding-bottom: 40px;
 `;
 
+const Form = styled.form`
+	opacity: 0;
+`;
+
 export {
+	Form,
 	BannerContainer,
 	WorkWithUsContainer,
 }

@@ -18,6 +18,10 @@ const TitleContainer = styled.section`
 		justify-content: center;
 		align-items: center;
 	}
+
+	&.hidden {
+		opacity: 0;
+	}
 `;
 
 export { TitleContainer };
