@@ -57,6 +57,10 @@ const Title = styled.h1`
 		color: var(--red-500);
 	}
 
+	&.center {
+		text-align: center;
+	}
+
 	@media only screen and (max-width: 1310px) {
 		font-size: 2.2rem; /* 40px */
 	}
@@ -80,6 +84,10 @@ const Subtitle = styled.p`
 	span {
 		font-weight: 700;
 		text-decoration: underline;
+	}
+
+	&.center {
+		text-align: center;
 	}
 
 	@media only screen and (max-width: 1310px) {

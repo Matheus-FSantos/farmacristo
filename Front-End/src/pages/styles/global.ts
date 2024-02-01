@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const GlobalContainer = styled.section`
+	min-height: 100vh;
+	
 	padding: 0 6.25rem; /* 0 and 100px */
 	overflow: auto;
 

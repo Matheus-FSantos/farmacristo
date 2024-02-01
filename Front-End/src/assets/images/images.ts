@@ -7,6 +7,7 @@ import PersonalHygienePNG from "./landing-page/personal-hygiene.png";
 import BackgroundImageSVG from "./landing-page/background image.svg";
 import SOBackgroundImageSVG from "./landing-page/section-one-background.jpg";
 
+import OfficeJPG from "./work-with-us/office.jpg";
 import PumpersPNG from "./landing-page/product images/pumpers.jpg";
 import CreatinaPNG from "./landing-page/product images/creatina.jpg";
 import AcevitonPNG from "./landing-page/product images/aceviton.jpg";
@@ -15,6 +16,7 @@ import BackgroundTexture from "./landing-page/background-texture.svg";
 
 
 export {
+	OfficeJPG,
 	HerbalPNG,
 	PumpersPNG,
 	CreatinaPNG,
@@ -27,5 +29,4 @@ export {
 	BackgroundImageSVG,
 	PersonalHygienePNG,
 	SOBackgroundImageSVG,
-	
 };
