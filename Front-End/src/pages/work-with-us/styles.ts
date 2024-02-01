@@ -20,10 +20,6 @@ const BannerContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	position: relative;
-
-	overflow: hidden;
 `;
 
 const WorkWithUsContainer = styled.div`
