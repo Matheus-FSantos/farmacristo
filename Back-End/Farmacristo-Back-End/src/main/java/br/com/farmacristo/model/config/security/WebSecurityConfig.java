@@ -25,8 +25,9 @@ public class WebSecurityConfig {
 			.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests((request) -> request
-						.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/users", "/api/resumes").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/products/**", "/api/pharmacies/**").permitAll()
+						.requestMatchers(HttpMethod.PUT, "/api/resumes/cv/**").permitAll()
 						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/h2-console").permitAll()
 						.anyRequest().authenticated()
 				).addFilterBefore(customBasicAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

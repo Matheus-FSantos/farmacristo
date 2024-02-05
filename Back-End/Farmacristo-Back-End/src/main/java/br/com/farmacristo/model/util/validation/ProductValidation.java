@@ -27,14 +27,14 @@ public class ProductValidation {
 
 	public static void nameValidation(List<String> messages, String name) {
 		if(name == null)
-			messages.add("O campo MARCA não pode ser nulo.");
+			messages.add("O campo NOME não pode ser nulo.");
 		else if(name.length() < 2 || name.length() > 200)
 			messages.add("O campo NOME deve conter entre 2 e 200 caracteres.");
 	}
 	
 	public static void descriptionValidation(List<String> messages, String description) {
 		if(description == null)
-			messages.add("O campo MARCA não pode ser nulo.");
+			messages.add("O campo DESCRIÇÃO não pode ser nulo.");
 		else if(description.length() < 5 || description.length() > 500)
 			messages.add("O campo DESCRIÇÃO deve conter entre 5 e 500 caracteres.");
 	}
