@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { AuthService } from "../../../services/Auth";
 
 interface IPrivateRouteProps {
-	children: React.ReactNode
+	children?: React.ReactNode
 }
 
 const PrivateRoute = ({ children }: IPrivateRouteProps): React.ReactElement => {

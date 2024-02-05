@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-const Container = styled.section`
-	padding: 2.5rem 0; /* 40px 0 */
-`;
-
 const PriceContainer = styled.section`
 	display: flex;
 	align-items: center;
@@ -87,7 +83,6 @@ const ButtonsContainer = styled.section`
 `;
 
 export {
-	Container,
 	RadioContainer,
 	PriceContainer,
 	ButtonsContainer,
