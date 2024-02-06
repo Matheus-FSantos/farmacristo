@@ -1,2 +1,2 @@
-import { AdminPanel } from "./AdminPanel";
-export { AdminPanel };
+import { AdminPanelLayout } from "./AdminPanelLayout";
+export { AdminPanelLayout };

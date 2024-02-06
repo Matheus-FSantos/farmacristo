@@ -11,7 +11,7 @@ const Container = styled.div`
 const SideBarContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width: 25%; 
+	width: 400px;
 `;
 
 const SideBar = styled.div`
@@ -82,6 +82,13 @@ const Option = styled.div`
 	a {
 		color: var(--blue-1000);
 		font-weight: 600;
+
+		position: relative;
+		top: 2px;
+	}
+
+	a:not([href]):not([class]), a:not([href]):not([class]):hover {
+		color: var(--blue-1000); /* reset bootstrap decoration */
 	}
 `;
 
@@ -96,11 +103,11 @@ const CopyrightSpan = styled.span`
 `;
 
 const IFrame = styled.iframe`
-	border: 0;
-	width: 75%;
+	border: 1px solid red;
+	width: 70%;
 	height: 100%;
 
-	padding: 80px 0;
+	padding: 40px 0;
 `;
 
 export {

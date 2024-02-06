@@ -145,8 +145,56 @@ const GlobalStyles = createGlobalStyle`
 			}
 		}
 
-		input[type="file"] {
+		.react-modal-overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+			z-index: 99;
+	  }
+
+    .react-modal-content {
+      max-width: 550px;
+			min-height: 400px;
+			max-height: 600px;
+      width: 100%;
+
+      background: var(--white-1000);
+      
+      position: relative;
+
+			overflow: auto;
+        
+      border-radius: 0.25rem;
+
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
 		}
+
+    .react-modal-close {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      border: 0;
+      background: transparent;
+
+      transition: filter 0.15s;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
 `
 
 export { GlobalStyles };

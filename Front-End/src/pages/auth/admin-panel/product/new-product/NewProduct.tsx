@@ -1,20 +1,20 @@
 import { useLayoutEffect, useState } from "react";
 
 import { gsap } from "gsap";
-import { PrivateRoute } from "../private-route";
-import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
+import { PrivateRoute } from "../../../private-route";
+import { useDinamicTitle } from "../../../../../hooks/useDinamicTitle";
 
 /* UI */
-import { Label } from "../../../components/ui/label/Label";
-import { Title } from "../../../components/ui/title/Title";
-import { Input } from "../../../components/ui/input/Input";
-import { Button } from "../../../components/ui/button/Button";
-import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
-import { TextArea } from "../../../components/ui/text-area/TextArea";
-import { Container } from "../../../components/ui/containers/Container";
-import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
-import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
-import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
+import { Label } from "../../../../../components/ui/label/Label";
+import { Title } from "../../../../../components/ui/title/Title";
+import { Input } from "../../../../../components/ui/input/Input";
+import { Button } from "../../../../../components/ui/button/Button";
+import { Subtitle } from "../../../../../components/ui/subtitle/Subtitle";
+import { TextArea } from "../../../../../components/ui/text-area/TextArea";
+import { Container } from "../../../../../components/ui/containers/Container";
+import { InputsFlex } from "../../../../../components/ui/containers/inputs-flex/InputsFlex";
+import { TitleContainer } from "../../../../../components/ui/containers/title-container/TitleContainer";
+import { InputContainer } from "../../../../../components/ui/containers/input-container/InputContainer";
 
 import {
 	PriceContainer,
@@ -24,7 +24,7 @@ import {
 	PharmaciesContainer,
 } from "./styles";
 
-const NewProduct = (): React.ReactElement => {
+const NewProduct = ({  }): React.ReactElement => {
 	useDinamicTitle("Novo produto");
 
 	const [name, setName] = useState<string>("");
@@ -148,7 +148,7 @@ const NewProduct = (): React.ReactElement => {
 							<InputContainer>
 								<Label For="promotionalPrice">
 									Preço promocional:{" "}
-									<span className="text-muted">(Em caso de promoção)</span>
+									<span className="text-muted">(Opcional)</span>
 								</Label>
 								<Input
 									Type="number"
