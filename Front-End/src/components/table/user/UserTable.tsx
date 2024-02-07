@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { DeleteButton } from "../../ui/button/delete-button/DeleteButton";
 import { UpdateTierButton } from "../../ui/button/update-tier-button/UpdateTierButton";
 import { Container } from "../../ui/containers/Container";
 import { TableData, TableHeader } from "../styles";
+import { UsersService } from "../../../services/Users.service";
 
 interface IUserTable {
 	onDelete: (id?: string) => void
@@ -10,6 +12,11 @@ interface IUserTable {
 
 const UserTable = ({ onDelete, onUpdateTier }: IUserTable) => {
 	const userId = "889d4d12-08ac-4a68-8b30-d1633951d965";
+	const usersService = new UsersService();
+
+	useEffect(() => {
+		usersService.findAll("matheus@gmail.com", "strongPassword");
+	}, [])
 
 	return (
 		<Container Type="no-padding w-100">

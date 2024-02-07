@@ -1,7 +1,7 @@
 import { HeaderAlternative } from "../../components/header/header-alternative";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 import { GlobalContainer } from "../../pages/styles/global";
-import { AuthService } from "../../services/Auth";
+import { AuthService } from "../../services/Auth.service";
 
 interface IGlobalLayoutProps {
 	children: React.ReactNode

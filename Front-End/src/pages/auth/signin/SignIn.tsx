@@ -19,7 +19,7 @@ import { TitleContainer } from "../../../components/ui/containers/title-containe
 import { Logo } from "../../../components/header/styles";
 import { LogoPNG } from "../../../assets/icons/icons";
 import { useTimeout } from "../../../hooks/useTimeout";
-import { AuthService } from "../../../services/Auth";
+import { AuthService } from "../../../services/Auth.service";
 
 const SignIn = (): React.ReactElement => {
 	useDinamicTitle("Entre em sua conta");
