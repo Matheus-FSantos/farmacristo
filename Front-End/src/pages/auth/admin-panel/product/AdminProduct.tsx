@@ -3,7 +3,7 @@ import { AdminPanelLayout } from "..";
 import { Title } from "../../../../components/ui/title/Title";
 import { Subtitle } from "../../../../components/ui/subtitle/Subtitle";
 import { Container } from "../../../../components/ui/containers/Container";
-import { PharmacyTable } from "../../../../components/table/pharmacy/PharmacyTable";
+import { ProductTable } from "../../../../components/table/product/ProductTable";
 import { TitleContainer } from "../../../../components/ui/containers/title-container/TitleContainer";
 
 import { NewProduct } from "./new-product";
@@ -44,7 +44,7 @@ const AdminProduct = (): React.ReactElement => {
 							<input type="text" className="form-control" placeholder="Ex.: Nivea Men Care" aria-label="search" aria-describedby="addon-wrapping" />
 						</div>
 					</Container>
-					<PharmacyTable onEditModalVisibility={ handleEditModalVisibility } onDeleteProduct={ handleDeleteProduct } />	
+					<ProductTable onEditModalVisibility={ handleEditModalVisibility } onDeleteProduct={ handleDeleteProduct } />	
 				</Container>
 			</Container>
 
