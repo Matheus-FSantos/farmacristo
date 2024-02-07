@@ -57,80 +57,13 @@ const ProductTable = ({ onEditModalVisibility, onDeleteProduct }: IProductTable)
 						<TableData>
 							<DeleteButton
 								Title="Confirma essa ação?"
-								Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, é possivel reverter a ação"
-								ProductId={ productId }
-								onDeleteProduct={ onDeleteProduct }
+								Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, será possivel contornar a situação criando outro produto."
+								ItemID={ productId }
+								onDelete={ onDeleteProduct }
 							/>
 						</TableData>
 					</tr>
-					<tr>
-						<TableData className="id">
-							{ productId }
-						</TableData>
-						<TableData>
-							<Image src={CreatinaPNG} />
-						</TableData>
-						<TableData>Rexona Desodorante Aerosol 150ml</TableData>
-						<TableData>
-							O desodorante Rexona Aerosol oferece uma proteção confiável contra
-							o odor e a transpiração ao longo do dia, mantendo você fresco e
-							confiante em qualquer situação. Com sua fórmula avançada, este
-							desodorante em aerosol proporciona uma sensação de frescor
-							revitalizante, enquanto controla efetivamente a umidade, evitando
-							o mau odor.
-						</TableData>
-						<TableData>R$ 120,00</TableData>
-						<TableData>-</TableData>
-						<TableData>05/02/2024 às 11:55:55</TableData>
-						<TableData>05/02/2024 às 11:55:55</TableData>
-						<TableData>
-							<button onClick={ onEditModalVisibility } type="button" className="btn btn-outline-success">
-								Editar
-							</button>
-						</TableData>
-						<TableData>
-							<DeleteButton
-								Title="Confirma essa ação?"
-								Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, é possivel reverter a ação"
-								ProductId={ productId }
-								onDeleteProduct={ onDeleteProduct }
-							/>
-						</TableData>
-					</tr>
-					<tr>
-						<TableData className="id">
-							{ productId }
-						</TableData>
-						<TableData>
-							<Image src={CreatinaPNG} />
-						</TableData>
-						<TableData>Rexona Desodorante Aerosol 150ml</TableData>
-						<TableData>
-							O desodorante Rexona Aerosol oferece uma proteção confiável contra
-							o odor e a transpiração ao longo do dia, mantendo você fresco e
-							confiante em qualquer situação. Com sua fórmula avançada, este
-							desodorante em aerosol proporciona uma sensação de frescor
-							revitalizante, enquanto controla efetivamente a umidade, evitando
-							o mau odor.
-						</TableData>
-						<TableData>R$ 120,00</TableData>
-						<TableData>-</TableData>
-						<TableData>05/02/2024 às 11:55:55</TableData>
-						<TableData>05/02/2024 às 11:55:55</TableData>
-						<TableData>
-							<button onClick={ onEditModalVisibility } type="button" className="btn btn-outline-success">
-								Editar
-							</button>
-						</TableData>
-						<TableData>
-							<DeleteButton
-								Title="Confirma essa ação?"
-								Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, é possivel reverter a ação"
-								ProductId={ productId }
-								onDeleteProduct={ onDeleteProduct }
-							/>
-						</TableData>
-					</tr>
+
 				</tbody>
 			</table>
 		</Container>

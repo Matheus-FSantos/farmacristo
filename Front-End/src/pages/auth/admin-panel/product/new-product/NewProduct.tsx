@@ -24,7 +24,7 @@ import {
 	PharmaciesContainer,
 } from "./styles";
 
-const NewProduct = ({  }): React.ReactElement => {
+const NewProduct = (): React.ReactElement => {
 	useDinamicTitle("Novo produto");
 
 	const [name, setName] = useState<string>("");
