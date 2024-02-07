@@ -1,20 +1,20 @@
 import { useState } from "react";
-import { Input } from "../../../components/ui/input/Input";
-import { Label } from "../../../components/ui/label/Label";
-import { Title } from "../../../components/ui/title/Title";
-import { Button } from "../../../components/ui/button/Button";
-import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
-import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
-import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
-import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
-import { ButtonsContainer } from "../../../components/ui/containers/buttons-container/ButtonsContainer";
+import { Input } from "../../../../../components/ui/input/Input";
+import { Label } from "../../../../../components/ui/label/Label";
+import { Title } from "../../../../../components/ui/title/Title";
+import { Button } from "../../../../../components/ui/button/Button";
+import { Subtitle } from "../../../../../components/ui/subtitle/Subtitle";
+import { InputsFlex } from "../../../../../components/ui/containers/inputs-flex/InputsFlex";
+import { TitleContainer } from "../../../../../components/ui/containers/title-container/TitleContainer";
+import { InputContainer } from "../../../../../components/ui/containers/input-container/InputContainer";
+import { ButtonsContainer } from "../../../../../components/ui/containers/buttons-container/ButtonsContainer";
 
-import { PrivateRoute } from "../private-route";
-import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
-import { Container } from "../../../components/ui/containers/Container";
+import { PrivateRoute } from "../../../private-route";
+import { useDinamicTitle } from "../../../../../hooks/useDinamicTitle";
+import { Container } from "../../../../../components/ui/containers/Container";
 
-const NewPharmacy = () => {
-	useDinamicTitle("Nova Farmácia");
+const UpdatePharmacy = () => {
+	useDinamicTitle("Atualizar farmácia");
 
 	const [name, setName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
@@ -53,9 +53,9 @@ const NewPharmacy = () => {
 		<PrivateRoute>
 			<Container>
 				<TitleContainer>
-					<Title>Criar uma farmácia</Title>
+					<Title>Atualizar farmácia</Title>
 					<Subtitle>
-						Adicione uma nova farmácia ao site, campos obrigatórios são marcados
+						Atualize uma farmácia abaixo, campos obrigatórios são marcados
 						com <span>*</span>
 					</Subtitle>
 				</TitleContainer>
@@ -127,7 +127,7 @@ const NewPharmacy = () => {
 
 					<ButtonsContainer>
 						<Button ButtonType="save" Type="submit">
-							Salvar farmácia
+							Atualizar farmácia
 						</Button>
 						<Button ButtonType="cancel">Cancelar</Button>
 					</ButtonsContainer>
@@ -137,4 +137,4 @@ const NewPharmacy = () => {
 	);
 };
 
-export { NewPharmacy };
+export { UpdatePharmacy };

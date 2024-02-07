@@ -8,6 +8,7 @@ import BackgroundImageSVG from "./landing-page/background image.svg";
 import SOBackgroundImageSVG from "./landing-page/section-one-background.jpg";
 
 import OfficeJPG from "./work-with-us/office.jpg";
+import FarmaCristoPNG from "./pharmacies/farmacristo.png";
 import PumpersPNG from "./landing-page/product images/pumpers.jpg";
 import CreatinaPNG from "./landing-page/product images/creatina.jpg";
 import AcevitonPNG from "./landing-page/product images/aceviton.jpg";
@@ -23,6 +24,7 @@ export {
 	AcevitonPNG,
 	PediatricsPNG,
 	WomanImageSVG,
+	FarmaCristoPNG,
 	FirstAidKitPNG,
 	PrescriptionPNG,
 	BackgroundTexture,
