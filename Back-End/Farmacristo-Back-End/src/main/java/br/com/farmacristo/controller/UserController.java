@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.farmacristo.model.DTO.user.LoginDTO;
+import br.com.farmacristo.model.DTO.user.LoginResponseDTO;
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
 import br.com.farmacristo.model.DTO.user.UserDTO;
 import br.com.farmacristo.model.entity.User;
@@ -85,6 +87,15 @@ public class UserController {
 	public ResponseEntity<Void> save(@RequestBody NewUserDTO newUserDTO) throws FarmaCristoException {
 		this.userService.save(newUserDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+	
+	@Operation (
+		summary="Login",
+		description="Login method." 
+	)
+	@PostMapping("/login")
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO login) throws FarmaCristoException {
+		return ResponseEntity.ok().body(this.userService.login(login));
 	}
 	
 	@Operation (

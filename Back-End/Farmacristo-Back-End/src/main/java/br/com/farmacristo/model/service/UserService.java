@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.farmacristo.model.DTO.user.LoginDTO;
+import br.com.farmacristo.model.DTO.user.LoginResponseDTO;
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
 import br.com.farmacristo.model.DTO.user.UserDTO;
 import br.com.farmacristo.model.annotation.Auth;
@@ -93,7 +95,7 @@ public class UserService {
 		if((user.isPresent() && user.get().getId().equals(id)) || user.isEmpty()) {
 			oldUser.updateName(updatedUser.name());
 			oldUser.updateEmail(updatedUser.email());
-			oldUser.updatePassword(updatedUser.password());
+			oldUser.updatePassword(this.passwordEncoder.encode(updatedUser.password()));
 			oldUser.updateUpdatedAt();
 			
 			this.userRepository.save(oldUser);
@@ -137,6 +139,20 @@ public class UserService {
 			this.userRepository.deleteById(id);
 		else
 			throw new UserNotFound("Usuário não encontrado.", "Você tentou deletar um usuário inexistente em nosso sistema. Por favor, altere as informações e tente novamente.");
+	}
+	
+	@Auth(required=false)
+	public LoginResponseDTO login(LoginDTO login) throws InvalidFields, UserNotFound {
+		/* Fields Validation */
+		UserValidation.validation(login);
+		List<User> users = this.userRepository.findAll();
+		
+		for(User user : users) {
+			if(user.getEmail().equals(login.email()) && this.passwordEncoder.matches(login.password(), user.getPassword()))
+				return new LoginResponseDTO(user.getId(), login.email(), login.password());
+		}
+		
+		throw new UserNotFound("Usuário não encontrado.", "Conta inexistente. Por favor, altere as informações e tente novamente.");
 	}
 	
 }

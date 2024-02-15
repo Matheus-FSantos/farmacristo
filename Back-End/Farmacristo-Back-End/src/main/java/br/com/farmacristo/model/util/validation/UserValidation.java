@@ -6,6 +6,7 @@ import java.util.List;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import br.com.farmacristo.model.DTO.user.LoginDTO;
 import br.com.farmacristo.model.DTO.user.NewUserDTO;
 import br.com.farmacristo.model.exception.specialization.InvalidFields;
 
@@ -23,6 +24,17 @@ public class UserValidation {
 		if(!messages.isEmpty())
 			throw new InvalidFields(messages, "Algumas informações foram inseridas de maneira incorreta. Por favor, verifique e corrija os campos necessários.");
 	}
+	
+	public static void validation(LoginDTO login) throws InvalidFields {
+		List<String> messages = new ArrayList<String>();
+		
+		UserValidation.emailValidation(messages, login.email());
+		UserValidation.passwordValidation(messages, login.password());
+		
+		if(!messages.isEmpty())
+			throw new InvalidFields(messages, "Algumas informações foram inseridas de maneira incorreta. Por favor, verifique e corrija os campos necessários.");
+	}
+	
 	
 	public static void passwordValidation(List<String> messages, String password) {
 		if(password == null)
