@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
 import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex, MobileSocialMediaContainer } from "../styles";
 import { NavContainer, ResponsiveNavContainer, MobileNavBar, ResourcesDropDown } from "./styles";
 import { Hr } from "../../ui/hr/Hr";
+import { AuthService } from "../../../services/Auth.service";
+import { UsersService } from "../../../services/Users.service";
 
 interface IHeaderAlternative {
 	isLogged: boolean
@@ -12,9 +14,12 @@ interface IHeaderAlternative {
 
 const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 	const navigate = useNavigate();
+	const authService = new AuthService();
+	const usersService = new UsersService();
 
 	const [dropdownIsActive, setDropdownIsActive] = useState<boolean>(false);
 	const [mobileNavBarOpen, setMobileNavBarOpen] = useState<boolean>(false); 
+	const [isAllowedToTheAdminPanel, setIsAllowedToTheAdminPanel] = useState<boolean>(false);
 
 	if(mobileNavBarOpen) {
 		var elementoHtml = document.documentElement;
@@ -27,6 +32,21 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 		elementoHtml.style.width = '';
 		elementoHtml.style.height = '';
 	}
+
+	useEffect(() => {
+		try {
+			const value = authService.getCredentials();
+		
+			usersService.findById(value.email, value.password, value.id).then((data) => {
+				if(data.tier !== "Client")
+					setIsAllowedToTheAdminPanel(true);
+				else
+					setIsAllowedToTheAdminPanel(false);		
+			});	
+		} catch (error) {
+			setIsAllowedToTheAdminPanel(false);
+		}
+	}, []);
 
 	const handleNavigate = (path: string) => {
 		navigate(path);
@@ -78,7 +98,7 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
 								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
 								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
-								<p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p>
+								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p> }
 							</ResourcesDropDown>
 						</li>
 					</ul>
@@ -98,7 +118,7 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
 								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
 								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
-								<p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p>
+								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p> }
 							</ResourcesDropDown>
 						</li>
 					</ul>

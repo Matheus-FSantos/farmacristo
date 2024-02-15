@@ -39,6 +39,10 @@ const Container = styled.div`
 		justify-content: center;
 	}
 
+	&.justify-between {
+		justify-content: space-between;
+	}
+
 	&.gap-20 {
 		gap: 20px;
 	}
@@ -53,6 +57,10 @@ const Container = styled.div`
 
 	&.h-100 {
 		height: 100%;
+	}
+
+	&.h-700px {
+		height: 700px;
 	}
 
 	&.over-auto {

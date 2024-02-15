@@ -35,27 +35,46 @@ const SignIn = (): React.ReactElement => {
 		e.preventDefault();
 		setIsDisabled(true);
 
-		authService.loggin();
-		
 		const alert = toast.loading("Por favor, aguarde...");
-		await useTimeout(1000);
-		toast.update(alert, {
-			render: "Logado! Redirecionando...",
-			type: "success",
-			isLoading: false,
-			position: "top-right",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: "colored",
-		});
-		setIsDisabled(false);
-		await useTimeout(1000);
 
-		navigate("/");
+		authService.login({ email, password }).then(async () => {
+			console.clear();
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: "Logado! Redirecionando...",
+				type: "success",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			setIsDisabled(false);
+			await useTimeout(1000);
+			navigate("/");
+		}).catch(async () => {
+			console.clear();
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: "Dados inválidos!",
+				type: "error",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			setIsDisabled(false);
+			await useTimeout(1000);
+		});
 	};
 
 	return (

@@ -9,13 +9,18 @@ const TableData = styled.td`
 	overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 150px; // Define a largura máxima do texto
+  max-width: 9.375rem; /* 150px */
 	
 	text-align: center;
 	vertical-align: middle;
 
 	&.id {
 		font-weight: bold;
+	}
+
+	&.not-found {
+		color: var(--gray-500);
+		padding: 2.5rem 0; /* 40px */
 	}
 `;
 
@@ -24,8 +29,15 @@ const Image = styled.img`
 	height: 70px;
 `;
 
+const NotFound = styled.div`
+	width: 100%;
+
+	border: 1px solid red;
+`;
+
 export {
 	Image,
+	NotFound,
 	TableData,
 	TableHeader,
 }

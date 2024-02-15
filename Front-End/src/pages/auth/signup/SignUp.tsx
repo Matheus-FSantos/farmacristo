@@ -17,8 +17,7 @@ import { Subtitle } from "../../../components/ui/subtitle/Subtitle";
 import { InputsFlex } from "../../../components/ui/containers/inputs-flex/InputsFlex";
 import { InputContainer } from "../../../components/ui/containers/input-container/InputContainer";
 import { TitleContainer } from "../../../components/ui/containers/title-container/TitleContainer";
-import { Logo } from "../../../components/header/styles";
-import { LogoPNG } from "../../../assets/icons/icons";
+import { UsersService } from "../../../services/Users.service";
 
 const SignUp = (): React.ReactElement => {
 	useDinamicTitle("Cria uma conta");
@@ -30,29 +29,50 @@ const SignUp = (): React.ReactElement => {
 	const [password, setPassword] = useState<string>("");
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
+	const usersService = new UsersService();
+
 	const handleSubmit = async (e: React.FormEvent): Promise<void> => {
 		e.preventDefault();
 		setIsDisabled(true);
 		
 		const alert = toast.loading("Por favor, aguarde...");
-		await useTimeout(1000);
-		toast.update(alert, {
-			render: "Conta criada! Redirecionando...",
-			type: "success",
-			isLoading: false,
-			position: "top-right",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: false,
-			draggable: true,
-			progress: undefined,
-			theme: "colored",
+		usersService.save({ name, email, password}).then(async () => {
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: "Usuário criado!",
+				type: "success",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			setIsDisabled(false);
+			await useTimeout(1000);
+			navigate("/signin");
+		}).catch(async (error) => {
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: error  + "",
+				type: "error",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			console.clear();
+			await useTimeout(1000);
+			setIsDisabled(false);
 		});
-		setIsDisabled(false);
-		await useTimeout(1000);
-
-		navigate("/signin");
 	}
 
 	return (
@@ -118,7 +138,6 @@ const SignUp = (): React.ReactElement => {
 					</div>
 				</ContentContainer>
 
-				<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
 			</Container>
 			<Toast />
 		</>

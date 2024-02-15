@@ -10,6 +10,7 @@ import { AdminHome } from "../pages/auth/admin-panel/home/AdminHome";
 import { AdminUser } from "../pages/auth/admin-panel/user/AdminUser";
 import { AdminProduct } from "../pages/auth/admin-panel/product/AdminProduct";
 import { AdminPharmacy } from "../pages/auth/admin-panel/pharmacy/AdminPharmacy";
+import { Profile } from "../pages/auth/profile";
 
 const Routing = (): React.ReactElement => {
 	return (
@@ -18,6 +19,7 @@ const Routing = (): React.ReactElement => {
 				<Route path="/" element={<Home />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
+				<Route path="/profile" element={<Profile />} />
 				<Route path="/careers" element={<WorkWithUs />} />
 				<Route path="/explore" element={<LandingPage />} />
 				<Route path="/shopping-cart" element={<ShoppingCart />} />

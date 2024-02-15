@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PrivateRoute } from "../../../private-route";
 import { useDinamicTitle } from "../../../../../hooks/useDinamicTitle";
@@ -19,19 +19,22 @@ import { ButtonsContainer } from "../../product/new-product/styles";
 import { UsersService } from "../../../../../services/Users.service";
 import { toast } from "react-toastify";
 import { useTimeout } from "../../../../../hooks/useTimeout";
+import { AuthService } from "../../../../../services/Auth.service";
 
 interface INewUserProps {
 	onRequestClose: () => void
 	Credentials: {
 		id: string
+		name: string
 		email: string
-		password: string,
+		password: string
 	}
 }
 
-const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactElement => {
+const UpdateUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactElement => {
 	useDinamicTitle("Novo usuário");
 
+	const authService = new AuthService();
 	const usersService = new UsersService();
 
 	const [name, setName] = useState<string>("");
@@ -47,11 +50,19 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 		const body: INewUserDTO = { name, email, password };
 		const alert = toast.loading("Por favor, aguarde...");
 
-		await useTimeout(1000);
-		if(!image) {
+		/* ATUALIZAR O SESSION STORAGE APÓS TER DADO TUDO CERTO */
+
+		usersService.update(Credentials.email, Credentials.password, Credentials.id, body).then(async (message) => {
+			if(image) {
+				const formData = new FormData();
+				formData.append("image", image);
+				usersService.updateUserImage(email, password, Credentials.id, formData);
+			}
+
+			await useTimeout(1000);
 			toast.update(alert, {
-				render: "Selecione uma imagem!",
-				type: "error",
+				render: message,
+				type: "success",
 				isLoading: false,
 				position: "top-right",
 				autoClose: 2000,
@@ -62,46 +73,29 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 				progress: undefined,
 				theme: "colored",
 			});
-			setIsDisabled(false);
-		} else {
-			usersService.save(body).then(async (id) => {
-				const formData = new FormData();
-				formData.append("image", image);
-				usersService.updateUserImage(Credentials.email, Credentials.password, id, formData)
-				toast.update(alert, {
-					render: "Usuário criado!",
-					type: "success",
-					isLoading: false,
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: false,
-					draggable: true,
-					progress: undefined,
-					theme: "colored",
-				});
-				await useTimeout(1000);
-				window.location.reload();
-			}).catch(async (error) => {
-				toast.update(alert, {
-					render: error  + "",
-					type: "error",
-					isLoading: false,
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: false,
-					draggable: true,
-					progress: undefined,
-					theme: "colored",
-				});
-				console.clear();
-				await useTimeout(1000);
-				setIsDisabled(false);
+			authService.setNewCredentials(email, password);
+			await useTimeout(1000);
+			window.location.reload();
+		}).catch(async (error) => {
+			console.log(error);
+
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: "Erro",
+				type: "success",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
 			});
-		}
+			await useTimeout(1000);
+			setIsDisabled(false);
+		});
 	};
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -118,14 +112,22 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 		}
 	};
 
+	useEffect(() => {
+		if(Credentials.name) {
+			setName(Credentials.name);
+			setEmail(Credentials.email);
+			setPassword(Credentials.password);
+		}
+	}, []);
+
 	return (
 		<>
 			<PrivateRoute>
 				<Container>
 					<TitleContainer>
-						<Title>Criar um usuário</Title>
+						<Title>Atualizar</Title>
 						<Subtitle>
-							Crie um novo usuário abaixo, campos obrigatórios são marcados com{" "}
+							Atualize seus dados, campos obrigatórios são marcados com{" "}
 							<span>*</span>
 						</Subtitle>
 					</TitleContainer>
@@ -172,10 +174,9 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 							</InputContainer>
 
 							<InputContainer InputContainerType="file">
-								<Label Required={true}>Insira uma imagem:</Label>
+								<Label Required={false}>Insira uma imagem:</Label>
 								<input
 									type="file"
-									required
 									accept="image/*"
 									onChange={ handleFileChange }
 								/>
@@ -184,7 +185,7 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 
 						<ButtonsContainer>
 							<Button ButtonType="save" Type="submit" isDisabled={ isDisabled }>
-								Salvar usuário
+								Atualizar
 							</Button>
 							<Button ButtonType="cancel" Type="button" onClick={ onRequestClose } isDisabled={ isDisabled }>Cancelar</Button>
 						</ButtonsContainer>
@@ -197,4 +198,4 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 	);
 };
 
-export { NewUser };
+export { UpdateUser };

@@ -4,13 +4,15 @@ import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import "./styles.css";
 
 interface IDeleteButton {
+	Type?: string
+	ItemID: string
+	Label?: string
 	Title: string | undefined
-	onDelete: (id?: string) => void
-	ItemID?: string | undefined
+	onDelete: (id: string) => void
 	Description: string | undefined
 }
 
-const DeleteButton = ({ Title, Description, ItemID, onDelete }: IDeleteButton): React.ReactElement => {
+const DeleteButton = ({ Type, Label, Title, Description, ItemID, onDelete }: IDeleteButton): React.ReactElement => {
 	
 	const handleClick = (): void => {
 		onDelete(ItemID);
@@ -19,7 +21,7 @@ const DeleteButton = ({ Title, Description, ItemID, onDelete }: IDeleteButton): 
 	return (
 		<AlertDialog.Root>
     <AlertDialog.Trigger asChild>
-      <button className="btn btn-danger">Deletar</button>
+      <button className={ !Type ? "btn btn-danger" : "RadixButtonReset Button red" }>{ !Label ? "Deletar" : Label}</button>
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="AlertDialogOverlay" />

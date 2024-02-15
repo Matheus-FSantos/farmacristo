@@ -5,15 +5,16 @@ import "../delete-button/styles.css";
 
 interface IUpdateTierButton {
 	Title: string | undefined
-	ItemID?: string | undefined
+	UserId: string
+	UserTier: string
 	Description: string | undefined
-	onUpdateTier: (id?: string) => void
+	onUpdateTier: (id: string, tier: string) => void
 }
 
-const UpdateTierButton = ({ Title, Description, ItemID, onUpdateTier }: IUpdateTierButton): React.ReactElement => {
+const UpdateTierButton = ({ Title, Description,  UserTier,  UserId, onUpdateTier }: IUpdateTierButton): React.ReactElement => {
 	
 	const handleClick = (): void => {
-		onUpdateTier(ItemID);
+		onUpdateTier(UserId, UserTier);
 	}
 	
 	return (
