@@ -82,9 +82,8 @@ public class PharmacyController {
 		description="With this method you can add a new pharmacy to our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PostMapping
-	public ResponseEntity<Void> save(@RequestBody NewPharmacyDTO newPharmacyDTO) throws FarmaCristoException {
-		this.pharmacyService.save(newPharmacyDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<UUID> save(@RequestBody NewPharmacyDTO newPharmacyDTO) throws FarmaCristoException {
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.pharmacyService.save(newPharmacyDTO));
 	}
 	
 	@PreAuthorize("hasRole('Administrator')")

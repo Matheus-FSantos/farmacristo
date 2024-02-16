@@ -24,7 +24,7 @@ import br.com.farmacristo.model.exception.specialization.pharmacy.PharmacyAlread
 import br.com.farmacristo.model.exception.specialization.pharmacy.PharmacyNotFound;
 import br.com.farmacristo.model.exception.specialization.viacep.CEPNotFound;
 import br.com.farmacristo.model.repository.PharmacyRepository;
-import br.com.farmacristo.model.service.restTemplate.ViaCEPService;
+import br.com.farmacristo.model.service.restTemplate.CEPService;
 import br.com.farmacristo.model.util.images.ImageUtils;
 import br.com.farmacristo.model.util.validation.PharmacyValidation;
 import jakarta.transaction.Transactional;
@@ -36,7 +36,7 @@ public class PharmacyService {
 	private PharmacyRepository pharmacyRepository;
 	
 	@Autowired
-	private ViaCEPService viaCEPRepository;
+	private CEPService viaCEPRepository;
 	
 	@Auth(required=false)
 	public List<PharmacyDTO> findAll() throws CEPNotFound {
@@ -72,14 +72,14 @@ public class PharmacyService {
 	@Transactional
 	@FieldsValidation
 	@Auth(required=true)
-	public void save(NewPharmacyDTO newPharmacyDTO) throws CEPNotFound, InvalidFields, PharmacyAlreadyExist {
+	public UUID save(NewPharmacyDTO newPharmacyDTO) throws CEPNotFound, InvalidFields, PharmacyAlreadyExist {
 		PharmacyValidation.validation(newPharmacyDTO);
 		this.viaCEPRepository.CEPValidation(newPharmacyDTO.postalCode());
 		
 		if(this.pharmacyRepository.findByEmail(newPharmacyDTO.email()).isEmpty()) {
 			Pharmacy newPharmacy = new Pharmacy(newPharmacyDTO.name(), newPharmacyDTO.number(), newPharmacyDTO.email(), newPharmacyDTO.postalCode(), LocalDateTime.now(), LocalDateTime.now());
 			newPharmacy.updateImage(ImageUtils.encryptedDefaultImage);
-			this.pharmacyRepository.save(newPharmacy);
+			return this.pharmacyRepository.save(newPharmacy).getId();
 		} else
 			throw new PharmacyAlreadyExist("Campos inválidos.", "Esta farmácia já existe em nosso sistema. Por favor, altere as informações e tente novamente.");
 	}

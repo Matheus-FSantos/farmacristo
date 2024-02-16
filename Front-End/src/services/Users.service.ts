@@ -1,10 +1,5 @@
 import { API_INSTANCE } from "./config/Axios.api";
 
-interface IAuthorizationParams {
-	username: string,
-	password: string
-}
-
 export class UsersService {
 	
 	private getAuthorization(loginUsername: string, loginPassword: string): IAuthorizationParams {
@@ -56,7 +51,7 @@ export class UsersService {
 	public async update(loginUsername: string, loginPassword: string, userId: string, body: INewUserDTO) {
 		return await API_INSTANCE.put(`/users/${ userId }`, body, {
 			auth: this.getAuthorization(loginUsername, loginPassword)
-		}).then(() => "Atualizado!").catch((error) => error);
+		}).then(() => "Atualizado!").catch((error) => error.response.data.messages[0]);
 	}
 
 	public async updateUserImage(loginUsername: string, loginPassword: string, userId: string, formData: FormData) {

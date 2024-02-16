@@ -32,7 +32,7 @@ const AdminUser = () => {
 	const handleDeleteUser = (id: string) => {
 		usersService.delete(credentials.email, credentials.password, id).then(() => {
 			window.location.reload();
-		}).catch((error) => console.log(error))
+		}).catch(() => { handleLogout() })
 	}
 
 	const handleUpdateTier = async (id: string, tier: string) => {

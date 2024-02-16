@@ -58,7 +58,7 @@ public class UserService {
 	@Auth(required=true)
 	public UserDTO findById(UUID id) throws FarmaCristoException {
 		User user = this.findByIdDefault(id);
-		return new UserDTO(user.getId(), user.getEmail(), user.getEmail(), user.getPassword(), user.getTier());
+		return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getTier());
 	}
 	
 	public User findByIdDefault(UUID id) throws UserNotFound {

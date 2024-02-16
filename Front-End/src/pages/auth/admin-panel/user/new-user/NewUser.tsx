@@ -67,7 +67,7 @@ const NewUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactEle
 			usersService.save(body).then(async (id) => {
 				const formData = new FormData();
 				formData.append("image", image);
-				usersService.updateUserImage(Credentials.email, Credentials.password, id, formData)
+				usersService.updateUserImage(Credentials.email, Credentials.password, id, formData);
 				toast.update(alert, {
 					render: "Usuário criado!",
 					type: "success",

@@ -44,13 +44,11 @@ const UpdateUser = ({ onRequestClose, Credentials }: INewUserProps): React.React
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
-	const handleSubmit = async (e: React.FormEvent): Promise<void> => {
+	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault();
 		setIsDisabled(true);
 		const body: INewUserDTO = { name, email, password };
 		const alert = toast.loading("Por favor, aguarde...");
-
-		/* ATUALIZAR O SESSION STORAGE APÓS TER DADO TUDO CERTO */
 
 		usersService.update(Credentials.email, Credentials.password, Credentials.id, body).then(async (message) => {
 			if(image) {
@@ -77,11 +75,9 @@ const UpdateUser = ({ onRequestClose, Credentials }: INewUserProps): React.React
 			await useTimeout(1000);
 			window.location.reload();
 		}).catch(async (error) => {
-			console.log(error);
-
 			await useTimeout(1000);
 			toast.update(alert, {
-				render: "Erro",
+				render: error  + "",
 				type: "success",
 				isLoading: false,
 				position: "top-right",
@@ -93,6 +89,7 @@ const UpdateUser = ({ onRequestClose, Credentials }: INewUserProps): React.React
 				progress: undefined,
 				theme: "colored",
 			});
+			console.clear();
 			await useTimeout(1000);
 			setIsDisabled(false);
 		});
