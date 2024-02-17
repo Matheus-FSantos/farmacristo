@@ -81,7 +81,7 @@ const AdminPanelLayout = ({ children }: IAdminPanelProps): React.ReactElement =>
 						</SideBar>
 						<SideBarHr />
 					</SideBarContainer>
-					<ContainerGlobal Type="padding-top w-100 over-auto h-100">
+					<ContainerGlobal Type="padding-top w-100 h-100">
 						{ children }
 					</ContainerGlobal>
 				</Container>
