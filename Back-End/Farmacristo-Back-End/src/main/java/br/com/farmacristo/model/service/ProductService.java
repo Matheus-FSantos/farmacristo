@@ -43,12 +43,13 @@ public class ProductService {
 	public List<ProductDTO> findAll() throws PharmacyNotFound, CEPNotFound {
 		List<Product> products = this.productRepository.findAll();
 		List<ProductDTO> productsDTO = new ArrayList<ProductDTO>();
-		
-		Set<PharmacyDTO> pharmaciesDTO = new HashSet<PharmacyDTO>();
-		
+				
 		for(Product product : products) {
-			for(Pharmacy pharmacy : product.getPharmacies())
-				pharmaciesDTO.add(this.pharmacyService.findById(pharmacy.getId()));
+			List<PharmacyDTO> pharmaciesDTO = new ArrayList<PharmacyDTO>();
+			
+			for(Pharmacy pharmacy : product.getPharmacies()) {
+				pharmaciesDTO.add(this.pharmacyService.findById(pharmacy.getId()));			
+			}	
 			
 			productsDTO.add(new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getBrand(), product.getPrice(), product.getPromotionalPrice(), product.getPrescriptionIsRequired(), pharmaciesDTO));			
 		}
@@ -60,7 +61,7 @@ public class ProductService {
 	@Auth(required=true)
 	public ProductDTO findById(UUID id) throws ProductNotFound, PharmacyNotFound, CEPNotFound {
 		Product product = this.findByIdDefault(id);
-		Set<PharmacyDTO> pharmaciesDTO = new HashSet<PharmacyDTO>();
+		List<PharmacyDTO> pharmaciesDTO = new ArrayList<PharmacyDTO>();
 		
 		
 		for(Pharmacy pharmacy : product.getPharmacies())
@@ -77,7 +78,7 @@ public class ProductService {
 	@Transactional
 	@FieldsValidation
 	@Auth(required=true)
-	public void save(NewProductDTO newProductDTO) throws InvalidFields, PharmacyNotFound, CEPNotFound {
+	public UUID save(NewProductDTO newProductDTO) throws InvalidFields, PharmacyNotFound, CEPNotFound {
 		/* Fields Validation */
 		ProductValidation.validation(newProductDTO);
 		Set<Pharmacy> pharmacies = this.getPharmacies(newProductDTO.getPharmacies());
@@ -88,7 +89,7 @@ public class ProductService {
 		newProduct.getPharmacies().addAll(pharmacies);
 		newProduct.updateImage(ImageUtils.encryptedDefaultImage);
 		
-		this.productRepository.save(newProduct);
+		return this.productRepository.save(newProduct).getId();
 	}
 	
 	@OnlyAdmin

@@ -195,7 +195,7 @@ const NewPharmacy = ({ Credentials, onRequestClose }: INewPharmacyProps) => {
 							<Button ButtonType="save" Type="submit" isDisabled={ isDisabled }>
 								Salvar farmácia
 							</Button>
-							<Button ButtonType="cancel" onClick={ onRequestClose }>Cancelar</Button>
+							<Button ButtonType="cancel" onClick={ onRequestClose } isDisabled={ isDisabled }>Cancelar</Button>
 						</ButtonsContainer>
 					</form>
 				</Container>

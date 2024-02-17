@@ -28,6 +28,26 @@ export class PharmacyService {
 		}
 	}
 
+	public async findAllReduced(): Promise<IPharmacyReducedDTO[]> {
+		try {
+			const pharmacies: IPharmacyDTO[] = (await API_INSTANCE.get("/pharmacies")).data;
+			const finalPharmaciesPromises: Promise<IPharmacyReducedDTO>[] = pharmacies.map(async (pharmacy) => {
+				const data: IPharmacyReducedDTO = {
+					id: pharmacy.id,
+					name: pharmacy.name
+				}
+
+				return data;
+		});
+
+		const finalPharmacies: IPharmacyReducedDTO[] = await Promise.all(finalPharmaciesPromises);
+
+		return finalPharmacies;
+		} catch (error) {
+			throw new Error();
+		}
+	}
+
 	public async findByIdWithImage(pharmacyId: string): Promise<IPharmacyFullDTO> {
 		try {
 			const pharmacy = await this.findById(pharmacyId);

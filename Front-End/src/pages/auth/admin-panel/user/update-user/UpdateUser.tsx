@@ -32,7 +32,7 @@ interface INewUserProps {
 }
 
 const UpdateUser = ({ onRequestClose, Credentials }: INewUserProps): React.ReactElement => {
-	useDinamicTitle("Novo usuário");
+	useDinamicTitle("Atualizar usuário");
 
 	const authService = new AuthService();
 	const usersService = new UsersService();

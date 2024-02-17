@@ -52,33 +52,36 @@ const UserTable = ({ onDelete, onUpdateTier, Filter }: IUserTable) => {
 				<tbody>
 					{
 						!Filter ?
-							users.map((user) => 
-								<tr key={ user.id } >
-									<TableData className="id">
-										{ user.id }
-									</TableData>
-									<TableData>{ user.name }</TableData>
-									<TableData>{ user.email }</TableData>
-									<TableData>{ user.tier === "Administrator" ? "Admin" : "Cliente" }</TableData>
-									<TableData>
-										<UpdateTierButton
-											Title="Confirma essa ação?"
-											Description="Ao clicar para atualizar, o usuário terá o seu nivel hierarquico alterado para o inverso (se for cliente, passará a ser administrador, se for administrador, passará a ser cliente). Caso clique para atualizar, essa ação pode ser revertida apenas por um administrador."
-											UserTier={ user.tier }
-											UserId={ user.id }
-											onUpdateTier={ onUpdateTier }
-										/>
-									</TableData>
-									<TableData>
-										<DeleteButton
+							users.length > 0 ?
+								users.map((user) => 
+									<tr key={ user.id } >
+										<TableData className="id">
+											{ user.id }
+										</TableData>
+										<TableData>{ user.name }</TableData>
+										<TableData>{ user.email }</TableData>
+										<TableData>{ user.tier === "Administrator" ? "Admin" : "Cliente" }</TableData>
+										<TableData>
+											<UpdateTierButton
 												Title="Confirma essa ação?"
-												Description="Ao clicar para deletar, o usuário será permantemente removido do sistema, logo, caso ele tente entrar novamente em sua conta, será impossibilitado e terá que criar novamente outra conta."
-												ItemID={ user.id }
-												onDelete={ onDelete }
+												Description="Ao clicar para atualizar, o usuário terá o seu nivel hierarquico alterado para o inverso (se for cliente, passará a ser administrador, se for administrador, passará a ser cliente). Caso clique para atualizar, essa ação pode ser revertida apenas por um administrador."
+												UserTier={ user.tier }
+												UserId={ user.id }
+												onUpdateTier={ onUpdateTier }
 											/>
-									</TableData>
-								</tr>
-							)
+										</TableData>
+										<TableData>
+											<DeleteButton
+													Title="Confirma essa ação?"
+													Description="Ao clicar para deletar, o usuário será permantemente removido do sistema, logo, caso ele tente entrar novamente em sua conta, será impossibilitado e terá que criar novamente outra conta."
+													ItemID={ user.id }
+													onDelete={ onDelete }
+												/>
+										</TableData>
+									</tr>
+								)
+							:
+								<TableData className="id not-found" colSpan={ 6 }>Nenhum resultado...</TableData>
 						:
 							users.filter(user => user.name.toLowerCase().includes(Filter.toLowerCase() + "")).length === 0 ?
 								<TableData className="id not-found" colSpan={6}>Nenhum resultado...</TableData>

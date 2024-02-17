@@ -9,8 +9,8 @@ import { TableHeader, Image, TableData } from "../styles";
 
 interface IPharmacyTable {
 	Filter: string
-	onEditModalVisibility: (pharmacy: IPharmacyFullDTO) => void
 	onDeleteProduct: (id?: string) => void
+	onEditModalVisibility: (pharmacy: IPharmacyFullDTO) => void
 }
 
 const PharmacyTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IPharmacyTable): React.ReactElement => {
@@ -48,33 +48,36 @@ const PharmacyTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IPhar
 				<tbody>
 					{
 						!Filter ?
-							pharmacies.map(pharmacy => 
-								<tr key={ pharmacy.infos.id }>
-									<TableData className="id">
-										{ pharmacy.infos.id }
-									</TableData>
-									<TableData>
-										<Image src={ pharmacy.image } />
-									</TableData>
-									<TableData>{ pharmacy.infos.name }</TableData>
-									<TableData>{ pharmacy.infos.email }</TableData>
-									<TableData>{ pharmacy.infos.number }</TableData>
-									<TableData>{ pharmacy.infos.postalCode }</TableData>
-									<TableData>
-										<button onClick={ () => onEditModalVisibility(pharmacy) } type="button" className="btn btn-outline-success">
-											Editar
-										</button>
-									</TableData>
-									<TableData>
-										<DeleteButton
-											Title="Confirma essa ação?"
-											Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, será possivel contornar a situação criando outro produto."
-											ItemID={ pharmacy.infos.id }
-											onDelete={ onDeleteProduct }
-										/>
-									</TableData>
-								</tr>
-							)
+							pharmacies.length > 0 ?
+								pharmacies.map(pharmacy => 
+									<tr key={ pharmacy.infos.id }>
+										<TableData className="id">
+											{ pharmacy.infos.id }
+										</TableData>
+										<TableData>
+											<Image src={ pharmacy.image } />
+										</TableData>
+										<TableData>{ pharmacy.infos.name }</TableData>
+										<TableData>{ pharmacy.infos.email }</TableData>
+										<TableData>{ pharmacy.infos.number }</TableData>
+										<TableData>{ pharmacy.infos.postalCode }</TableData>
+										<TableData>
+											<button onClick={ () => onEditModalVisibility(pharmacy) } type="button" className="btn btn-outline-success">
+												Editar
+											</button>
+										</TableData>
+										<TableData>
+											<DeleteButton
+												Title="Confirma essa ação?"
+												Description="Ao clicar para deletar, o produto será permantemente removido do sistema, logo, nenhum usuário/cliente saberá que sua loja vende esse produto. Caso marque para deletar, será possivel contornar a situação criando outro produto."
+												ItemID={ pharmacy.infos.id }
+												onDelete={ onDeleteProduct }
+											/>
+										</TableData>
+									</tr>
+								)
+							:
+								<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
 						:
 							pharmacies.filter((pharmacy) => pharmacy.infos.name.toLowerCase().includes(Filter.toLowerCase())).length === 0 ?
 								<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>

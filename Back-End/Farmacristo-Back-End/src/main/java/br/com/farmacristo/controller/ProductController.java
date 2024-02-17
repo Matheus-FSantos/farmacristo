@@ -81,9 +81,8 @@ public class ProductController {
 		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
 	@PostMapping
-	public ResponseEntity<Void> save(@RequestBody NewProductDTO newProductDTO) throws FarmaCristoException {
-		this.productService.save(newProductDTO);
-		return ResponseEntity.status(201).build();
+	public ResponseEntity<UUID> save(@RequestBody NewProductDTO newProductDTO) throws FarmaCristoException {
+		return ResponseEntity.status(201).body(this.productService.save(newProductDTO));
 	}
 	
 	@PreAuthorize("hasRole('Administrator')")

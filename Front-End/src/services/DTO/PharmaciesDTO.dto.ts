@@ -12,6 +12,11 @@ interface IPharmacyFullDTO {
 	image: string	
 }
 
+interface IPharmacyReducedDTO {
+	id: string,
+	name: string
+}
+
 interface IAddressDTO {
 	publicPlace: string
 	neighborhood: string
