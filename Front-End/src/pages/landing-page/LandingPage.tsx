@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import { gsap } from "gsap";
 import { Header } from "../../components/header";
@@ -47,13 +47,122 @@ import { InputContainer } from "../../components/ui/containers/input-container/I
 import { Label } from "../../components/ui/label/Label";
 import { Input } from "../../components/ui/input/Input";
 import { InputsFlex } from "../../components/ui/containers/inputs-flex/InputsFlex";
+import styled from "styled-components";
+import { PharmacyService } from "../../services/Pharmacies.service";
+import { AuthService } from "../../services/Auth.service";
+import { useNavigate } from "react-router-dom";
+import { Container } from "../../components/ui/containers/Container";
+
+const DetailsSection = styled.section`
+	padding-top: 4rem;
+  width: 60%;
+  margin: auto;
+`;
+
+const DetailsContainer = styled.details`
+	padding-bottom: 30px;
+	
+	&[open] {
+		summary ~ * {
+			animation: open 0.3s ease-in-out;
+		}
+
+		summary:after {
+			transform: rotate(45deg);
+			font-size: 2rem;
+		}
+	}
+
+	@keyframes open {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	
+	p {
+		font-size: 0.95rem;
+		font-weight: 500;
+
+		color: var(--gray-700);
+
+		span {
+			color: var(--black-900);
+			font-weight: 600;
+		}
+
+		&.title-open {
+			font-size: 1.5rem;
+			font-weight: 600;
+		}
+
+		&.title-open-email {
+			font-size: 1rem;
+		}
+	}
+`;
+
+const DetailsImage = styled.img`
+	width: 100px;
+	height: 100px;
+
+	border-radius: 999px;
+`;
+
+const Summary = styled.summary`
+	width: 100%;
+	padding: 0.5rem 0;
+
+	border-top: 1px solid var(--green-1000);
+	
+	position: relative;
+	cursor: pointer;
+	
+	font-size: 1.5rem;
+	font-weight: 400;
+	
+	list-style: none;
+	outline: 0;
+
+	font-weight: 600;
+	color: var(--green-800);
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&:after {
+		content: "+";
+		position: absolute;
+		font-size: 1.75rem;
+		line-height: 0;
+		margin-top: 0.75rem;
+		right: 0;
+		font-weight: 200;
+		transform-origin: center;
+		transition: 200ms linear;
+	}
+`;
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
 
+	const navigate = useNavigate();
+	const authService = new AuthService();
+	const pharmacyService = new PharmacyService();
+
 	const [name, setName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+
+	const [pharmacies, setPharmacies] = useState<IPharmacyFullDTO[]>([]);
+
+	const handleLogout = () => {
+		authService.logout();
+		navigate("/");
+	}
 
 	useLayoutEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
@@ -98,6 +207,10 @@ const LandingPage = (): React.ReactElement => {
 		return () => {
 			gsap.killTweensOf("#four");
 		}
+	}, []);
+
+	useEffect(() => {
+		pharmacyService.findAll().then((data) => setPharmacies(data)).catch(() => { handleLogout(); } );
 	}, []);
 
 	return (
@@ -253,7 +366,27 @@ const LandingPage = (): React.ReactElement => {
 				</GlobalContainer>
 			</SectionFourContainer>
 
-			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			<DetailsSection>
+					<TitleComponent Type="sm green extra-bold p-bottom-40">Conheca nossas farmácias!</TitleComponent>
+					{
+						pharmacies.map((pharmacy) => 
+							<DetailsContainer>
+								<Summary>{ pharmacy.infos.name }</Summary>
+								<Container Type="padding-top flex center gap-40">
+									<DetailsImage src={ pharmacy.image } />
+									<Container Type="no-padding flex column">
+										<p className="title-open">{ pharmacy.infos.name }</p>
+										<p className="title-open-email">{ pharmacy.infos.email }</p>
+									</Container>
+								</Container>
+								<p>Número (Whatsapp): <span>{ pharmacy.infos.number }</span></p>
+								<br />
+								<p>CEP: <span>{ pharmacy.infos.postalCode }</span></p>
+								<p>Endereço: <span>{ pharmacy.infos.address.publicPlace } | { pharmacy.infos.address.neighborhood } ({ pharmacy.infos.address.locality })</span></p>
+							</DetailsContainer>
+						)
+					}
+			</DetailsSection>
 			<WhatsappWidget />
 		</>
 	);

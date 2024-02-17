@@ -10,6 +10,10 @@ const Title = styled.h1`
 		font-size: 2.25rem; /* 36px */
 	}
 
+	&.p-bottom-40 {
+		padding-bottom: 40px;
+	}
+
 	&.extra-bold {
 		font-weight: 800;
 	}

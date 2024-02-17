@@ -47,6 +47,10 @@ const Container = styled.div`
 		gap: 20px;
 	}
 
+	&.gap-40 {
+		gap: 40px;
+	}
+
 	&.gap-10 {
 		gap: 10px;
 	}
