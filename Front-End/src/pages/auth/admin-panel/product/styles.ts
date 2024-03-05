@@ -7,6 +7,10 @@ const NewModalBtn = styled.button`
 		font-weight: 600;
 		white-space: nowrap;
 	}
+
+	@media only screen and (max-width: 625px) {
+		width: 100%;
+	}
 `;
 
 export { NewModalBtn };

@@ -4,19 +4,29 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 
-	height: 930px;
-	gap: 20px;
+	height: 58.125rem; /* 930px */
+	
+	@media only screen and (max-width: 510px) {
+		gap: 0.313rem; /* 5px */
+	}
+
+	@media only screen and (max-width: 420px) {
+		flex-direction: column;
+
+		gap: 0;
+	}
 `;
 
 const SideBarContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width: 400px;
+	max-width: 25rem; /* 400px */
+	width: 100%;
 `;
 
 const SideBar = styled.div`
 	width: 100%;
-	height: 930px;
+	height: 58.125rem; /* 930px */
 
 	background-color: var(--white-1000);
 
@@ -29,6 +39,17 @@ const SideBar = styled.div`
 	padding: 5rem 0;
 
 	position: relative;
+
+	@media only screen and (max-width: 420px) {
+		width: 100%;
+		height: auto;
+		padding: 1.25rem; /* 20px */
+
+		flex-direction: row;
+		gap: 1.25rem;
+
+		justify-content: space-between;
+	}
 `;
 
 const Logo = styled.img`
@@ -41,6 +62,13 @@ const Logo = styled.img`
 	&:hover {
 		cursor: pointer;
 	}
+
+	@media only screen and (max-width: 510px) {
+		width: 4rem;
+		height: 4em;
+
+		left: 0rem;
+	}
 `;
 
 const SideBarHr = styled.div`
@@ -50,6 +78,10 @@ const SideBarHr = styled.div`
 	background-color: var(--blue-1000);
 
 	border-radius: 3.125rem; /* 50px */
+
+	@media only screen and (max-width: 420px){
+		display: none;
+	}
 `;
 
 const OptionsContainer = styled.div`
@@ -59,21 +91,28 @@ const OptionsContainer = styled.div`
 	justify-content: center;
 
 	width: 100%;
+
+	@media only screen and (max-width: 420px) {
+		width: auto;
+		flex-direction: row;
+
+		gap: 0.625rem; /* 10px */
+	}
 `;
 
 const Option = styled.div`
 	width: 60%;
-	padding: 20px;
+	padding: 1.25rem; /* 20px */
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	gap: 20px;
+	gap: 1.25rem;
 
 	cursor: pointer;
 
-	border-radius: 5px;
+	border-radius: 0.313rem; /* 5px */
 
 	&:hover {
 		background-color: var(--gray-70);
@@ -84,30 +123,50 @@ const Option = styled.div`
 		font-weight: 600;
 
 		position: relative;
-		top: 2px;
+		top: 0.125rem; /* 2px */
 	}
 
 	a:not([href]):not([class]), a:not([href]):not([class]):hover {
 		color: var(--blue-1000); /* reset bootstrap decoration */
 	}
+
+	@media only screen and (max-width: 1255px) {
+		width: 90%;
+	}
+
+	@media only screen and (max-width: 510px) {
+		a {
+			display: none;
+		}
+	}
+
+	@media only screen and (max-width: 510px) {
+		width: 2.5rem; /* 40px */
+		padding: 0.625rem; /* 10px */
+
+		i {
+			transform: scale(1.05);
+		}
+
+		background-color: var(--gray-70);
+	}
 `;
 
 const CopyrightSpan = styled.span`
-	font-size: 10px;
+	font-size: 0.625rem; /* 10px */
 	font-weight: 600;
 
-	width: 100px;
+	width: 6.25rem; /* 100px */
 	text-align: center;
 
 	color: var(--gray-700);
+
+	@media only screen and (max-width: 420px) {
+		display: none;
+	}
 `;
 
 const IFrame = styled.iframe`
-	border: 1px solid red;
-	width: 70%;
-	height: 100%;
-
-	padding: 40px 0;
 `;
 
 export {

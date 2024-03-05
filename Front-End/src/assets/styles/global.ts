@@ -40,6 +40,8 @@ const GlobalStyles = createGlobalStyle`
 			--pink-900: #FF00FA;
 			--pink-150: #FFD9FE;
 
+			--purple-500: #5652BF;
+
 			--orange-900: #FF8500;
 			--orange-150: #FFEDD9;
 

@@ -7,7 +7,7 @@ import { AdminPanelLayout } from "..";
 const AdminHome = () => {
 	return (
 		<AdminPanelLayout>
-			<Container>
+			<Container Type="main-content">
 				<TitleContainer>
 					<Title>Painel Adm.</Title>
 					<Subtitle>Bem vindo ao painel administrativo da FarmaCristo!</Subtitle>

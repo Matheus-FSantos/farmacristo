@@ -3,6 +3,7 @@ import styled from "styled-components";
 const TableHeader = styled.th`
 	text-align: center;
 	vertical-align: middle;
+	white-space: nowrap;
 `;
 
 const TableData = styled.td`
@@ -25,14 +26,14 @@ const TableData = styled.td`
 `;
 
 const Image = styled.img`
-	width: 85px;
-	height: 70px;
+	width: 5.313rem; /* 85px */
+	height: 4.375rem; /* 70px */
 `;
 
 const NotFound = styled.div`
 	width: 100%;
 
-	border: 1px solid red;
+	border: 0.063rem solid red; /* 1px */
 `;
 
 export {

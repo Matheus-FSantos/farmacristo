@@ -129,13 +129,13 @@ const AdminUser = () => {
 	return (
 		<>
 			<AdminPanelLayout>
-				<Container Type="flex column start gap-10 w-100">
+				<Container Type="flex column start gap-10 w-100 main-content">
 					<TitleContainer>
 						<Title>Usuários</Title>
 						<Subtitle>Tela administrativa dos usuários do sistema!</Subtitle>
 					</TitleContainer>
 					<Container Type="flex column end no-padding gap-20 w-100">
-						<Container Type="flex no-padding justify-center row-reverse center gap-20 w-100">
+						<Container Type="flex no-padding justify-center row-reverse center gap-20 w-100 search-container">
 							<NewModalBtn className="btn btn-primary" onClick={ handleModalVisibility }><span>Novo Usuário</span></NewModalBtn>
 							<div className="input-group flex-nowrap">
 								<span className="input-group-text" id="addon-wrapping"><i className="fa-solid fa-magnifying-glass" style={{ color: "#77767b" }}></i></span>
