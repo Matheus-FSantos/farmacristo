@@ -62,6 +62,18 @@ const Container = styled.div`
 		}
 	}
 
+	&.details {
+		@media only screen and (max-width: 768px) {
+			flex-direction: column;
+		}
+	}
+
+	&.details-texts {
+		@media only screen and (max-width: 768px) {
+			text-align: center;
+		}
+	}
+
 	&.no-padding {
 		padding: 0;
 	}

@@ -557,15 +557,116 @@ const SignUpContainer = styled.section`
 	}
 `;
 
+const DetailsSection = styled.section`
+	padding-top: 4rem;
+  width: 60%;
+  margin: auto;
+
+	@media only screen and (max-width: 600px) {
+		width: 85%;
+	}
+`;
+
+const DetailsContainer = styled.details`
+	padding-bottom: 30px;
+	
+	&[open] {
+		summary ~ * {
+			animation: open 0.3s ease-in-out;
+		}
+
+		summary:after {
+			transform: rotate(45deg);
+			font-size: 2rem;
+		}
+	}
+
+	@keyframes open {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	
+	p {
+		font-size: 0.95rem;
+		font-weight: 500;
+
+		color: var(--gray-700);
+
+		span {
+			color: var(--black-900);
+			font-weight: 600;
+		}
+
+		&.title-open {
+			font-size: 1.5rem;
+			font-weight: 600;
+		}
+
+		&.title-open-email {
+			font-size: 1rem;
+		}
+	}
+`;
+
+const DetailsImage = styled.img`
+	width: 100px;
+	height: 100px;
+
+	border-radius: 999px;
+`;
+
+const Summary = styled.summary`
+	width: 100%;
+	padding: 0.5rem 0;
+
+	border-top: 1px solid var(--green-1000);
+	
+	position: relative;
+	cursor: pointer;
+	
+	font-size: 1.5rem;
+	font-weight: 400;
+	
+	list-style: none;
+	outline: 0;
+
+	font-weight: 600;
+	color: var(--green-800);
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&:after {
+		content: "+";
+		position: absolute;
+		font-size: 1.75rem;
+		line-height: 0;
+		margin-top: 0.75rem;
+		right: 0;
+		font-weight: 200;
+		transform-origin: center;
+		transition: 200ms linear;
+	}
+`;
+
 export {
 	Card,
 	Title,
 	Elipse,
+	Summary,
 	Subtitle,
 	WomanImage,
+	DetailsImage,
 	CardContainer,
 	SubtitleGreen,
+	DetailsSection,
 	SignUpContainer,
+	DetailsContainer,
 	JoinUsDescription,
 	SectionOneContainer,
 	SectionTwoContainer,

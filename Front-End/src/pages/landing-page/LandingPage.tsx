@@ -1,19 +1,15 @@
 import { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 
 import { gsap } from "gsap";
 import { Header } from "../../components/header";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GlobalContainer } from "../styles/global";
-import { useDinamicTitle } from "../../hooks/useDinamicTitle";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 
-/* UI */
-import { Hr } from "../../components/ui/hr/Hr";
-import { Product } from "../../components/ui/product/Product";
-import { Title as TitleComponent } from "../../components/ui/title/Title";
-import { Subtitle as SubtitleComponent } from "../../components/ui/subtitle/Subtitle";
-import { TitleContainer } from "../../components/ui/containers/title-container/TitleContainer";
-import { ProductsGridContainer } from "../../components/ui/containers/products-grid-container/ProductsGridContainer";
+import { AuthService } from "../../services/Auth.service";
+import { PharmacyService } from "../../services/Pharmacies.service";
 
 import {
 	HerbalPNG,
@@ -24,15 +20,33 @@ import {
 	PersonalHygienePNG,
 } from "../../assets/images/images";
 
+/* UI */
+import { Hr } from "../../components/ui/hr/Hr";
+import { Label } from "../../components/ui/label/Label";
+import { Input } from "../../components/ui/input/Input";
+import { Button } from "../../components/ui/button/Button";
+import { Product } from "../../components/ui/product/Product";
+import { Container } from "../../components/ui/containers/Container";
+import { Title as TitleComponent } from "../../components/ui/title/Title";
+import { InputsFlex } from "../../components/ui/containers/inputs-flex/InputsFlex";
+import { Subtitle as SubtitleComponent } from "../../components/ui/subtitle/Subtitle";
+import { TitleContainer } from "../../components/ui/containers/title-container/TitleContainer";
+import { InputContainer } from "../../components/ui/containers/input-container/InputContainer";
+import { ProductsGridContainer } from "../../components/ui/containers/products-grid-container/ProductsGridContainer";
+
 import {
 	Card,
 	Title,
 	Elipse,
+	Summary,
 	Subtitle,
 	WomanImage,
+	DetailsImage,
 	SubtitleGreen,
 	CardContainer,
+	DetailsSection,
 	SignUpContainer,
+	DetailsContainer,
 	JoinUsDescription,
 	SectionOneContainer,
 	SectionTwoContainer,
@@ -41,110 +55,6 @@ import {
 	SectionThreeContainer,
 	SectionFourContainerFlex,
 } from "./styles";
-
-import { Button } from "../../components/ui/button/Button";
-import { InputContainer } from "../../components/ui/containers/input-container/InputContainer";
-import { Label } from "../../components/ui/label/Label";
-import { Input } from "../../components/ui/input/Input";
-import { InputsFlex } from "../../components/ui/containers/inputs-flex/InputsFlex";
-import styled from "styled-components";
-import { PharmacyService } from "../../services/Pharmacies.service";
-import { AuthService } from "../../services/Auth.service";
-import { useNavigate } from "react-router-dom";
-import { Container } from "../../components/ui/containers/Container";
-
-const DetailsSection = styled.section`
-	padding-top: 4rem;
-  width: 60%;
-  margin: auto;
-`;
-
-const DetailsContainer = styled.details`
-	padding-bottom: 30px;
-	
-	&[open] {
-		summary ~ * {
-			animation: open 0.3s ease-in-out;
-		}
-
-		summary:after {
-			transform: rotate(45deg);
-			font-size: 2rem;
-		}
-	}
-
-	@keyframes open {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
-	
-	p {
-		font-size: 0.95rem;
-		font-weight: 500;
-
-		color: var(--gray-700);
-
-		span {
-			color: var(--black-900);
-			font-weight: 600;
-		}
-
-		&.title-open {
-			font-size: 1.5rem;
-			font-weight: 600;
-		}
-
-		&.title-open-email {
-			font-size: 1rem;
-		}
-	}
-`;
-
-const DetailsImage = styled.img`
-	width: 100px;
-	height: 100px;
-
-	border-radius: 999px;
-`;
-
-const Summary = styled.summary`
-	width: 100%;
-	padding: 0.5rem 0;
-
-	border-top: 1px solid var(--green-1000);
-	
-	position: relative;
-	cursor: pointer;
-	
-	font-size: 1.5rem;
-	font-weight: 400;
-	
-	list-style: none;
-	outline: 0;
-
-	font-weight: 600;
-	color: var(--green-800);
-
-	&::-webkit-details-marker {
-		display: none;
-	}
-
-	&:after {
-		content: "+";
-		position: absolute;
-		font-size: 1.75rem;
-		line-height: 0;
-		margin-top: 0.75rem;
-		right: 0;
-		font-weight: 200;
-		transform-origin: center;
-		transition: 200ms linear;
-	}
-`;
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
@@ -372,9 +282,9 @@ const LandingPage = (): React.ReactElement => {
 						pharmacies.map((pharmacy) => 
 							<DetailsContainer>
 								<Summary>{ pharmacy.infos.name }</Summary>
-								<Container Type="padding-top flex center gap-40">
+								<Container Type="padding-top flex center gap-40 details">
 									<DetailsImage src={ pharmacy.image } />
-									<Container Type="no-padding flex column">
+									<Container Type="no-padding flex column details-texts">
 										<p className="title-open">{ pharmacy.infos.name }</p>
 										<p className="title-open-email">{ pharmacy.infos.email }</p>
 									</Container>
