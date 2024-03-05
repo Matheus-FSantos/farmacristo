@@ -308,6 +308,7 @@ const SectionThreeContainer = styled.section`
 	opacity: 0;
 
 	div.products-grid {
+		padding: 1.25rem;
 		width: 100%;
 
 		display: flex;

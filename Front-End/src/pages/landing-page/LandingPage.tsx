@@ -9,6 +9,7 @@ import { GlobalContainer } from "../styles/global";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 
 import { AuthService } from "../../services/Auth.service";
+import { ProductService } from "../../services/Products.service";
 import { PharmacyService } from "../../services/Pharmacies.service";
 
 import {
@@ -25,7 +26,6 @@ import { Hr } from "../../components/ui/hr/Hr";
 import { Label } from "../../components/ui/label/Label";
 import { Input } from "../../components/ui/input/Input";
 import { Button } from "../../components/ui/button/Button";
-import { Product } from "../../components/ui/product/Product";
 import { Container } from "../../components/ui/containers/Container";
 import { Title as TitleComponent } from "../../components/ui/title/Title";
 import { InputsFlex } from "../../components/ui/containers/inputs-flex/InputsFlex";
@@ -55,6 +55,7 @@ import {
 	SectionThreeContainer,
 	SectionFourContainerFlex,
 } from "./styles";
+import { Product } from "../../components/ui/product/Product";
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
@@ -68,6 +69,9 @@ const LandingPage = (): React.ReactElement => {
 	const [password, setPassword] = useState<string>("");
 
 	const [pharmacies, setPharmacies] = useState<IPharmacyFullDTO[]>([]);
+
+	const productService = new ProductService();
+	const [products, setProducts] = useState<IProductFullDTO[]>([]);
 
 	const handleLogout = () => {
 		authService.logout();
@@ -121,6 +125,10 @@ const LandingPage = (): React.ReactElement => {
 
 	useEffect(() => {
 		pharmacyService.findAll().then((data) => setPharmacies(data)).catch(() => { handleLogout(); } );
+		productService.findAll().then((data) => {
+			const firstTenProducts = data.slice(0, 10); 
+			setProducts(firstTenProducts);
+		}).catch(() => handleLogout());
 	}, []);
 
 	return (
@@ -177,25 +185,26 @@ const LandingPage = (): React.ReactElement => {
 
 			<SectionThreeContainer id="three">
 				<GlobalContainer className="products-grid">
-						<TitleContainer Type="xl center">
-							<TitleComponent Type="sm green extra-bold">Produtos em destaque</TitleComponent>
-							<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
-						</TitleContainer>
+					<TitleContainer Type="xl center">
+						<TitleComponent Type="sm green extra-bold">Produtos em destaque</TitleComponent>
+						<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
+					</TitleContainer>
 
-						<div className="products-grid">
-							<ProductsGridContainer>
-								<Product />
-								<Product />
-								<Product />
-								<Product />
-								<Product />
-								<Product />
-								<Product />
-								<Product />
-							</ProductsGridContainer>
-						</div>
-					</GlobalContainer>
-				</SectionThreeContainer>
+					<div className="products-grid">
+						<ProductsGridContainer>
+							{
+								products.map(product => 
+									<Product
+										key={ product.infos.id }
+										product={ product }
+										changeModalVisibility={ () => { }}
+									/>
+								)
+							}
+						</ProductsGridContainer>
+					</div>
+				</GlobalContainer>
+			</SectionThreeContainer>
 
 			<SectionFourContainer id="four">
 				<Elipse className="yellow lg"/>
@@ -297,6 +306,7 @@ const LandingPage = (): React.ReactElement => {
 						)
 					}
 			</DetailsSection>
+
 			<WhatsappWidget />
 		</>
 	);
