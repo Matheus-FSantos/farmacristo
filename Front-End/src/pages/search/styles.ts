@@ -6,6 +6,15 @@ const LoadingContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&.adjustable {
+		height: 3.75rem; /* 60px */		
+		margin: 0 auto;
+	}
+
+	&.h-400 {
+		min-height: 25rem; /* 400px */
+	}
 `;
 
 const SearchContainer = styled.section`
@@ -35,76 +44,4 @@ const SearchContainer = styled.section`
 	}
 `;
 
-const ProductLocationContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-`;
-
-const ModalProductImage = styled.img`
-	width: 250px;
-	height: 250px;
-`;
-
-const ProductInfosContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-
-	width: 100%;
-
-	gap: 0.625rem;
-`;
-
-const ProductBrand = styled.p`
-	font-weight: 700;
-	color: var(--purple-500);
-
-	display: flex;
-	align-items: center;
-
-	gap: 0.625rem;
-`;
-
-const ProductDescription = styled.p `
-	font-size: 0.75rem; /* 12px */
-	font-weight: 600;
-	line-height: 1rem;
-
-	text-align: justify;
-
-	color: var(--gray-700);
-`;
-
-const ProductPrescriptionIsRequired = styled.span`
-	background-color: var(--red-150);
-	color: var(--red-500);
-
-	font-weight: 600;
-
-	border-radius: 50px;
-	border: 0.063rem solid var(--red-1000);
-
-	padding: 5px 10px;
-
-	font-size: 12px;
-`;
-
-const ProductPresentIn = styled.p`
-	font-size: 0.75rem; /* 12px */
-	font-weight: 600;
-	line-height: 1rem;
-
-	text-align: justify;
-
-	color: var(--gray-700);
-
-	&.pharmacy {
-		color: var(--black-1000);
-		position: relative;
-		left: 0.625rem; /* 10px */
-	}
-`;
-
-export { LoadingContainer, SearchContainer, ModalProductImage, ProductInfosContainer, ProductLocationContainer, ProductPresentIn, ProductBrand, ProductDescription, ProductPrescriptionIsRequired };
+export { LoadingContainer, SearchContainer };

@@ -563,6 +563,8 @@ const DetailsSection = styled.section`
   width: 60%;
   margin: auto;
 
+	opacity: 0;
+
 	@media only screen and (max-width: 600px) {
 		width: 85%;
 	}

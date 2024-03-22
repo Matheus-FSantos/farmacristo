@@ -56,26 +56,80 @@ import {
 	SectionFourContainerFlex,
 } from "./styles";
 import { Product } from "../../components/ui/product/Product";
+import { LoadingContainer } from "../search/styles";
+import { Spinner } from "../../components/ui/spinner";
+import { useTimeout } from "../../hooks/useTimeout";
+import { UsersService } from "../../services/Users.service";
+import { toast } from "react-toastify";
+import { Toast } from "../../components/toast";
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
 
 	const navigate = useNavigate();
 	const authService = new AuthService();
+	const usersService = new UsersService();
 	const pharmacyService = new PharmacyService();
 
 	const [name, setName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
 	const [pharmacies, setPharmacies] = useState<IPharmacyFullDTO[]>([]);
 
 	const productService = new ProductService();
 	const [products, setProducts] = useState<IProductFullDTO[]>([]);
 
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const handleLogout = () => {
 		authService.logout();
 		navigate("/");
+	}
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+
+		const alert = toast.loading("Por favor, aguarde...");
+		usersService.save({ name, email, password}).then(async () => {
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: "Usuário criado!",
+				type: "success",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			setIsDisabled(false);
+			await useTimeout(1000);
+			navigate("/signin");
+		}).catch(async (error) => {
+			await useTimeout(1000);
+			toast.update(alert, {
+				render: error  + "",
+				type: "error",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			console.clear();
+			await useTimeout(1000);
+			setIsDisabled(false);
+		});
 	}
 
 	useLayoutEffect(() => {
@@ -123,11 +177,28 @@ const LandingPage = (): React.ReactElement => {
 		}
 	}, []);
 
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to("#five", {
+			opacity: 1,
+			scrollTrigger: {
+				trigger: "#five",
+				start: "top 500px"
+			}
+		});
+
+		return () => {
+			gsap.killTweensOf("#five");
+		}
+	}, []);
+
 	useEffect(() => {
+		setIsLoading(true);
 		pharmacyService.findAll().then((data) => setPharmacies(data)).catch(() => { handleLogout(); } );
 		productService.findAll().then((data) => {
 			const firstTenProducts = data.slice(0, 10); 
 			setProducts(firstTenProducts);
+			setIsLoading(false);
 		}).catch(() => handleLogout());
 	}, []);
 
@@ -190,19 +261,26 @@ const LandingPage = (): React.ReactElement => {
 						<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
 					</TitleContainer>
 
-					<div className="products-grid">
-						<ProductsGridContainer>
-							{
-								products.map(product => 
-									<Product
-										key={ product.infos.id }
-										product={ product }
-										changeModalVisibility={ () => { }}
-									/>
-								)
-							}
-						</ProductsGridContainer>
-					</div>
+					{
+						isLoading ?						
+							<LoadingContainer className="adjustable h-400">
+								<Spinner />
+							</LoadingContainer>
+						:
+							<div className="products-grid">
+								<ProductsGridContainer>
+									{
+										products.map(product => 
+											<Product
+												key={ product.infos.id }
+												product={ product }
+												noOpen={ true }
+											/>
+										)
+									}
+								</ProductsGridContainer>
+							</div>
+					}
 				</GlobalContainer>
 			</SectionThreeContainer>
 
@@ -234,7 +312,7 @@ const LandingPage = (): React.ReactElement => {
 									<SubtitleComponent>Campos obrigatórios marcados com <span>*</span></SubtitleComponent>
 								</TitleContainer>
 
-								<form>
+								<form onSubmit={ handleSubmit }>
 									<InputsFlex Type="no-margin">
 										<InputContainer>
 											<Label Type="bold green sm" For="name" Required={ true }>Nome e sobrenome</Label>
@@ -273,7 +351,7 @@ const LandingPage = (): React.ReactElement => {
 										</InputContainer>
 									</InputsFlex>
 								
-									<Button Type="submit" ButtonType="save">
+									<Button Type="submit" ButtonType="save" isDisabled={ isDisabled }>
 										Cadastrar
 									</Button>
 								</form>
@@ -285,28 +363,34 @@ const LandingPage = (): React.ReactElement => {
 				</GlobalContainer>
 			</SectionFourContainer>
 
-			<DetailsSection>
+			<DetailsSection id="five">
 					<TitleComponent Type="sm green extra-bold p-bottom-40">Conheca nossas farmácias!</TitleComponent>
 					{
-						pharmacies.map((pharmacy) => 
-							<DetailsContainer>
-								<Summary>{ pharmacy.infos.name }</Summary>
-								<Container Type="padding-top flex center gap-40 details">
-									<DetailsImage src={ pharmacy.image } />
-									<Container Type="no-padding flex column details-texts">
-										<p className="title-open">{ pharmacy.infos.name }</p>
-										<p className="title-open-email">{ pharmacy.infos.email }</p>
+						isLoading ?
+							<LoadingContainer className="adjustable h-400">
+								<Spinner />
+							</LoadingContainer>
+						:
+							pharmacies.map((pharmacy) => 
+								<DetailsContainer>
+									<Summary>{ pharmacy.infos.name }</Summary>
+									<Container Type="padding-top flex center gap-40 details">
+										<DetailsImage src={ pharmacy.image } />
+										<Container Type="no-padding flex column details-texts">
+											<p className="title-open">{ pharmacy.infos.name }</p>
+											<p className="title-open-email">{ pharmacy.infos.email }</p>
+										</Container>
 									</Container>
-								</Container>
-								<p>Número (Whatsapp): <span>{ pharmacy.infos.number }</span></p>
-								<br />
-								<p>CEP: <span>{ pharmacy.infos.postalCode }</span></p>
-								<p>Endereço: <span>{ pharmacy.infos.address.publicPlace } | { pharmacy.infos.address.neighborhood } ({ pharmacy.infos.address.locality })</span></p>
-							</DetailsContainer>
-						)
+									<p>Número (Whatsapp): <span>{ pharmacy.infos.number }</span></p>
+									<br />
+									<p>CEP: <span>{ pharmacy.infos.postalCode }</span></p>
+									<p>Endereço: <span>{ pharmacy.infos.address.publicPlace } | { pharmacy.infos.address.neighborhood } ({ pharmacy.infos.address.locality })</span></p>
+								</DetailsContainer>
+							)
 					}
 			</DetailsSection>
 
+			<Toast />
 			<WhatsappWidget />
 		</>
 	);

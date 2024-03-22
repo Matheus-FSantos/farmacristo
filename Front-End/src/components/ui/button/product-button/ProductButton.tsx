@@ -6,8 +6,19 @@ interface IProductButton {
 }
 
 const ProductButton = ({ Type }: IProductButton) => {
+
+	const handleClick = () => {
+		if(Type === "shopping-cart") {
+			//chama a função para adicionar o produto para o carrinho de compras do lek
+		}
+
+		if(Type === "whatsapp") {
+			//chama a função do zap
+		}
+	}
+
 	return(
-		<ProductButtonComponent className={ Type }>
+		<ProductButtonComponent className={ Type } onClick={ handleClick }>
 			{
 				Type === "shopping-cart" ?
 					<>

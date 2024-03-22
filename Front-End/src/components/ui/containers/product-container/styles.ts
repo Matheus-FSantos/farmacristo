@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ProductContainer = styled.section`
-	padding: 1.875rem; /* 30px */
+	padding: 1.875rem 6rem; /* 30px and 96px */
 
 	position: relative;
 
@@ -16,8 +16,7 @@ const ProductContainer = styled.section`
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 	
-	//gap: 3.75rem; /* 60px */
-	gap: 8%;
+	gap: 3.75rem; /* 60px */
 
 	&.start {
 		justify-content: start;

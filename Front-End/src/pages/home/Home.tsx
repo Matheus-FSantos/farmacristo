@@ -11,10 +11,40 @@ import { ProductsGridContainer } from "../../components/ui/containers/products-g
 import { GlobalLayout } from "../../layout/global/GlobalLayout";
 
 import { HomeContainer, ProductTrend } from "./styles";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ProductService } from "../../services/Products.service";
+import { AuthService } from "../../services/Auth.service";
+import { LoadingContainer } from "../search/styles";
+import { Spinner } from "../../components/ui/spinner";
 
 const Home = (): React.ReactElement => {
-
 	useDinamicTitle("Inicio");
+
+	const navigate = useNavigate();
+	const authService = new AuthService();
+
+	const productService = new ProductService();
+	const [products, setProducts] = useState<IProductFullDTO[]>([]);
+	const [firstEightProducts, setFirstEightProducts] = useState<IProductFullDTO[]>([]);
+
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const handleLogout = () => {
+		authService.logout();
+		navigate("/");
+	}
+
+	useEffect(() => {
+		setIsLoading(true);
+		productService.findAll().then((data) => {
+			setProducts(data);
+
+			const firstEightProducts = data.slice(0, 8);
+			setFirstEightProducts(firstEightProducts);
+			setIsLoading(false);
+		}).catch(() => handleLogout());
+	}, []);
 
 	return (
 		<GlobalLayout>
@@ -27,21 +57,23 @@ const Home = (): React.ReactElement => {
 				<ProductTrend>
 					<div className="title">
 						<h2>Principais produtos</h2>
-						<a>Ver tudo</a>
+						<Link to="/search">Ver tudo</Link>
 					</div>
 
 					<ProductContainer Type="start">
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
+						{
+							isLoading ?
+								<LoadingContainer className="adjustable">
+									<Spinner />
+								</LoadingContainer>
+							:
+								firstEightProducts.map(product => 
+									<Product
+										key={ product.infos.id }
+										product={ product }
+									/>
+								)
+						}
 					</ProductContainer>
 
 					<div className="blur toright"></div>
@@ -50,22 +82,19 @@ const Home = (): React.ReactElement => {
 
 				<ProductTrend>
 					<div className="title">
-						<h2>Cuidados pessoais</h2>
-						<a>Ver tudo</a>
+						<h2>Principais de Farmacristo</h2>
+						<Link to="/search">Ver tudo</Link>
 					</div>
 
 					<ProductContainer Type="start">
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
+						{
+							isLoading ?
+								<LoadingContainer className="adjustable">
+									<Spinner />
+								</LoadingContainer>
+							:
+								<div></div>
+						}
 					</ProductContainer>
 
 					<div className="blur toright"></div>
@@ -74,23 +103,20 @@ const Home = (): React.ReactElement => {
 
 				<ProductTrend>
 					<div className="title">
-						<h2>Vitaminas e suplementos</h2>
-						<a>Ver tudo</a>
+						<h2>Principais de Farmacristo 2</h2>
+						<Link to="/search">Ver tudo</Link>
 					</div>
 
 
 					<ProductContainer Type="start">
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
+						{
+							isLoading ?
+								<LoadingContainer className="adjustable">
+									<Spinner />
+								</LoadingContainer>
+							:
+								<div></div>
+						}
 					</ProductContainer>
 
 					<div className="blur toright"></div>
@@ -102,17 +128,24 @@ const Home = (): React.ReactElement => {
 						<Title Type="sm green">Explore</Title>
 						<Subtitle Type="xl green">Veja todos os produtos das nossas lojas!</Subtitle>
 					</TitleContainer>
-					<a className="right">Ver tudo</a>
-					<ProductsGridContainer>
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-						<Product />
-					</ProductsGridContainer>
+					<Link to="/search">Ver tudo</Link>
+					{
+						isLoading ?
+							<LoadingContainer className="adjustable">
+								<Spinner />
+							</LoadingContainer>
+						:
+							<ProductsGridContainer>
+								{
+									products.map(product => 
+										<Product
+											key={ product.infos.id }
+											product={ product }
+										/>
+									)
+								}
+							</ProductsGridContainer>
+					}
 				</div>
 			</HomeContainer>
 		</GlobalLayout>
