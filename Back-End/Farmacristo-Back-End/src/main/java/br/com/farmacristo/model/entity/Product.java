@@ -53,7 +53,7 @@ public class Product implements Serializable {
 	private Boolean prescriptionIsRequired;
 	
 	@Lob
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition="LONGTEXT")
 	private String image;
 	
 	@Column(nullable=false)

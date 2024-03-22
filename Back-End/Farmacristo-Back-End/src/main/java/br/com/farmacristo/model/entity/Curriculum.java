@@ -31,6 +31,7 @@ public class Curriculum implements Serializable {
 	private String description;
 	
 	@Lob
+	@Column(columnDefinition="LONGTEXT")
 	private byte[] CV;
 	private Boolean isViewed;
 	private LocalDateTime createdAt;

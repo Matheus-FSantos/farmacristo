@@ -41,6 +41,7 @@ public class Pharmacy implements Serializable {
 	private String postalCode;
 	
 	@Lob
+	@Column(columnDefinition="LONGTEXT")
 	private String image;
 	
 	@Column(nullable=false)

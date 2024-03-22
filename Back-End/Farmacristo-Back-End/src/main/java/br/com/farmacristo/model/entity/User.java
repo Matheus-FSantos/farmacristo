@@ -36,7 +36,7 @@ public class User implements Serializable {
 	private Integer tier;
 
 	@Lob
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition="LONGTEXT")
 	private String image;
 
 	@Column(nullable=false, length=60)

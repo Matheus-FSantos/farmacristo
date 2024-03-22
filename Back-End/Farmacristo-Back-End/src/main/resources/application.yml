@@ -3,9 +3,13 @@ server:
   
 spring:
   datasource:
-    url: jdbc:h2:mem:farmacristo
-    driverClassName: org.h2.Driver
-    username: SUDO
-    password: 
+    url: jdbc:mysql://localhost:3306/farmacristoTest
+    username: root
+    password: d94ed3838
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
