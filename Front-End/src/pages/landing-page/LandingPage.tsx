@@ -183,7 +183,7 @@ const LandingPage = (): React.ReactElement => {
 			opacity: 1,
 			scrollTrigger: {
 				trigger: "#five",
-				start: "top 500px"
+				start: "top 800px"
 			}
 		});
 
@@ -272,7 +272,6 @@ const LandingPage = (): React.ReactElement => {
 									{
 										products.map(product => 
 											<Product
-												key={ product.infos.id }
 												product={ product }
 												noOpen={ true }
 											/>
@@ -372,7 +371,7 @@ const LandingPage = (): React.ReactElement => {
 							</LoadingContainer>
 						:
 							pharmacies.map((pharmacy) => 
-								<DetailsContainer>
+								<DetailsContainer key={ pharmacy.infos.id }>
 									<Summary>{ pharmacy.infos.name }</Summary>
 									<Container Type="padding-top flex center gap-40 details">
 										<DetailsImage src={ pharmacy.image } />

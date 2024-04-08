@@ -15,6 +15,10 @@ const LoadingContainer = styled.div`
 	&.h-400 {
 		min-height: 25rem; /* 400px */
 	}
+
+	&.small {
+		transform: scale(0.5);
+	}
 `;
 
 const SearchContainer = styled.section`

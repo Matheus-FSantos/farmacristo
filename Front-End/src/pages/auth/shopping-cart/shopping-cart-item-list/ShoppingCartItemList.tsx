@@ -5,6 +5,12 @@ import { Hr } from "../../../../components/ui/hr/Hr";
 
 import styled from "styled-components";
 import { ProductTitle } from "../../../../components/ui/title/product-title/ProductTitle";
+import { useEffect, useState } from "react";
+import { AuthService } from "../../../../services/Auth.service";
+import { ProductService } from "../../../../services/Products.service";
+import { ShoppingCartService } from "../../../../services/ShoppingCart.service";
+import { LoadingContainer } from "../../../search/styles";
+import { Spinner } from "../../../../components/ui/spinner";
 
 const ShoppingCartItemListContainer = styled.section`
 	width: 100%;
@@ -34,19 +40,71 @@ const TotalContainer = styled.section`
 `;
 
 const ShoppingCartItemList = () => {
-	return(
+	
+	const authService = new AuthService();
+	const productService = new ProductService();
+	const shoppingCartService = new ShoppingCartService();
+
+	const [total, setTotal] = useState<string>("");
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const [products, setProducts] = useState<IProductFullDTO[]>([]);
+
+	useEffect(() => {
+		setIsLoading(true);
+
+		try {
+			const credentials = authService.getCredentials();
+			const id = credentials.id;
+			const login = {
+				email: credentials.email,
+				password: credentials.password
+			};
+
+			shoppingCartService.findAllProducts(id, login).then((shoppingCartInfos) => {
+				productService.findAll().then(products => {
+					const finalProducts: IProductFullDTO[] = [];
+					
+					products.forEach((product) => {
+						shoppingCartInfos.products.forEach((shoppingCartProduct) => {
+							if(product.infos.id === shoppingCartProduct.id)
+								finalProducts.push(product);
+						});
+					});
+
+					setProducts(finalProducts);
+					setIsLoading(false);
+				});
+
+				setTotal(shoppingCartInfos.total);
+			}).catch((error) => { console.log(error) });
+		} catch (error) {
+
+		}
+	}, []);
+
+	
+	return (
 		<ShoppingCartItemListContainer>
 			<ItemList>
-				<ShoppingCartItem />
-				<ShoppingCartItem />
-				<ShoppingCartItem />
+				{
+					isLoading ?
+						<LoadingContainer>
+							<Spinner />
+						</LoadingContainer>
+					:
+						products.length === 0 ?
+							<p>Seu carrinho está vazio!</p>
+						: 
+							products.map((product) => <ShoppingCartItem key={ product.infos.id } Product={ product } />)
+				}
 			</ItemList>
 
 			<Hr />
 
 			<TotalContainer>
 				<ProductTitle Title="Total:" Type="xl" />
-				<span className="price">R$ 518,70</span>
+				<span className="price">{ isLoading ? "Calculando..." : total }</span>
 			</TotalContainer>
 		</ShoppingCartItemListContainer>
 	);

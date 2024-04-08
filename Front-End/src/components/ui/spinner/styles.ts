@@ -11,6 +11,10 @@ const StyledSpinner = styled.svg`
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
+
+	&.margin-0 {
+		margin: 0;
+	}
   
   @keyframes rotate {
     100% {

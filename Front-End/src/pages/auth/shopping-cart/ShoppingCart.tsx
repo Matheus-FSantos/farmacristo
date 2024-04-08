@@ -20,6 +20,7 @@ const ShoppingCartContainer = styled.section`
 `;
 
 const ShoppingCart = () => {
+
 	return (
 		<PrivateRoute>
 			<GlobalLayout>

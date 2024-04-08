@@ -8,13 +8,13 @@ export class ProductService {
 
 	public async findAll(): Promise<IProductFullDTO[]> {
 		try {
-			const pharmacies: IProductDTO[] = (await API_INSTANCE.get("/products")).data;
-			const finalProductsPromises: Promise<IProductFullDTO>[] = pharmacies.map(async (pharmacy) => {
-				const image = await this.findProductsImageById(pharmacy.id);
+			const products: IProductDTO[] = (await API_INSTANCE.get("/products")).data;
+			const finalProductsPromises: Promise<IProductFullDTO>[] = products.map(async (products) => {
+				const image = await this.findProductsImageById(products.id);
 
 				const data: IProductFullDTO = {
 						image: image,
-						infos: pharmacy
+						infos: products
 				};
 
 				return data;

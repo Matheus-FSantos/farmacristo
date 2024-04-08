@@ -1,8 +1,12 @@
 import { StyledSpinner } from "./styles";
 
-const Spinner = () => {
+interface ISpinnerProps {
+	className?: string	
+} 
+
+const Spinner = ({ className }: ISpinnerProps ) => {
 	return (
-		<StyledSpinner viewBox="0 0 50 50">
+		<StyledSpinner className={ className } viewBox="0 0 50 50">
 			<circle
 				className="path"
 				cx="25"

@@ -10,6 +10,10 @@ const ProductGridContainer = styled.section`
 
 	place-items: center;
 
+	&.padding-20 {
+		padding: 20px 0;
+	}
+
 	@media (max-width: 1445px) {
     grid-template-columns: repeat(4, 1fr);
   }

@@ -17,6 +17,7 @@ import { ProductService } from "../../services/Products.service";
 import { AuthService } from "../../services/Auth.service";
 import { LoadingContainer } from "../search/styles";
 import { Spinner } from "../../components/ui/spinner";
+import { Toast } from "../../components/toast";
 
 const Home = (): React.ReactElement => {
 	useDinamicTitle("Inicio");
@@ -26,6 +27,7 @@ const Home = (): React.ReactElement => {
 
 	const productService = new ProductService();
 	const [products, setProducts] = useState<IProductFullDTO[]>([]);
+	const [exploreProducts, setExploreProducts] = useState<IProductFullDTO[]>([]);
 	const [firstEightProducts, setFirstEightProducts] = useState<IProductFullDTO[]>([]);
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,114 +43,121 @@ const Home = (): React.ReactElement => {
 			setProducts(data);
 
 			const firstEightProducts = data.slice(0, 8);
+			const exploreProducts = data.slice(0, 15);
+
+			setExploreProducts(exploreProducts);
 			setFirstEightProducts(firstEightProducts);
 			setIsLoading(false);
 		}).catch(() => handleLogout());
 	}, []);
 
 	return (
-		<GlobalLayout>
-			<HomeContainer>
-				<TitleContainer>
-					<Title Type="sm">Inicio</Title>
-					<Subtitle>Seja bem vindo a FarmaCristo!</Subtitle>
-				</TitleContainer>
-
-				<ProductTrend>
-					<div className="title">
-						<h2>Principais produtos</h2>
-						<Link to="/search">Ver tudo</Link>
-					</div>
-
-					<ProductContainer Type="start">
-						{
-							isLoading ?
-								<LoadingContainer className="adjustable">
-									<Spinner />
-								</LoadingContainer>
-							:
-								firstEightProducts.map(product => 
-									<Product
-										key={ product.infos.id }
-										product={ product }
-									/>
-								)
-						}
-					</ProductContainer>
-
-					<div className="blur toright"></div>
-					<div className="blur toleft"></div>
-				</ProductTrend>
-
-				<ProductTrend>
-					<div className="title">
-						<h2>Principais de Farmacristo</h2>
-						<Link to="/search">Ver tudo</Link>
-					</div>
-
-					<ProductContainer Type="start">
-						{
-							isLoading ?
-								<LoadingContainer className="adjustable">
-									<Spinner />
-								</LoadingContainer>
-							:
-								<div></div>
-						}
-					</ProductContainer>
-
-					<div className="blur toright"></div>
-					<div className="blur toleft"></div>
-				</ProductTrend>
-
-				<ProductTrend>
-					<div className="title">
-						<h2>Principais de Farmacristo 2</h2>
-						<Link to="/search">Ver tudo</Link>
-					</div>
-
-
-					<ProductContainer Type="start">
-						{
-							isLoading ?
-								<LoadingContainer className="adjustable">
-									<Spinner />
-								</LoadingContainer>
-							:
-								<div></div>
-						}
-					</ProductContainer>
-
-					<div className="blur toright"></div>
-					<div className="blur toleft"></div>
-				</ProductTrend>
-
-				<div className="products-grid">
-					<TitleContainer Type="center">
-						<Title Type="sm green">Explore</Title>
-						<Subtitle Type="xl green">Veja todos os produtos das nossas lojas!</Subtitle>
+		<>
+			<GlobalLayout>
+				<HomeContainer>
+					<TitleContainer>
+						<Title Type="sm">Inicio</Title>
+						<Subtitle>Seja bem vindo a FarmaCristo!</Subtitle>
 					</TitleContainer>
-					<Link to="/search">Ver tudo</Link>
-					{
-						isLoading ?
-							<LoadingContainer className="adjustable">
-								<Spinner />
-							</LoadingContainer>
-						:
-							<ProductsGridContainer>
-								{
-									products.map(product => 
+
+					<ProductTrend>
+						<div className="title">
+							<h2>Principais produtos</h2>
+							<Link to="/search">Ver tudo</Link>
+						</div>
+
+						<ProductContainer Type="start">
+							{
+								isLoading ?
+									<LoadingContainer className="adjustable">
+										<Spinner />
+									</LoadingContainer>
+								:
+									firstEightProducts.map(product => 
 										<Product
 											key={ product.infos.id }
 											product={ product }
 										/>
 									)
-								}
-							</ProductsGridContainer>
-					}
-				</div>
-			</HomeContainer>
-		</GlobalLayout>
+							}
+						</ProductContainer>
+
+						<div className="blur toright"></div>
+						<div className="blur toleft"></div>
+					</ProductTrend>
+
+					<ProductTrend>
+						<div className="title">
+							<h2>Principais de Farmacristo</h2>
+							<Link to="/search">Ver tudo</Link>
+						</div>
+
+						<ProductContainer Type="start">
+							{
+								isLoading ?
+									<LoadingContainer className="adjustable">
+										<Spinner />
+									</LoadingContainer>
+								:
+									<div></div>
+							}
+						</ProductContainer>
+
+						<div className="blur toright"></div>
+						<div className="blur toleft"></div>
+					</ProductTrend>
+
+					<ProductTrend>
+						<div className="title">
+							<h2>Principais de Farmacristo 2</h2>
+							<Link to="/search">Ver tudo</Link>
+						</div>
+
+
+						<ProductContainer Type="start">
+							{
+								isLoading ?
+									<LoadingContainer className="adjustable">
+										<Spinner />
+									</LoadingContainer>
+								:
+									<div></div>
+							}
+						</ProductContainer>
+
+						<div className="blur toright"></div>
+						<div className="blur toleft"></div>
+					</ProductTrend>
+
+					<div className="products-grid">
+						<TitleContainer Type="center">
+							<Title Type="sm green">Explore</Title>
+							<Subtitle Type="xl green">Veja todos os produtos das nossas lojas!</Subtitle>
+						</TitleContainer>
+						<Link to="/search">Ver tudo</Link>
+						{
+							isLoading ?
+								<LoadingContainer className="adjustable">
+									<Spinner />
+								</LoadingContainer>
+							:
+								<ProductsGridContainer className="padding-20">
+									{
+										exploreProducts.map(product => 
+											<Product
+												key={ product.infos.id }
+												product={ product }
+											/>
+										)
+									}
+								</ProductsGridContainer>
+						}
+					</div>
+				</HomeContainer>
+			</GlobalLayout>
+			
+			<Toast />
+		</>
 	);
 };
 

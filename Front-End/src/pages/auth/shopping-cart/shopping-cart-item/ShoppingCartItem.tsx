@@ -10,20 +10,24 @@ import { ButtonsContainer } from "../../../../components/ui/containers/buttons-c
 
 import { Icon, IconAndInfos, InfosContainer, ProductDescription, ShoppingCartItemContainer } from "./styles";
 
-const ShoppingCartItem = () => {
+interface IShoppingCartItemProps {
+	Product: IProductFullDTO
+}
+
+const ShoppingCartItem = ({ Product }: IShoppingCartItemProps) => {
 	return (
 		<ShoppingCartItemContainer>
 			<IconAndInfos>
-				<Icon src={ CreatinaPNG }/>
+				<Icon src={ Product.image }/>
 
 				<InfosContainer>
 					<div>
-						<ProductTitle Title="Creatina 100% creapure (150G) - Nutrata"/>
-						<ProductDescription>A CREATINA Probiótica, traz o aminoácido creatina na concentração e purezada exclusiva tecnologia alemã CREAPURE®. A CREATINA auxilia no aumento do desempenho físico durante exercícios repetidos de curta duração e alta intensidade, além de ajudar a complementar os estoques endógenos de creatina.</ProductDescription>
+						<ProductTitle Title={ Product.infos.name } />
+						<ProductDescription>{ Product.infos.description }</ProductDescription>
 					</div>
 					<PricesContainer>
-						<Price Price="R$ 172,90"/>
-						<OldPrice OldPrice="R$ 199,99" />
+						<Price Price={ Product.infos.promotionalPrice }/>
+						<OldPrice OldPrice={ Product.infos.price } />
 					</PricesContainer>
 				</InfosContainer>
 			</IconAndInfos>

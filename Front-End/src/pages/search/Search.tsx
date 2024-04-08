@@ -21,6 +21,7 @@ import {
 } from "./styles";
 
 import { Input } from "../../components/ui/input/Input";
+import { Toast } from "../../components/toast";
 
 const Search = () => {
 	useDinamicTitle("Pesquisa");
@@ -49,42 +50,46 @@ const Search = () => {
 	}, []);
 
 	return (
-		<GlobalLayout>
-			{
-				isLoading ?
-					<LoadingContainer>
-						<Spinner />
-					</LoadingContainer>
-				:
-					<SearchContainer>
-						<TitleContainer>
-							<Title Type="sm">Buscar</Title>
-							<Subtitle>Ache o produto que deseja em nossas farmácias!</Subtitle>
-						</TitleContainer>
+		<>
+			<GlobalLayout>
+				{
+					isLoading ?
+						<LoadingContainer>
+							<Spinner />
+						</LoadingContainer>
+					:
+						<SearchContainer>
+							<TitleContainer>
+								<Title Type="sm">Buscar</Title>
+								<Subtitle>Ache o produto que deseja em nossas farmácias!</Subtitle>
+							</TitleContainer>
 
-						<Input Type="text" Placeholder="Pesquise aqui..." Value={ filter } SetValue={ (e) => setFilter(e.target.value) }/>
+							<Input Type="text" Placeholder="Pesquise aqui..." Value={ filter } SetValue={ (e) => setFilter(e.target.value) }/>
 
-						<ProductsGridContainer>
-								{
-									!filter ?
-										products.map(product => 
-											<Product
-												key={ product.infos.id }
-												product={ product }
-											/>
-										)
-									:
-										products.filter(product => product.infos.name.toLowerCase().includes(filter.toLowerCase() + "")).map(product => 
-											<Product
-												key={ product.infos.id }
-												product={ product }
-											/>
-										)
-								}
-							</ProductsGridContainer>
-					</SearchContainer>
-			}
-		</GlobalLayout>
+							<ProductsGridContainer className="padding-20">
+									{
+										!filter ?
+											products.map(product => 
+												<Product
+													key={ product.infos.id }
+													product={ product }
+												/>
+											)
+										:
+											products.filter(product => product.infos.name.toLowerCase().includes(filter.toLowerCase() + "")).map(product => 
+												<Product
+													key={ product.infos.id }
+													product={ product }
+												/>
+											)
+									}
+								</ProductsGridContainer>
+						</SearchContainer>
+				}
+			</GlobalLayout>
+		
+			<Toast />
+		</>
 	);
 }
 

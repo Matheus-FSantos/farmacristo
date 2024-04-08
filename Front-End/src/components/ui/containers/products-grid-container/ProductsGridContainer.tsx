@@ -1,11 +1,12 @@
 import { ProductGridContainer as ProductGridContainerComponent } from "./styles";
 
 interface IProductsGridContainer {
-	children: React.ReactNode
+	children: React.ReactNode,
+	className?: string
 }
 
-const ProductsGridContainer = ({ children }: IProductsGridContainer): React.ReactElement => {
-	return <ProductGridContainerComponent>{ children }</ProductGridContainerComponent>
+const ProductsGridContainer = ({ children, className }: IProductsGridContainer): React.ReactElement => {
+	return <ProductGridContainerComponent className={ className }>{ children }</ProductGridContainerComponent>
 }
 
 export { ProductsGridContainer };

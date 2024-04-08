@@ -25,6 +25,11 @@ import {
 
 import { Modal } from "../../modal/Modal";
 import { Container } from "../containers/Container";
+import { ShoppingCartService } from "../../../services/ShoppingCart.service";
+import { AuthService } from "../../../services/Auth.service";
+import { toast } from "react-toastify";
+import { useTimeout } from "../../../hooks/useTimeout";
+
 interface IProductProps {
 	product?: IProductFullDTO,
 	noOpen?: boolean | false
@@ -32,11 +37,83 @@ interface IProductProps {
 
 const Product = ({ product, noOpen }: IProductProps) => {
 	
+	const authService = new AuthService();
+	const shoppingCartService = new ShoppingCartService();
+
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 	const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
 	const handleClick = () => {
 		if(!noOpen)
 			setIsOpenModal(!isOpenModal);
+	}
+
+	const addOnShoppingCart = () => {
+		setIsDisabled(true);
+		const alert = toast.loading("Por favor, aguarde...");
+
+		try {
+			const credentials = authService.getCredentials();
+			const id = credentials.id;
+			const login = {
+				email: credentials.email,
+				password: credentials.password
+			};
+
+			if(product !== undefined) {
+				shoppingCartService.addProduct(id, product.infos.id, login)
+					.then(async () => {
+						await useTimeout(1000);
+						toast.update(alert, {
+							render: "Produto adicionado a seu carrinho!",
+							type: "success",
+							isLoading: false,
+							position: "top-right",
+							autoClose: 2000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: false,
+							draggable: true,
+							progress: undefined,
+							theme: "colored",
+						});
+						setIsDisabled(false);
+					})
+					.catch(async (error) => {
+						console.clear();
+						await useTimeout(1000);
+						toast.update(alert, {
+							render: error.message,
+							type: "error",
+							isLoading: false,
+							position: "top-right",
+							autoClose: 2000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: false,
+							draggable: true,
+							progress: undefined,
+							theme: "colored",
+						});
+						setIsDisabled(false);
+					});
+			}
+		} catch (error) {
+			toast.update(alert, {
+				render: "É preciso estar logado para realizar essa ação.",
+				type: "error",
+				isLoading: false,
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+			setIsDisabled(false);
+		}
 	}
 	
 	return (
@@ -70,62 +147,62 @@ const Product = ({ product, noOpen }: IProductProps) => {
 				</ProductPressableArea>
 
 				<ButtonsContainer>
-					<ProductButton Type="shopping-cart"/>
+					<ProductButton Type="shopping-cart" OnClick={ addOnShoppingCart } IsDisabled={ isDisabled }/>
 					<ProductButton Type="whatsapp"/>
 				</ButtonsContainer>
 			</ProductContainer>
 		
 			<Modal isOpen={ isOpenModal } onRequestClose={ handleClick }>
-					{
-							product?.infos !== undefined
-						&&
-							<Container>
-								<Container Type="no-padding flex column center justify-center gap-40">
-									<ModalProductImage src={ product?.image } alt={`Imagem do medicamento ou produto ${ product?.infos.name }`} loading="lazy" />
-									<Container Type="no-padding flex column justify-start gap-10 w-100">
-										<ProductInfosContainer>
-											<ProductTitle className="title xl">{ product?.infos.name }</ProductTitle>
+				{
+						product?.infos !== undefined
+					&&
+						<Container>
+							<Container Type="no-padding flex column center justify-center gap-40">
+								<ModalProductImage src={ product?.image } alt={`Imagem do medicamento ou produto ${ product?.infos.name }`} loading="lazy" />
+								<Container Type="no-padding flex column justify-start gap-10 w-100">
+									<ProductInfosContainer>
+										<ProductTitle className="title xl">{ product?.infos.name }</ProductTitle>
 
-											<ProductBrand>
-												{ product?.infos.brand }
-												{
-													product.infos.prescriptionIsRequired === true && <ProductPrescriptionIsRequired>Prescrição requerida</ProductPrescriptionIsRequired> 
-												}
-											</ProductBrand>
+										<ProductBrand>
+											{ product?.infos.brand }
+											{
+												product.infos.prescriptionIsRequired === true && <ProductPrescriptionIsRequired>Prescrição requerida</ProductPrescriptionIsRequired> 
+											}
+										</ProductBrand>
 
-											<ProductDescription>
-												Descrição: { product.infos.description }
-											</ProductDescription>
+										<ProductDescription>
+											Descrição: { product.infos.description }
+										</ProductDescription>
 
-											<ProductLocationContainer>
-												<ProductPresentIn>- Este produto está presente em:</ProductPresentIn>
-												{
-													product.infos.pharmacies.map(pharmacy => <ProductPresentIn className="pharmacy">📍 { pharmacy.name }</ProductPresentIn>)
-												}
-											</ProductLocationContainer>
+										<ProductLocationContainer>
+											<ProductPresentIn>- Este produto está presente em:</ProductPresentIn>
+											{
+												product.infos.pharmacies.map(pharmacy => <ProductPresentIn className="pharmacy" key={ pharmacy.id }>📍 { pharmacy.name }</ProductPresentIn>)
+											}
+										</ProductLocationContainer>
 
-											<PricesContainer>
-												{
-													product.infos.promotionalPrice === product.infos.price ?
-														<Price Price={ product.infos.price }/>
-													:
-														<>
-															<Price Price={ product.infos.promotionalPrice }/>
-															<OldPrice OldPrice={ product.infos.price }/>	
-														</>
-												}
-											</PricesContainer>
-										</ProductInfosContainer>
+										<PricesContainer>
+											{
+												product.infos.promotionalPrice === product.infos.price ?
+													<Price Price={ product.infos.price }/>
+												:
+													<>
+														<Price Price={ product.infos.promotionalPrice }/>
+														<OldPrice OldPrice={ product.infos.price }/>	
+													</>
+											}
+										</PricesContainer>
+									</ProductInfosContainer>
 
-										<ButtonsContainer>
-											<ProductButton Type="shopping-cart"/>
-											<ProductButton Type="whatsapp"/>
-										</ButtonsContainer>
-									</Container>
+									<ButtonsContainer>
+										<ProductButton Type="shopping-cart" OnClick={ addOnShoppingCart } IsDisabled={ isDisabled }/>
+										<ProductButton Type="whatsapp"/>
+									</ButtonsContainer>
 								</Container>
 							</Container>
-					}
-				</Modal>
+						</Container>
+				}
+			</Modal>
 		</>
 	);
 }
