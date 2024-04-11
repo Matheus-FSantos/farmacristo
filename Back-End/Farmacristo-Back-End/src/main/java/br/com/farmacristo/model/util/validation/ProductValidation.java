@@ -64,7 +64,7 @@ public class ProductValidation {
 	}
 	
 	public static void pharmaciesValidation(List<String> messages, Set<ProductPharmacyDTO> pharmacies) {
-		if(pharmacies.isEmpty())
+		if(pharmacies == null || pharmacies.isEmpty())
 			messages.add("O produto não pode ser criado sem estar presente em PELO MENOS UMA FARMÁCIA. Por favor, atualize os campos e tente novamente.");	
 	}
 	

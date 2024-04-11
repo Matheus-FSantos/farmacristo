@@ -1,5 +1,6 @@
 package br.com.farmacristo.model.repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,7 @@ import br.com.farmacristo.model.entity.ShoppingCart;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, UUID>{
+
+    Optional<ShoppingCart> findByUserId(UUID id);
 
 }

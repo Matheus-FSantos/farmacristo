@@ -45,8 +45,8 @@ public class ShoppingCartController {
 		summary="Find shopping cart by id",
 		description="With this method you can search for a specific shopping cart in our system. In return, all formatted information will come from the respective shopping cart - if there is one." 
 	)
-	@GetMapping("/{shoppingCartId}")
-	public ResponseEntity<ShoppingCartDTO> findById(@PathVariable(name="shoppingCartId") UUID id) throws FarmaCristoException {
+	@GetMapping("/{userId}")
+	public ResponseEntity<ShoppingCartDTO> findById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.service.findById(id));
 	}
 	
@@ -59,8 +59,8 @@ public class ShoppingCartController {
 		summary="Find shopping cart products by user id",
 		description="With this method you can search for a specific shopping cart in our system. In return, all formatted information will come from the respective shopping cart products - if there is one." 
 	)
-	@PostMapping("/{shoppingCartId}/product/{productId}")
-	public ResponseEntity<Void> addProductOnShoppingCart(@PathVariable(name="shoppingCartId") UUID id, @PathVariable(name="productId") UUID productId) throws FarmaCristoException {
+	@PostMapping("/{userId}/product/{productId}")
+	public ResponseEntity<Void> addProductOnShoppingCart(@PathVariable(name="userId") UUID id, @PathVariable(name="productId") UUID productId) throws FarmaCristoException {
 		this.service.addProductOnShoppingCart(id, productId);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
@@ -69,8 +69,8 @@ public class ShoppingCartController {
 		summary="Remove product on shopping cart",
 		description="This method will remove a specific product to a specific shopping cart."
 	)
-	@DeleteMapping("/{shoppingCartId}/product/{productId}")
-	public ResponseEntity<Void> removeProductOnShoppingCart(@PathVariable(name="shoppingCartId") UUID id, @PathVariable(name="productId") UUID productId) throws FarmaCristoException {
+	@DeleteMapping("/{userId}/product/{productId}")
+	public ResponseEntity<Void> removeProductOnShoppingCart(@PathVariable(name="userId") UUID id, @PathVariable(name="productId") UUID productId) throws FarmaCristoException {
 		this.service.removeProductOnShoppingCart(id, productId);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

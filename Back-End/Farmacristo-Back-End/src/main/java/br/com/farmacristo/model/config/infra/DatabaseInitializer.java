@@ -30,9 +30,9 @@ public class DatabaseInitializer {
 			List<NewProductDTO> newProductsList = new ArrayList<NewProductDTO>();
 			List<NewPharmacyDTO> newPharmaciesList = new ArrayList<NewPharmacyDTO>();
 			
-			//insertUsersData(newUsersList);
+			insertUsersData(newUsersList);
 			//insertProductsData(newProductsList);
-			//insertPharmaciesData(newPharmaciesList);
+			insertPharmaciesData(newPharmaciesList);
 			
 			newUsersList.forEach(user -> {
 				try {
