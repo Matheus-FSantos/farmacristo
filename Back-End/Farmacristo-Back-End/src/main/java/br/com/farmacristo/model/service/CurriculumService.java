@@ -29,26 +29,24 @@ public class CurriculumService {
 
 	@Autowired
 	private CurriculumRepository repository;
-	
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@OnlyAdmin
-	@Auth(required=true)
+	@Auth
 	public List<CurriculumDTO> findAll() {
 		List<Curriculum> resumes = this.repository.findAll();
 		List<CurriculumDTO> resumesDTO = new ArrayList<CurriculumDTO>();
 		
 		for(Curriculum curriculum : resumes)
-			resumesDTO.add(new CurriculumDTO(curriculum.getName(), curriculum.getDescription(), curriculum.getIsViewed(), curriculum.getCreatedAt()));
+			resumesDTO.add(new CurriculumDTO(curriculum.getId(), curriculum.getName(), curriculum.getEmail(), curriculum.getDescription(), curriculum.getIsViewed(), curriculum.getCreatedAt()));
 		
 		return resumesDTO;
 	}
 	
 	@OnlyAdmin
-	@Auth(required=true)
+	@Auth
 	public CurriculumDTO findById(UUID id) throws CurriculumNotFound {
 		Curriculum curriculum = this.findByIdDefault(id);
-		return new CurriculumDTO(curriculum.getName(), curriculum.getDescription(), curriculum.getIsViewed(), curriculum.getCreatedAt());
+		return new CurriculumDTO(curriculum.getId(), curriculum.getName(), curriculum.getEmail(), curriculum.getDescription(), curriculum.getIsViewed(), curriculum.getCreatedAt());
 	}
 	
 	public Curriculum findByIdDefault(UUID id) throws CurriculumNotFound {
@@ -59,19 +57,17 @@ public class CurriculumService {
 	@FieldsValidation
 	@Auth(required=false)
 	public UUID save(NewCurriculumDTO newCurriculum) throws InvalidFields {
-		logger.info(newCurriculum.toString());
-		
 		/* Fields Validation */
 		CurriculumValidation.validation(newCurriculum);	
 		
-		Curriculum curriculum = new Curriculum(newCurriculum.name(), newCurriculum.description());
+		Curriculum curriculum = new Curriculum(newCurriculum.name(), newCurriculum.email(), newCurriculum.description());
 		return this.repository.save(curriculum).getId();
 	}
 	
 	
 	@Transactional
 	@FieldsValidation
-	@Auth(required=true)
+	@Auth(required=false)
 	public void updateCurriculumCV(UUID id, MultipartFile multipart) throws InvalidFields, CurriculumNotFound {
 		DocumentValidation.pdfValidation(multipart);
 		Curriculum curriculum = this.findByIdDefault(id);
@@ -84,13 +80,22 @@ public class CurriculumService {
 		}		
 	}
 
-	@OnlyAdmin
 	@Transactional
-	@Auth(required=true)
+	@Auth(required=false)
 	public void updateView(UUID id) throws CurriculumNotFound {
 		Curriculum curriculum = this.findByIdDefault(id);
 		curriculum.updateIsViewed(true);
 		this.repository.save(curriculum);
+	}
+
+	@OnlyAdmin
+	@Transactional
+	@Auth(required=true)
+	public void delete(UUID id) throws CurriculumNotFound {
+		if(this.repository.findById(id).isPresent())
+			this.repository.deleteById(id);
+		else
+			throw new CurriculumNotFound("Curriculo não encontrado.", "Você tentou deletar um curriculo inexistente. Por favor, altere as informações e realize uma consulta.");
 	}
 	
 }

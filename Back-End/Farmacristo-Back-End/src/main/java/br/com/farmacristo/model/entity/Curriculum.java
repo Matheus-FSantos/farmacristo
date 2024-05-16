@@ -3,9 +3,11 @@ package br.com.farmacristo.model.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,62 +26,64 @@ public class Curriculum implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private UUID id;
 	
-	@Column(nullable=false, length=200)
+	@Column(nullable=false, length=60)
 	private String name;
+
+	@Column(nullable=false, length=120)
+	private String email;
 	
 	@Column(nullable=false, length=500)
 	private String description;
 	
 	@Lob
 	@Column(columnDefinition="LONGTEXT")
-	private byte[] CV;
+	private String CV;
 	private Boolean isViewed;
 	private LocalDateTime createdAt;
 	
 	public Curriculum() { }
 
-	public Curriculum(String name, String description) {
+	public Curriculum(String name, String email, String description) {
 		this.name = name;
+		this.email = email;
 		this.description = description;
 		this.isViewed = false;
 		this.createdAt = LocalDateTime.now();
 	}
 	
-	public Curriculum(UUID id, String name, String description, Boolean isViewed, LocalDateTime createdAt) {
+	public Curriculum(UUID id, String name, String email, String description, Boolean isViewed, LocalDateTime createdAt) {
 		this.id = id;
 		this.name = name;
+		this.email = email;
 		this.description = description;
 		this.isViewed = isViewed;
 		this.createdAt = createdAt;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(CV);
-		result = prime * result + Objects.hash(createdAt, description, id, isViewed, name);
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Curriculum that = (Curriculum) o;
+		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(description, that.description) && Objects.equals(CV, that.CV) && Objects.equals(isViewed, that.isViewed) && Objects.equals(createdAt, that.createdAt);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Curriculum other = (Curriculum) obj;
-		return Arrays.equals(CV, other.CV) && Objects.equals(createdAt, other.createdAt)
-				&& Objects.equals(description, other.description) && Objects.equals(id, other.id)
-				&& Objects.equals(isViewed, other.isViewed) && Objects.equals(name, other.name);
+	public int hashCode() {
+		return Objects.hash(id, name, email, description, CV, isViewed, createdAt);
 	}
 
 	@Override
 	public String toString() {
-		return "Curriculum [id=" + id + ", name=" + name + ", description=" + description + ", CV="
-				+ Arrays.toString(CV) + ", isViewed=" + isViewed + ", createdAt=" + createdAt + "]";
+		return "Curriculum{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", description='" + description + '\'' +
+				", CV='" + CV + '\'' +
+				", isViewed=" + isViewed +
+				", createdAt=" + createdAt +
+				'}';
 	}
 
 	public UUID getId() {
@@ -106,6 +110,12 @@ public class Curriculum implements Serializable {
 		this.name = name;
 	}
 
+	public String getEmail() { return email; }
+
+	public void updateEmail(String email) { this.setEmail(email); }
+
+	private void setEmail(String email) { this.email = email; }
+
 	public String getDescription() {
 		return description;
 	}
@@ -129,9 +139,14 @@ public class Curriculum implements Serializable {
 	private void setIsViewed(Boolean isViewed) {
 		this.isViewed = isViewed;
 	}
-	
-	public byte[] getCV() {
+
+	public String getCV() {
 		return CV;
+	}
+
+	@JsonIgnore
+	public byte[] getCvBytes() {
+		return Base64.getDecoder().decode(this.CV);
 	}
 
 	public void updateCV(byte[] CV) {
@@ -139,7 +154,7 @@ public class Curriculum implements Serializable {
 	}
 	
 	private void setCV(byte[] CV) {
-		this.CV = CV;
+		this.CV = Base64.getEncoder().encodeToString(CV);
 	}
 
 	public LocalDateTime getCreatedAt() {

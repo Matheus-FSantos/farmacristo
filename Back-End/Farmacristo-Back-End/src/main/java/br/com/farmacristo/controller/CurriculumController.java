@@ -9,14 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.farmacristo.model.DTO.career.CurriculumDTO;
@@ -68,9 +61,9 @@ public class CurriculumController {
 			HttpHeaders headers = new HttpHeaders();
 	        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + curriculum.getName());
 	        headers.add(HttpHeaders.CONTENT_TYPE, "application/pdf");
-	        headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(curriculum.getCV().length));
+	        headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(curriculum.getCvBytes().length));
 	        
-	        return ResponseEntity.ok().headers(headers).body(new ByteArrayResource(curriculum.getCV()));
+	        return ResponseEntity.ok().headers(headers).body(new ByteArrayResource(curriculum.getCvBytes()));
 		} else
 			return ResponseEntity.notFound().build();
 	}
@@ -102,6 +95,17 @@ public class CurriculumController {
 	@PutMapping("/{curriculumId}")
 	public ResponseEntity<Void> updateView(@PathVariable(name="curriculumId") UUID id) {
 		this.updateView(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+	@Operation (
+			summary="Delete resume view an existent resume",
+			description="With this method you delete an existing resume in our system. In response to the request, a 204 will be returned if everything goes well."
+	)
+	@PreAuthorize("hasRole('Administrator')")
+	@DeleteMapping("/{curriculumId}")
+	public ResponseEntity<Void> delete(@PathVariable(name="curriculumId") UUID id) throws FarmaCristoException {
+		this.service.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
