@@ -1,3 +1,4 @@
+import { Footer } from "../../components/footer";
 import { HeaderAlternative } from "../../components/header/header-alternative";
 import { WhatsappWidget } from "../../components/whatsapp-widget";
 import { GlobalContainer } from "../../pages/styles/global";
@@ -16,6 +17,7 @@ const GlobalLayout = ({ children }: IGlobalLayoutProps) => {
 			<HeaderAlternative isLogged={ authService.isLogged() } />
 			{ children }
 			<WhatsappWidget />
+			<Footer />
 		</GlobalContainer>
 	);
 }

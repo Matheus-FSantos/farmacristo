@@ -76,6 +76,15 @@ const AdminPanelLayout = ({ children }: IAdminPanelProps): React.ReactElement =>
 										Farmácias
 									</a>
 								</Option>
+								<Option onClick={() => handleNavigate("/admin-panel/cvs")}>
+									<i
+										className="fa-solid fa-paper-plane"
+										style={{ color: "#000c6e" }}
+									></i>
+									<a>
+										Currículos
+									</a>
+								</Option>
 							</OptionsContainer>
 							<CopyrightSpan>Todos os direitos reservados ©</CopyrightSpan>
 						</SideBar>

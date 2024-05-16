@@ -21,6 +21,10 @@ const ItemList = styled.section`
 	flex-direction: column;
 
 	gap: 5px; /* 5px */
+
+	@media only screen and (max-width: 612px) {
+		gap: 20px;
+	}
 `;
 
 const TotalContainer = styled.section`

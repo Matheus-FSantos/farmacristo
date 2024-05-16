@@ -1,5 +1,5 @@
 import React from "react";
-import "../delete-button/styles.css";
+import "../radix.styles.css";
 
 interface IUpdateButton {
 	Label?: string

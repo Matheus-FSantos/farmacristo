@@ -63,7 +63,9 @@ const UserTable = ({ onDelete, onUpdateTier, Filter }: IUserTable) => {
 				<tbody>
 					{
 						isLoading ?
-							<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							<tr>
+								<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							</tr>
 						:
 							!Filter ?
 								users.length > 0 ?
@@ -95,10 +97,14 @@ const UserTable = ({ onDelete, onUpdateTier, Filter }: IUserTable) => {
 										</tr>
 									)
 								:
-									<TableData className="id not-found" colSpan={ 6 }>Nenhum resultado...</TableData>
+									<tr>
+										<TableData className="id not-found" colSpan={ 6 }>Nenhum resultado...</TableData>
+									</tr>
 							:
 								users.filter(user => user.name.toLowerCase().includes(Filter.toLowerCase() + "")).length === 0 ?
-									<TableData className="id not-found" colSpan={6}>Nenhum resultado...</TableData>
+									<tr>
+										<TableData className="id not-found" colSpan={6}>Nenhum resultado...</TableData>
+									</tr>
 								:
 									users.filter(user => user.name.toLowerCase().includes(Filter.toLowerCase() + "")).map((user) => 
 										<tr key={ user.id } >

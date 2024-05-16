@@ -62,7 +62,9 @@ const PharmacyTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IPhar
 				<tbody>
 					{
 						isLoading ?
-							<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							<tr>
+								<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							</tr>
 						:
 							!Filter ?
 								pharmacies.length > 0 ?
@@ -94,10 +96,14 @@ const PharmacyTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IPhar
 										</tr>
 									)
 								:
-									<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									<tr>
+										<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									</tr>
 							:
 								pharmacies.filter((pharmacy) => pharmacy.infos.name.toLowerCase().includes(Filter.toLowerCase())).length === 0 ?
-									<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									<tr>
+										<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									</tr>
 								:
 									pharmacies.filter((pharmacy) => pharmacy.infos.name.toLowerCase().includes(Filter.toLowerCase())).map(pharmacy => 
 										<tr key={ pharmacy.infos.id }>

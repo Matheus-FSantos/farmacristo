@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
 import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
-import { Container, Icon, Logo, Main, Option, OptionsContainer, ShoppingCartIconContainer, SocialMediaFlex, MobileSocialMediaContainer } from "../styles";
+import { Container, Icon, Logo, Main, Option, OptionsContainer, SocialMediaFlex, MobileSocialMediaContainer } from "../styles";
 import { NavContainer, ResponsiveNavContainer, MobileNavBar, ResourcesDropDown } from "./styles";
 import { Hr } from "../../ui/hr/Hr";
 import { AuthService } from "../../../services/Auth.service";
@@ -126,18 +126,15 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 
 				<OptionsContainer>
 					<Option onClick={ () => handleNavigate("/search") }>
-						<img src={ SearchSVG } className="xl" alt="Uma ampulheta em azul" />
+						<img src={ SearchSVG } className="xl" alt="Uma lupa, na cor azul" />
 					</Option>
 
 					<Option onClick={ () => handleNavigate("/shopping-cart") }>
-						<ShoppingCartIconContainer>
-							<img src={ ShoppingCart } alt="Uma carrinho de supermercado em azul"/>
-							<span>0</span>
-						</ShoppingCartIconContainer>
+						<img src={ ShoppingCart } className="xl" alt="Uma carrinho de supermercado, na cor azul"/>					
 					</Option>
 
 					<Option onClick={ () => handlePrivateRoutesOnHeader("/profile") }>
-						<img src={ PersonSVG } alt="Uma carrinho de supermercado em azul" />
+						<img src={ PersonSVG } alt="Um icone que representa uma pessoa, na cor azul" />
 					</Option>
 				</OptionsContainer>
 			</Main>

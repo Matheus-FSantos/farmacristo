@@ -12,6 +12,7 @@ import { AdminHome } from "../pages/auth/admin-panel/home/AdminHome";
 import { AdminUser } from "../pages/auth/admin-panel/user/AdminUser";
 import { AdminProduct } from "../pages/auth/admin-panel/product/AdminProduct";
 import { AdminPharmacy } from "../pages/auth/admin-panel/pharmacy/AdminPharmacy";
+import { AdminCurriculum } from "../pages/auth/admin-panel/curriculum/AdminCurriculum";
 
 
 const Routing = (): React.ReactElement => {
@@ -25,9 +26,10 @@ const Routing = (): React.ReactElement => {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/careers" element={<WorkWithUs />} />
 				<Route path="/explore" element={<LandingPage />} />
-				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/admin-panel" element={<AdminHome />} />
+				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/admin-panel/users" element={<AdminUser />} />
+				<Route path="/admin-panel/cvs" element={<AdminCurriculum />} />
 				<Route path="/admin-panel/products" element={<AdminProduct />} />
 				<Route path="/admin-panel/pharmacies" element={<AdminPharmacy />} />
 				<Route path="*" element={<Error title="404 - Não encontrada!" subtitle="A página que você tentou acessar não foi encontrada." />} />

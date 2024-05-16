@@ -8,6 +8,8 @@ import { ShoppingCartItemList } from "./shopping-cart-item-list";
 
 import styled from "styled-components";
 import { PrivateRoute } from "../private-route";
+import { Toast } from "../../../components/toast";
+import { useDinamicTitle } from "../../../hooks/useDinamicTitle";
 
 const ShoppingCartContainer = styled.section`
 	display: flex;
@@ -21,19 +23,25 @@ const ShoppingCartContainer = styled.section`
 
 const ShoppingCart = () => {
 
-	return (
-		<PrivateRoute>
-			<GlobalLayout>
-				<ShoppingCartContainer>
-					<TitleContainer>
-						<Title Type="sm">Carrinho</Title>
-						<Subtitle>Abaixo, todos os itens do seu carrinho!</Subtitle>
-					</TitleContainer>
+	useDinamicTitle("Carrinho de compras");
 
-					<ShoppingCartItemList />
-				</ShoppingCartContainer>
-			</GlobalLayout>
-		</PrivateRoute>
+	return (
+		<>
+			<PrivateRoute>
+				<GlobalLayout>
+					<ShoppingCartContainer>
+						<TitleContainer>
+							<Title Type="sm">Carrinho</Title>
+							<Subtitle>Abaixo, todos os itens do seu carrinho!</Subtitle>
+						</TitleContainer>
+
+						<ShoppingCartItemList />
+					</ShoppingCartContainer>
+				</GlobalLayout>
+			</PrivateRoute>
+
+			<Toast />
+		</>
 	);
 }
 

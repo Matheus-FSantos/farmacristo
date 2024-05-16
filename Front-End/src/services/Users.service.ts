@@ -60,7 +60,7 @@ export class UsersService {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			}
-		}).then(() => "SUCESSO!").catch((error) => error)
+		}).then(() => "Atualizado!").catch((error) => error)
 	}
 
 	public async updateTierToAdmin(loginUsername: string, loginPassword: string, userId: string) {

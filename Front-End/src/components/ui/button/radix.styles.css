@@ -91,6 +91,15 @@
   box-shadow: 0 0 0 2px var(--mauve-7);
 }
 
+.height-default {
+	height: 20px;
+}
+
+.AlertDialogToCv {
+  max-width: 600px;
+	max-height: 100vh;
+}
+
 @keyframes overlayShow {
   from {
     opacity: 0;

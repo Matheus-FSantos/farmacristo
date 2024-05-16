@@ -26,8 +26,8 @@ const Home = (): React.ReactElement => {
 	const authService = new AuthService();
 
 	const productService = new ProductService();
-	const [products, setProducts] = useState<IProductFullDTO[]>([]);
 	const [exploreProducts, setExploreProducts] = useState<IProductFullDTO[]>([]);
+	const [groupedProducts, setGroupedProducts] = useState<IPharmacyProductDTO[]>([]);
 	const [firstEightProducts, setFirstEightProducts] = useState<IProductFullDTO[]>([]);
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,13 +40,31 @@ const Home = (): React.ReactElement => {
 	useEffect(() => {
 		setIsLoading(true);
 		productService.findAll().then((data) => {
-			setProducts(data);
+			const products: IProductFullDTO[] = data;
 
 			const firstEightProducts = data.slice(0, 8);
 			const exploreProducts = data.slice(0, 15);
 
 			setExploreProducts(exploreProducts);
 			setFirstEightProducts(firstEightProducts);
+
+			const groupedProducts: IPharmacyProductDTO[] = [];
+			products.forEach(product => {
+				product.infos.pharmacies.forEach(pharmacy => {
+					const existingPharmacyIndex = groupedProducts.findIndex(p => p.pharmacy === pharmacy.name);
+					if (existingPharmacyIndex !== -1) {
+						groupedProducts[existingPharmacyIndex].products.push(product);
+					} else {
+						groupedProducts.push({
+							pharmacy: pharmacy.name,
+							products: [product]
+						});
+					}
+				});
+			});
+
+
+			setGroupedProducts(groupedProducts);
 			setIsLoading(false);
 		}).catch(() => handleLogout());
 	}, []);
@@ -69,7 +87,7 @@ const Home = (): React.ReactElement => {
 						<ProductContainer Type="start">
 							{
 								isLoading ?
-									<LoadingContainer className="adjustable">
+									<LoadingContainer className="center">
 										<Spinner />
 									</LoadingContainer>
 								:
@@ -86,48 +104,32 @@ const Home = (): React.ReactElement => {
 						<div className="blur toleft"></div>
 					</ProductTrend>
 
-					<ProductTrend>
-						<div className="title">
-							<h2>Principais de Farmacristo</h2>
-							<Link to="/search">Ver tudo</Link>
-						</div>
+					{
+						groupedProducts.map(group => 
+							<ProductTrend
+								key={ group.pharmacy }
+							>
+								<div className="title">
+									<h2>Principais de { group.pharmacy }</h2>
+									<Link to="/search">Ver tudo</Link>
+								</div>
 
-						<ProductContainer Type="start">
-							{
-								isLoading ?
-									<LoadingContainer className="adjustable">
-										<Spinner />
-									</LoadingContainer>
-								:
-									<div></div>
-							}
-						</ProductContainer>
+								<ProductContainer Type="start">
+									{
+										group.products.slice(0, 8).map(product => 
+											<Product
+												key={ product.infos.id }
+												product={ product }
+											/>
+										)
+									}
+								</ProductContainer>
 
-						<div className="blur toright"></div>
-						<div className="blur toleft"></div>
-					</ProductTrend>
-
-					<ProductTrend>
-						<div className="title">
-							<h2>Principais de Farmacristo 2</h2>
-							<Link to="/search">Ver tudo</Link>
-						</div>
-
-
-						<ProductContainer Type="start">
-							{
-								isLoading ?
-									<LoadingContainer className="adjustable">
-										<Spinner />
-									</LoadingContainer>
-								:
-									<div></div>
-							}
-						</ProductContainer>
-
-						<div className="blur toright"></div>
-						<div className="blur toleft"></div>
-					</ProductTrend>
+								<div className="blur toright"></div>
+								<div className="blur toleft"></div>
+							</ProductTrend>
+						)
+					}
 
 					<div className="products-grid">
 						<TitleContainer Type="center">

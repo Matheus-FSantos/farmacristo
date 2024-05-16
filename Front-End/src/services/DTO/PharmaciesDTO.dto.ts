@@ -7,6 +7,11 @@ interface IPharmacyDTO {
   address: IAddressDTO
 }
 
+interface IPharmacyProductDTO {
+	pharmacy: string,
+	products: IProductFullDTO[]
+}
+
 interface IPharmacyFullDTO {
 	infos: IPharmacyDTO
 	image: string	

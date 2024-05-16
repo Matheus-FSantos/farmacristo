@@ -274,6 +274,7 @@ const LandingPage = (): React.ReactElement => {
 											<Product
 												product={ product }
 												noOpen={ true }
+												key={ product.infos.id }
 											/>
 										)
 									}

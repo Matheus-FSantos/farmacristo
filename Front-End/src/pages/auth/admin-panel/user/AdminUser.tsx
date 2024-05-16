@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
+
 import { NewUser } from "./new-user";
 import { AdminPanelLayout } from "..";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Toast } from "../../../../components/toast";
+import { useTimeout } from "../../../../hooks/useTimeout";
+import { Modal } from "../../../../components/modal/Modal";
+import { AuthService } from "../../../../services/Auth.service";
+import { UsersService } from "../../../../services/Users.service";
+
+/* UI */
 import { Title } from "../../../../components/ui/title/Title";
 import { Subtitle } from "../../../../components/ui/subtitle/Subtitle";
 import { UserTable } from "../../../../components/table/user/UserTable";
 import { Container } from "../../../../components/ui/containers/Container";
 import { TitleContainer } from "../../../../components/ui/containers/title-container/TitleContainer";
-import { Modal } from "../../../../components/modal/Modal";
+
 import { NewModalBtn } from "../product/styles";
-import { UsersService } from "../../../../services/Users.service";
-import { Toast } from "../../../../components/toast";
-import { toast } from "react-toastify";
-import { useTimeout } from "../../../../hooks/useTimeout";
-import { AuthService } from "../../../../services/Auth.service";
-import { useNavigate } from "react-router-dom";
 
 const AdminUser = () => {
 

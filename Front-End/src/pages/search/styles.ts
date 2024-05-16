@@ -8,7 +8,11 @@ const LoadingContainer = styled.div`
 	justify-content: center;
 
 	&.adjustable {
-		height: 3.75rem; /* 60px */		
+		height: 3.75rem; /* 60px */
+		margin: 0 auto;
+	}
+
+	&.center {
 		margin: 0 auto;
 	}
 

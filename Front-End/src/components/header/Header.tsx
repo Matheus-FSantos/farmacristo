@@ -63,14 +63,13 @@ const Header = (): React.ReactElement => {
 			
 				<OptionsContainer>
 					<Option onClick={ () => navigate("/search") }>
-						<img src={ SearchSVG } alt="Uma carrinho de supermercado em azul" />
+						<img src={ SearchSVG } alt="Uma lupa, na cor azul" />
 						<span className="description">Encontre seu produto</span>
 					</Option>
 
 					<Option onClick={ () => navigate("/shopping-cart") }>
 						<ShoppingCartIconContainer>
-							<img src={ ShoppingCart } alt="Uma ampulheta em azul" />
-							<span>0</span>
+							<img src={ ShoppingCart } alt="Um carrinho de compras, na cor azul" />
 						</ShoppingCartIconContainer>
 						<span className="description">Seu carrinho</span>
 					</Option>

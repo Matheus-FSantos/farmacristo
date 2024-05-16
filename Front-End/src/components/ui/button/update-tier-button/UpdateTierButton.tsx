@@ -1,7 +1,7 @@
 import React from "react";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 
-import "../delete-button/styles.css";
+import "../radix.styles.css";
 
 interface IUpdateTierButton {
 	Title: string | undefined

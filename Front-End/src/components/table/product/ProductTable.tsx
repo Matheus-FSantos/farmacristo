@@ -59,7 +59,9 @@ const ProductTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IProdu
 				<tbody>
 					{
 						isLoading ?
-							<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							<tr>
+								<TableData className="id not-found" colSpan={ 8 }><Spinner /></TableData>
+							</tr>
 						:
 							!Filter ?
 								products.length > 0 ?
@@ -91,10 +93,14 @@ const ProductTable = ({ Filter, onEditModalVisibility, onDeleteProduct }: IProdu
 										</tr>	
 									)
 								:
-									<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>	
+									<tr>
+										<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>	
+									</tr>
 							:
 								products.filter((products) => products.infos.name.toLowerCase().includes(Filter.toLowerCase())).length === 0 ?
-									<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									<tr>
+										<TableData className="id not-found" colSpan={ 8 }>Nenhum resultado...</TableData>
+									</tr>
 								:
 									products.filter((products) => products.infos.name.toLowerCase().includes(Filter.toLowerCase())).map((product) =>
 									<tr key={ product.infos.id }>
