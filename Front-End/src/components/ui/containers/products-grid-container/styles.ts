@@ -14,7 +14,7 @@ const ProductGridContainer = styled.section`
 	height: 100%;
 
 	&.padding-20 {
-		padding: 20px 0;
+		padding: 20px 0 40px 0;
 	}
 
 	@media (max-width: 1445px) {

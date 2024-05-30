@@ -84,7 +84,12 @@ const ShoppingCartItem = ({ Product }: IShoppingCartItemProps) => {
 			
 			<div className="buttons">
 				<ButtonsContainer>
-					<ProductButton Type="whatsapp" IsDisabled={ isLoading } />
+					<a
+						href={`https://api.whatsapp.com/send?phone=5515996181099&text=Ol%C3%A1!%20%F0%9F%91%8B%20Tenho%20interesse%20em%20comprar%20o%20produto%3A%20${ Product.infos.name }%2C%20pode%20me%20ajudar%3F%20%F0%9F%A4%94`}
+						target="_blank"
+					>
+						<ProductButton Type="whatsapp" IsDisabled={ isLoading } />
+					</a>
 					<ProductButton Type="remove" OnClick={ handleDeleteItem } IsDisabled={ isLoading } />
 				</ButtonsContainer>
 			</div>

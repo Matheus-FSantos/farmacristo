@@ -11,6 +11,10 @@ const FooterMainContentContainer = styled.div`
 	flex-direction: column;
 
 	gap: 20px;
+
+	@media only screen and (max-width: 668px) {
+		gap: 40px
+	}
 `;
 
 const TitleAndContentContainer = styled.div`
@@ -26,6 +30,11 @@ const TitleContainer = styled.div`
 
 	gap: 4px;
 	align-items: baseline;
+	
+	@media only screen and (max-width: 668px) {
+		align-items: center;
+		flex-direction: column;
+	}
 `;
 
 const TitleFooter = styled.p`
@@ -34,12 +43,15 @@ const TitleFooter = styled.p`
 
 	color: var(--white-1000);
 
+	@media only screen and (max-width: 750px) {
+		font-size: 32px;
+	}
 `;
 
 const SubtitleFooter = styled.p`
-	font-size: 10;
+	font-size: 10px;
 	font-weight: 700;
-
+	
 	color: var(--gray-150);
 `;
 
@@ -49,6 +61,14 @@ const DescriptionAndLinksContainer = styled.div`
 	align-items: center;
 
 	gap: 80px;
+
+	@media only screen and (max-width: 750px) {
+		gap: 40px;
+	}
+
+	@media only screen and (max-width: 668px) {
+		flex-direction: column;
+	}
 `;
 
 const DescriptionContainer = styled.div`
@@ -65,6 +85,10 @@ const DescriptionFooter = styled.p`
 	color: var(--white-1000);
 
 	width: 334px;
+
+	@media only screen and (max-width: 668px) {
+		text-align: center;
+	}
 `;
 
 const VerticalHr = styled.div`
@@ -73,6 +97,12 @@ const VerticalHr = styled.div`
 
 	background-color: var(--white-1000);
 	border-radius: 1000px;
+
+	@media only screen and (max-width: 668px) {
+		max-width: 220px;
+		width: 100%;
+		height: 1px;
+	}
 `;
 
 const LinkContainer = styled.div`
@@ -87,6 +117,14 @@ const LinkTitle = styled.p`
 	font-weight: 600;
 
 	color: var(--white-1000);
+
+	@media only screen and (max-width: 750px) {
+		font-size: 1rem;
+	}
+
+	@media only screen and (max-width: 668px) {
+		text-align: center;
+	}
 `;
 
 const UlContainer = styled.ul`
@@ -94,6 +132,10 @@ const UlContainer = styled.ul`
 	flex-direction: column;
 
 	gap: 10px;
+
+	@media only screen and (max-width: 668px) {
+		text-align: center;
+	}
 `;
 
 const LinkItem = styled.li`
@@ -104,6 +146,10 @@ const LinkItem = styled.li`
 	&:hover {
 		list-style: circle;
 		text-decoration: underline;
+	}
+
+	@media only screen and (max-width: 750px) {
+		font-size: 14px;
 	}
 `;
 
@@ -120,6 +166,14 @@ const SignUpText = styled.p`
 	font-size: 16px;
 	font-weight: 600;
 	color: var(--white-1000);
+
+	@media only screen and (max-width: 750px) {
+		font-size: 14px;
+	}
+
+	@media only screen and (max-width: 410px) {
+		font-size: 12px;
+	}
 `;
 
 const SignUpButton = styled.button`
@@ -133,6 +187,11 @@ const SignUpButton = styled.button`
 	width: 120px;
 	height: 35px;
 	border-radius: 20px;
+
+	@media only screen and (max-width: 410px) {
+		width: 100px;
+		height: 30px;
+	}
 `;
 
 const CopyrightContainer = styled.div`
@@ -145,6 +204,14 @@ const CopyrightContainer = styled.div`
 const CopyrightText = styled.p`
 	font-size: 1rem;
 	color: var(--gray-150);
+	
+	@media only screen and (max-width: 750px) {
+		font-size: 14px;
+	}
+
+	@media only screen and (max-width: 410px) {
+		font-size: 12px;
+	}
 `;
 
 

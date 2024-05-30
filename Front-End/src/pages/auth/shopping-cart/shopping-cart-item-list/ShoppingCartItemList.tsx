@@ -11,6 +11,7 @@ import { ProductService } from "../../../../services/Products.service";
 import { ShoppingCartService } from "../../../../services/ShoppingCart.service";
 import { LoadingContainer } from "../../../search/styles";
 import { Spinner } from "../../../../components/ui/spinner";
+import { ProductButton } from "../../../../components/ui/button/product-button/ProductButton";
 
 const ShoppingCartItemListContainer = styled.section`
 	width: 100%;
@@ -54,6 +55,7 @@ const ShoppingCartItemList = () => {
 
 	const [total, setTotal] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [productsMessage, setProductsMessage] = useState<string>("");
 
 	const [products, setProducts] = useState<IProductFullDTO[]>([]);
 
@@ -69,17 +71,22 @@ const ShoppingCartItemList = () => {
 			};
 
 			shoppingCartService.findAllProducts(id, login).then((shoppingCartInfos) => {
+				
 				productService.findAll().then(products => {
 					const finalProducts: IProductFullDTO[] = [];
+					let productsMessage = "";
 					
 					products.forEach((product) => {
 						shoppingCartInfos.products.forEach((shoppingCartProduct) => {
-							if(product.infos.id === shoppingCartProduct.id)
+							if(product.infos.id === shoppingCartProduct.id) {
+								productsMessage += ` ${ product.infos.name }, `;
 								finalProducts.push(product);
+							}
 						});
 					});
 
 					setProducts(finalProducts);
+					setProductsMessage(productsMessage);
 					setIsLoading(false);
 				});
 
@@ -118,11 +125,30 @@ const ShoppingCartItemList = () => {
 			</ItemList>
 
 			<Hr />
+			
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "space-between",
+				}}
+			>
+				<TotalContainer>
+					<ProductTitle Title="Total:" Type="xl" />
+					<span className="price">{ isLoading ? "Calculando..." : total }</span>
+				</TotalContainer>
 
-			<TotalContainer>
-				<ProductTitle Title="Total:" Type="xl" />
-				<span className="price">{ isLoading ? "Calculando..." : total }</span>
-			</TotalContainer>
+				<a
+						href={`https://api.whatsapp.com/send?phone=5515996181099&text=Ol%C3%A1!%20%F0%9F%91%8B%20Tenho%20interesse%20em%20comprar%3A%20${ productsMessage }%2C%20pode%20me%20ajudar%3F`}
+						target="_blank"
+						style={{
+							maxWidth: "200px",
+							width: "100%"
+						}}
+					>
+						<ProductButton Type="whatsapp" IsDisabled={ isLoading } />
+					</a>
+			</div>
 		</ShoppingCartItemListContainer>
 	);
 }
