@@ -560,6 +560,7 @@ const SignUpContainer = styled.section`
 
 const DetailsSection = styled.section`
 	padding-top: 4rem;
+	padding-bottom: 4rem;
   width: 60%;
   margin: auto;
 

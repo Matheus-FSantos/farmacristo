@@ -46,12 +46,6 @@ const AdminPanelLayout = ({ children }: IAdminPanelProps): React.ReactElement =>
 								onClick={() => handleNavigate("/")}
 							/>
 							<OptionsContainer>
-								<Option onClick={() => handleNavigate("/admin-panel")}>
-									<i className="fa-solid fa-home" style={{ color: "#000c6e" }}></i>
-									<a>
-										Inicio
-									</a>
-								</Option>
 								<Option onClick={() => handleNavigate("/admin-panel/users")}>
 									<i className="fa-solid fa-user" style={{ color: "#000c6e" }}></i>
 									<a>

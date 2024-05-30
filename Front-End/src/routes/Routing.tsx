@@ -26,7 +26,6 @@ const Routing = (): React.ReactElement => {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/careers" element={<WorkWithUs />} />
 				<Route path="/explore" element={<LandingPage />} />
-				<Route path="/admin-panel" element={<AdminHome />} />
 				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/admin-panel/users" element={<AdminUser />} />
 				<Route path="/admin-panel/cvs" element={<AdminCurriculum />} />

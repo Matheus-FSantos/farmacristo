@@ -98,7 +98,7 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
 								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
 								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
-								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p> }
+								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel/users")}>Painel Administrativo</p> }
 							</ResourcesDropDown>
 						</li>
 					</ul>
@@ -118,7 +118,7 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 							<ResourcesDropDown id="dropdown" className={ dropdownIsActive ? "actived" : ""}>
 								<p onClick={() => handleNavigate("/careers")}>Trabalhe conosco</p>
 								<p onClick={() => handleNavigate("/explore")}>Explore sobre nós</p>
-								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel")}>Painel Administrativo</p> }
+								{ isAllowedToTheAdminPanel && <p onClick={() => handleNavigate("/admin-panel/users")}>Painel Administrativo</p> }
 							</ResourcesDropDown>
 						</li>
 					</ul>
