@@ -1,12 +1,13 @@
 package br.com.farmacristo.model.DTO.pharmacy;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.farmacristo.model.DTO.viacep.AddressDTO;
 
-public record PharmacyDTO(UUID id, String name, String email, @JsonIgnore String number, @JsonIgnore String postalCode, AddressDTO address) {
+public record PharmacyDTO(UUID id, String name, String email, @JsonIgnore String number, @JsonIgnore String postalCode, AddressDTO address) implements Serializable {
 
 	public String getPostalCode() {
 		StringBuilder finalPostalCode = new StringBuilder();
