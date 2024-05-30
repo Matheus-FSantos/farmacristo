@@ -11,8 +11,6 @@ import { CurriculumService } from "../../../../services/Curriculum.service";
 import { AuthService } from "../../../../services/Auth.service";
 import { useNavigate } from "react-router-dom";
 
-import Cv from "../../../../assets/files/Curriculo Matheus Ferreira Santos - PTBR.pdf";
-
 interface IViewCvButtonProps {
 	CurriculumId: string
 }
@@ -50,7 +48,7 @@ const ViewCvButton = ({ CurriculumId }: IViewCvButtonProps): React.ReactElement 
 	return (
 		<AlertDialog.Root>
 			<AlertDialog.Trigger asChild>
-				<button className="RadixButtonReset Button violet" disabled={ !cv ? true : false }>Visualizar</button>
+				<button className="RadixButtonReset Button violet" disabled={ isLoading }>Visualizar</button>
 			</AlertDialog.Trigger>
 			
 			<AlertDialog.Portal>
