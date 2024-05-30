@@ -303,7 +303,7 @@ const Card = styled.section`
 `;
 
 const SectionThreeContainer = styled.section`
-	padding: 5rem 0; /* 80px and 0 */
+	padding: 5rem 0 2rem 0; /* 80px and 0 */
 
 	opacity: 0;
 

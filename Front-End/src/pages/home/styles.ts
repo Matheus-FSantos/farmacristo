@@ -9,7 +9,8 @@ const ProductTrend = styled.section`
 	gap: 20px;
 
 	min-height: 300px;
-
+	height: 100%;
+	
 	div.title {
 		position: relative;
 		z-index: 1;

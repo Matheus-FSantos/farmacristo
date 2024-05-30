@@ -91,19 +91,31 @@ const Home = (): React.ReactElement => {
 										<Spinner />
 									</LoadingContainer>
 								:
-									firstEightProducts.map(product => 
-										<Product
-											key={ product.infos.id }
-											product={ product }
-										/>
-									)
+									firstEightProducts.length === 0 ?
+										<div
+											style={{
+												display: "flex",
+												justifyContent: "center",
+												alignItems: "center",
+												minHeight: "300px",
+												width: "100%",
+											}}
+										>
+											<p style={{ textAlign: "center", fontSize: "1rem", fontWeight: "600", color: "var(--gray-700)" }}>Nenhum produto encontrado!</p>
+										</div>
+									: 
+										firstEightProducts.map(product => 
+											<Product
+												key={ product.infos.id }
+												product={ product }
+											/>
+										)
 							}
 						</ProductContainer>
 
 						<div className="blur toright"></div>
 						<div className="blur toleft"></div>
 					</ProductTrend>
-
 					{
 						groupedProducts.map(group => 
 							<ProductTrend
@@ -143,16 +155,29 @@ const Home = (): React.ReactElement => {
 									<Spinner />
 								</LoadingContainer>
 							:
-								<ProductsGridContainer className="padding-20">
-									{
-										exploreProducts.map(product => 
-											<Product
-												key={ product.infos.id }
-												product={ product }
-											/>
-										)
-									}
-								</ProductsGridContainer>
+								exploreProducts.length === 0 ?
+									<div
+										style={{
+											display: "flex",
+											justifyContent: "center",
+											alignItems: "center",
+											minHeight: "300px",
+											width: "100%",
+										}}
+									>
+										<p style={{ textAlign: "center", fontSize: "1rem", fontWeight: "600", color: "var(--gray-700)" }}>Nenhum produto encontrado!</p>
+									</div>
+								:
+									<ProductsGridContainer className="padding-20">
+										{
+												exploreProducts.map(product => 
+													<Product
+														key={ product.infos.id }
+														product={ product }
+													/>
+												)
+										}
+									</ProductsGridContainer>
 						}
 					</div>
 				</HomeContainer>

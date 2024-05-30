@@ -66,24 +66,40 @@ const Search = () => {
 
 							<Input Type="text" Placeholder="Pesquise aqui..." Value={ filter } SetValue={ (e) => setFilter(e.target.value) }/>
 
-							<ProductsGridContainer className="padding-20">
-									{
-										!filter ?
-											products.map(product => 
-												<Product
-													key={ product.infos.id }
-													product={ product }
-												/>
-											)
-										:
-											products.filter(product => product.infos.name.toLowerCase().includes(filter.toLowerCase() + "")).map(product => 
-												<Product
-													key={ product.infos.id }
-													product={ product }
-												/>
-											)
-									}
-								</ProductsGridContainer>
+							{
+								products.length === 0 ?
+									<div
+										style={{
+											display: "flex",
+											justifyContent: "center",
+											alignItems: "center",
+											minHeight: "500px",
+											width: "100%",
+										}}
+									>
+										<p style={{ textAlign: "center", fontSize: "1rem", fontWeight: "600", color: "var(--gray-700)" }}>Nenhum produto encontrado!</p>
+									</div>
+								:
+									<ProductsGridContainer className="padding-20">
+										{
+											!filter ?
+												products.map(product => 
+													<Product
+														key={ product.infos.id }
+														product={ product }
+													/>
+												)
+											:
+												products.filter(product => product.infos.name.toLowerCase().includes(filter.toLowerCase() + "")).map(product => 
+													<Product
+														key={ product.infos.id }
+														product={ product }
+													/>
+												)
+										}
+									</ProductsGridContainer>
+							}
+
 						</SearchContainer>
 				}
 			</GlobalLayout>

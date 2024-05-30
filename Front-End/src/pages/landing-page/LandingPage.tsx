@@ -256,7 +256,7 @@ const LandingPage = (): React.ReactElement => {
 			</GlobalContainer>
 
 			<SectionThreeContainer id="three">
-				<GlobalContainer className="products-grid">
+				<GlobalContainer className="products-grid no-bottom">
 					<TitleContainer Type="xl center">
 						<TitleComponent Type="sm green extra-bold">Produtos em destaque</TitleComponent>
 						<SubtitleGreen className="thirdSection">Explore agora um dos nossos produtos em destaque.</SubtitleGreen>
@@ -268,19 +268,32 @@ const LandingPage = (): React.ReactElement => {
 								<Spinner />
 							</LoadingContainer>
 						:
-							<div className="products-grid">
-								<ProductsGridContainer>
-									{
-										products.map(product => 
-											<Product
-												product={ product }
-												noOpen={ true }
-												key={ product.infos.id }
-											/>
-										)
-									}
-								</ProductsGridContainer>
-							</div>
+							products.length === 0 ?
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										minHeight: "800px",
+										width: "100%",
+									}}
+								>
+									<p style={{ textAlign: "center", fontSize: "1rem", fontWeight: "600", color: "var(--gray-700)" }}>Nenhum produto encontrado!</p>
+								</div>
+							:
+								<div className="products-grid">
+									<ProductsGridContainer>
+										{
+											products.map(product => 
+												<Product
+													product={ product }
+													noOpen={ true }
+													key={ product.infos.id }
+												/>
+											)
+										}
+									</ProductsGridContainer>
+								</div>
 					}
 				</GlobalContainer>
 			</SectionThreeContainer>

@@ -10,6 +10,9 @@ const ProductGridContainer = styled.section`
 
 	place-items: center;
 
+	min-height: 300px;
+	height: 100%;
+
 	&.padding-20 {
 		padding: 20px 0;
 	}

@@ -11,9 +11,13 @@ const GlobalContainer = styled.section`
 		min-height: auto;
 	}
 
+	&.no-bottom {
+		padding-bottom: 0px;
+	}
+
 	@media only screen and (max-width: 1200px) {
 		&.products-grid {
-			padding: 0;	
+			padding: 0;
 		}
 	}
 

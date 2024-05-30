@@ -22,6 +22,9 @@ const ItemList = styled.section`
 
 	gap: 5px; /* 5px */
 
+	min-height: 500px;
+	height: 100%;
+
 	@media only screen and (max-width: 612px) {
 		gap: 20px;
 	}
@@ -98,7 +101,17 @@ const ShoppingCartItemList = () => {
 						</LoadingContainer>
 					:
 						products.length === 0 ?
-							<p>Seu carrinho está vazio!</p>
+							<div
+								style={{
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+									minHeight: "450px",
+									width: "100%"
+								}}
+							>
+								<p style={{ textAlign: "center", fontSize: "1rem", fontWeight: "600", color: "var(--gray-700)" }}>Seu carrinho está vazio!</p>
+							</div>
 						: 
 							products.map((product) => <ShoppingCartItem key={ product.infos.id } Product={ product } />)
 				}

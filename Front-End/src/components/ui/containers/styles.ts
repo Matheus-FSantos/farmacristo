@@ -52,7 +52,7 @@ const Container = styled.div`
 		}
 
 		@media only screen and (max-width: 420px) {
-			height: 18.75rem; /* 300px */
+			height: 600px; /* 300px */
 		}
 	}
 

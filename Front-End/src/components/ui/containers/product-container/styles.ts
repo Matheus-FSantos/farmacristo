@@ -18,6 +18,8 @@ const ProductContainer = styled.section`
 	
 	gap: 3.75rem; /* 60px */
 
+	min-height: 300px;
+
 	&.start {
 		justify-content: start;
 	}
