@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,6 +47,7 @@ public class UserController {
 		summary="Find all users",
 		description="With this method you will be able to search for all existing users in our system. In return for the request, all formatted information will come from the respective user, if it exists." 
 	)
+	@Cacheable("users")
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.userService.findAll());
@@ -83,6 +86,7 @@ public class UserController {
 		summary="Save a new user",
 		description="With this method you can add a new user to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody NewUserDTO newUserDTO) throws FarmaCristoException {
 		this.userService.save(newUserDTO);
@@ -93,6 +97,7 @@ public class UserController {
 		summary="Login",
 		description="Login method." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO login) throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.userService.login(login));
@@ -102,6 +107,7 @@ public class UserController {
 		summary="Update an existent user",
 		description="With this method you update an existing user in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PutMapping("/{userId}")
 	public ResponseEntity<Void> update(@RequestBody NewUserDTO newUsersDTO, @PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		this.userService.updateUser(newUsersDTO, id);
@@ -112,6 +118,7 @@ public class UserController {
 		summary="Update the image of an existing user",
 		description="With this method you update the image of an existing user in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PutMapping("/image/{userId}")
 	public ResponseEntity<Void> updateUserImageById(@PathVariable(name="userId") UUID id, @RequestParam(name="image") MultipartFile file) throws IOException, FarmaCristoException {
 		this.userService.updateUserImage(id, file);
@@ -123,6 +130,7 @@ public class UserController {
 		summary="Downgrade the tier of an existing user (to client)",
 		description="With this method you lower the level of an existing user in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PutMapping("/tier-administrator/{userId}")
 	public ResponseEntity<Void> updateUserTierToAdminById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		this.userService.updateUserTierToAdmin(id);
@@ -134,6 +142,7 @@ public class UserController {
 		summary="Update the tier of an existing user (to admin)",
 		description="With this method you increase the level of an existing user in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@PutMapping("/tier-client/{userId}")
 	public ResponseEntity<Void> updateUserTierToClientById(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		this.userService.updateUserTierToClient(id);
@@ -144,6 +153,7 @@ public class UserController {
 		summary="Delete an existent user",
 		description="With this method you delete an existing user in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 
 	)
+	@CacheEvict(value="users", allEntries=true)
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<Void> delete(@PathVariable(name="userId") UUID id) throws FarmaCristoException {
 		this.userService.delete(id);

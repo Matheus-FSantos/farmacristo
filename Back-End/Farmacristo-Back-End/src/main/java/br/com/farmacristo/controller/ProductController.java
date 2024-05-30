@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -41,6 +43,7 @@ public class ProductController {
 		summary="Find all products",
 		description="With this method you will be able to search for all existing products in our system. In return for the request, all formatted information will come from the respective products, if it exists." 
 	)
+	@Cacheable("products")
 	@GetMapping
 	public ResponseEntity<List<ProductDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.productService.findAll());
@@ -80,6 +83,7 @@ public class ProductController {
 		summary="Save a new product",
 		description="With this method you can add a new product to our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="products", allEntries=true)
 	@PostMapping
 	public ResponseEntity<UUID> save(@RequestBody NewProductDTO newProductDTO) throws FarmaCristoException {
 		return ResponseEntity.status(201).body(this.productService.save(newProductDTO));
@@ -90,6 +94,7 @@ public class ProductController {
 		summary="Update an existent product",
 		description="With this method you update an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="products", allEntries=true)
 	@PutMapping("/{productId}")
 	public ResponseEntity<Void> update(@PathVariable(name="productId") UUID id, @RequestBody NewProductDTO updatedProduct) throws FarmaCristoException {
 		this.productService.update(id, updatedProduct);
@@ -101,6 +106,7 @@ public class ProductController {
 		summary="Update the image of an existing product",
 		description="With this method you update the image of an existing product in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
 	)
+	@CacheEvict(value="products", allEntries=true)
 	@PutMapping("/image/{productId}")
 	public ResponseEntity<Void> updateProductImageById(@PathVariable(name="productId") UUID id, @RequestPart(name="image") MultipartFile file) throws IOException, FarmaCristoException {
 		this.productService.updateImage(id, file);
@@ -112,6 +118,7 @@ public class ProductController {
 		summary="Delete an existent product",
 		description="With this method you delete an existing product in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 
 	)
+	@CacheEvict(value="products", allEntries=true)
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<Void> delete(@PathVariable(name="productId") UUID id) throws FarmaCristoException {
 		this.productService.delete(id);

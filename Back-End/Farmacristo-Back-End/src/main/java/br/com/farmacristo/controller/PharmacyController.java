@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,6 +44,7 @@ public class PharmacyController {
 		summary="Find all pharmacies",
 		description="With this method you will be able to search for all existing pharmacies in our system. In return for the request, all formatted information will come from the respective pharmacy - if it exists - and its respective address." 
 	)
+	@Cacheable("pharmacies")
 	@GetMapping
 	public ResponseEntity<List<PharmacyDTO>> findAll() throws FarmaCristoException {
 		return ResponseEntity.ok().body(this.pharmacyService.findAll());
@@ -81,6 +84,7 @@ public class PharmacyController {
 		summary="Save a new pharmacy",
 		description="With this method you can add a new pharmacy to our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="pharmacies", allEntries=true)
 	@PostMapping
 	public ResponseEntity<UUID> save(@RequestBody NewPharmacyDTO newPharmacyDTO) throws FarmaCristoException {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.pharmacyService.save(newPharmacyDTO));
@@ -91,6 +95,7 @@ public class PharmacyController {
 		summary="Update an existent pharmacy",
 		description="With this method you update an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the zip code is incorrect an error message will be returned and the status will be 404, if any invalid data is entered an error message will be displayed and the status 422 will be returned and between others." 
 	)
+	@CacheEvict(value="pharmacies", allEntries=true)
 	@PutMapping("/{pharmacyId}")
 	public ResponseEntity<Void> update(@PathVariable(name="pharmacyId") UUID id, @RequestBody NewPharmacyDTO updatedPharmacy) throws FarmaCristoException {
 		this.pharmacyService.updatePharmacy(id, updatedPharmacy);
@@ -102,6 +107,7 @@ public class PharmacyController {
 		summary="Update the image of an existing pharmacy",
 		description="With this method you update the image of an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, otherwise an error message will be reported." 
 	)
+	@CacheEvict(value="pharmacies", allEntries=true)
 	@PutMapping("/image/{pharmacyId}")
 	public ResponseEntity<Void> updatePharmacyImageById(@PathVariable(name="pharmacyId") UUID id, @RequestPart(name="image") MultipartFile file) throws IOException, FarmaCristoException {
 		this.pharmacyService.updatePharmacyImageById(id, file);
@@ -113,6 +119,7 @@ public class PharmacyController {
 		summary="Delete an existent pharmacy",
 		description="With this method you delete an existing pharmacy in our system. In response to the request, a 204 will be returned if everything goes well, if the ID is incorrect an error message will be returned and the status will be 404." 
 	)
+	@CacheEvict(value="pharmacies", allEntries=true)
 	@DeleteMapping("/{pharmacyId}")
 	public ResponseEntity<List<Pharmacy>> delete(@PathVariable(name="pharmacyId") UUID id) throws FarmaCristoException {
 		this.pharmacyService.delete(id);
