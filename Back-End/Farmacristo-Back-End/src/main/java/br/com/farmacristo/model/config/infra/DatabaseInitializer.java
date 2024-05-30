@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +32,7 @@ public class DatabaseInitializer {
 			
 			insertUsersData(newUsersList);
 			insertPharmaciesData(newPharmaciesList);
-			
+
 			newUsersList.forEach(user -> {
 				try {
 					userService.save(user);
@@ -55,7 +56,7 @@ public class DatabaseInitializer {
     
     public void insertUsersData(List<NewUserDTO> array) {
     	array.addAll(Arrays.asList(
-				new NewUserDTO("Administrador", "admin", "admin@redefarmacristo.com.br")
+				new NewUserDTO("Administrador Farmacristo", "admin", "admin@redefarmacristo.com.br")
 		));
     }
     

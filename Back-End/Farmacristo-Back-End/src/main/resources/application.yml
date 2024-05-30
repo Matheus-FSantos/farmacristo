@@ -3,9 +3,9 @@ server:
   
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/farmacristoTest
-    username: root
-    password: d94ed3838
+    url: jdbc:mysql://sql.freedb.tech/freedb_farmacristo
+    username: freedb_farmacristo_user
+    password: WTNBas7!qN!ZKx$
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
