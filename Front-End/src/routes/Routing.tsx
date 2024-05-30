@@ -8,7 +8,6 @@ import { Profile } from "../pages/auth/profile";
 import { LandingPage } from "../pages/landing-page";
 import { WorkWithUs } from "../pages/work-with-us";
 import { ShoppingCart } from "../pages/auth/shopping-cart";
-import { AdminHome } from "../pages/auth/admin-panel/home/AdminHome";
 import { AdminUser } from "../pages/auth/admin-panel/user/AdminUser";
 import { AdminProduct } from "../pages/auth/admin-panel/product/AdminProduct";
 import { AdminPharmacy } from "../pages/auth/admin-panel/pharmacy/AdminPharmacy";
