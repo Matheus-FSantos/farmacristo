@@ -4,7 +4,12 @@ const GlobalContainer = styled.section`
 	min-height: 100vh;
 	
 	padding: 0 6.25rem; /* 0 and 100px */
+	padding-bottom: 40px;
 	overflow: auto;
+
+	&.footer {
+		min-height: auto;
+	}
 
 	@media only screen and (max-width: 1200px) {
 		&.products-grid {

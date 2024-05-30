@@ -62,6 +62,7 @@ import { useTimeout } from "../../hooks/useTimeout";
 import { UsersService } from "../../services/Users.service";
 import { toast } from "react-toastify";
 import { Toast } from "../../components/toast";
+import { Footer } from "../../components/footer";
 
 const LandingPage = (): React.ReactElement => {
 	useDinamicTitle("Explore");
@@ -389,6 +390,8 @@ const LandingPage = (): React.ReactElement => {
 							)
 					}
 			</DetailsSection>
+
+			<Footer />
 
 			<Toast />
 			<WhatsappWidget />

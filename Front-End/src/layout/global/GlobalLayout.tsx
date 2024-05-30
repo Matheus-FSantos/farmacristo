@@ -13,12 +13,14 @@ const GlobalLayout = ({ children }: IGlobalLayoutProps) => {
 	const authService = new AuthService();
 
 	return (
-		<GlobalContainer>
-			<HeaderAlternative isLogged={ authService.isLogged() } />
-			{ children }
-			<WhatsappWidget />
+		<>
+			<GlobalContainer>
+				<HeaderAlternative isLogged={ authService.isLogged() } />
+				{ children }
+				<WhatsappWidget />
+			</GlobalContainer>
 			<Footer />
-		</GlobalContainer>
+		</>
 	);
 }
 
