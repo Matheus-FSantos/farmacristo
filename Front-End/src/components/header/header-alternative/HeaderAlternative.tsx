@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowResourcesSVG } from "../../../assets/icons/icons";
-import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, TwitterSVG } from "../../../assets/icons/icons";
+import { FacebookSVG, InstagramSVG, LogoPNG, PersonSVG, SearchSVG, ShoppingCart, } from "../../../assets/icons/icons";
 import { Container, Icon, Logo, Main, Option, OptionsContainer, SocialMediaFlex, MobileSocialMediaContainer } from "../styles";
 import { NavContainer, ResponsiveNavContainer, MobileNavBar, ResourcesDropDown } from "./styles";
 import { Hr } from "../../ui/hr/Hr";
@@ -63,14 +63,11 @@ const HeaderAlternative = ({ isLogged }: IHeaderAlternative) => {
 		<Container className={ mobileNavBarOpen ? "open" : ""}>
 			<MobileSocialMediaContainer>
 				<SocialMediaFlex>
-					<a href="https://www.facebook.com/" target="_blank">
+					<a href="https://www.facebook.com/redefarmacristo" target="_blank">
 						<Icon src={ FacebookSVG } alt="Logo do aplicativo facebook (um F com o fundo em azul)" />
 					</a>
-					<a href="https://www.instagram.com/" target="_blank">
+					<a href="https://www.instagram.com/redefarmacristo" target="_blank">
 						<Icon src={ InstagramSVG } alt="Logo do aplicativo instagram (uma camera, arredondada, com o fundo em azul)" />
-					</a>
-					<a href="https://twitter.com/" target="_blank">
-						<Icon src={ TwitterSVG } className="twitter" alt="Logo do aplicativo Twiiter (um passarinho em branco com o fundo em azul escuro)" />
 					</a>
 				</SocialMediaFlex>
 				

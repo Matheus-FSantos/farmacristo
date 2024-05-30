@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
 	LogoPNG,
 	EmailSVG,
-	TwitterSVG,
 	WhatsappSVG,
 	FacebookSVG,
 	InstagramSVG,
@@ -34,14 +33,11 @@ const Header = (): React.ReactElement => {
 	return (
 		<Container>
 			<SocialMediaFlex>
-				<a href="https://www.facebook.com/" target="_blank">
+				<a href="https://www.facebook.com/redefarmacristo" target="_blank">
 					<Icon src={ FacebookSVG } alt="Logo do aplicativo facebook (um F com o fundo em azul)" />
 				</a>
-				<a href="https://www.instagram.com/" target="_blank">
+				<a href="https://www.instagram.com/redefarmacristo" target="_blank">
 					<Icon src={ InstagramSVG } alt="Logo do aplicativo instagram (uma camera, arredondada, com o fundo em azul)" />
-				</a>
-				<a href="https://twitter.com/" target="_blank">
-					<Icon src={ TwitterSVG } className="twitter" alt="Logo do aplicativo Twiiter (um passarinho em branco com o fundo em azul escuro)" />
 				</a>
 			</SocialMediaFlex>
 			

@@ -148,7 +148,15 @@ const Product = ({ product, noOpen }: IProductProps) => {
 
 				<ButtonsContainer>
 					<ProductButton Type="shopping-cart" OnClick={ addOnShoppingCart } IsDisabled={ isDisabled }/>
-					<ProductButton Type="whatsapp"/>
+					<a
+						href={`https://api.whatsapp.com/send?phone=5515996181099&text=Ol%C3%A1!%20%F0%9F%91%8B%20Tenho%20interesse%20em%20comprar%3A%20${ product?.infos.name }%2C%20pode%20me%20ajudar%3F`}
+						target="_blank"
+						style={{
+							width: "100%"
+						}}
+					>
+						<ProductButton Type="whatsapp" />
+					</a>
 				</ButtonsContainer>
 			</ProductContainer>
 		
@@ -196,7 +204,15 @@ const Product = ({ product, noOpen }: IProductProps) => {
 
 									<ButtonsContainer>
 										<ProductButton Type="shopping-cart" OnClick={ addOnShoppingCart } IsDisabled={ isDisabled }/>
-										<ProductButton Type="whatsapp"/>
+										<a
+											href={`https://api.whatsapp.com/send?phone=5515996181099&text=Ol%C3%A1!%20%F0%9F%91%8B%20Tenho%20interesse%20em%20comprar%3A%20${ product.infos.name }%2C%20pode%20me%20ajudar%3F`}
+											target="_blank"
+											style={{
+												width: "100%"
+											}}
+										>
+											<ProductButton Type="whatsapp" />
+										</a>
 									</ButtonsContainer>
 								</Container>
 							</Container>
