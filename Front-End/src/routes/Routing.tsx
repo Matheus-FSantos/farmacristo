@@ -18,13 +18,13 @@ const Routing = (): React.ReactElement => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<LandingPage />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/search" element={<Search />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/careers" element={<WorkWithUs />} />
-				<Route path="/explore" element={<LandingPage />} />
+				<Route path="/explore" element={<Home />} />
 				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/admin-panel/users" element={<AdminUser />} />
 				<Route path="/admin-panel/cvs" element={<AdminCurriculum />} />

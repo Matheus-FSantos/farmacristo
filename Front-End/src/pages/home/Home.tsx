@@ -73,11 +73,6 @@ const Home = (): React.ReactElement => {
 		<>
 			<GlobalLayout>
 				<HomeContainer>
-					<TitleContainer>
-						<Title Type="sm">Inicio</Title>
-						<Subtitle>Seja bem vindo a FarmaCristo!</Subtitle>
-					</TitleContainer>
-
 					<ProductTrend>
 						<div className="title">
 							<h2>Principais produtos</h2>

@@ -55,7 +55,7 @@ const Header = (): React.ReactElement => {
 					</Informations>
 				</ContactInformations>			
 				
-				<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/") }/>
+				<Logo src={ LogoPNG } alt="Logo da rede farmacristo, uma cruz em vermelho escuro com 2 listras transversais em azul escuro" onClick={ () => navigate("/explore") }/>
 			
 				<OptionsContainer>
 					<Option onClick={ () => navigate("/search") }>
